@@ -2,6 +2,7 @@
 <html>
     @include('includes.head')
     <body>
+    	@include('components.navbar')
         <div class="container">
             <div class="content">
 

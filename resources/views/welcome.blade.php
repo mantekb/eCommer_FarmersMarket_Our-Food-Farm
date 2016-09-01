@@ -4,6 +4,6 @@
 
 @section('content')
 
-<h1 class="text-center">Our Food Farm</h1>
+<h1 class="text-center">Map goes here.</h1>
 
 @endsection
