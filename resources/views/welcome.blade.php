@@ -4,6 +4,9 @@
 
 @section('content')
 
-<h1 class="text-center">Map goes here.</h1>
+<input style="width: 60%;" type="text" placeholder="Zip Code" id="zipcode">
+<button class="btn btn-primary col s6">Find Me</button>
+
+<div class="text-center">Map goes here.</div>
 
 @endsection

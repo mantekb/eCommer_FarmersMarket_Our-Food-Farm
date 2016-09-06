@@ -17,3 +17,19 @@ Route::get('/', function () {
 
 Route::auth();
 
+Route::get('learning', function() {
+	//Replace function with a controller function instead.
+	$articles = [
+		[
+			'title' => 'Tomatoes',
+			'excerpt' => 'something somethings',
+			'author' => 'Farmer'
+		],
+		[
+			'title' => 'Corn',
+			'excerpt' => 'something somethings',
+			'author' => 'Stand Owner'
+		],
+	];
+	return view('learning.learning-resources', ['articles' => $articles]);
+});
