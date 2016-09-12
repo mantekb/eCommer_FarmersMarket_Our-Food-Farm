@@ -1,3 +1,23 @@
+# Getting Started
+
+1. Install WAMP
+2. Install Composer
+3. Clone this repo into C:\wamp\www
+4. `cd our-food-farm`
+5. `composer install`
+6. `php artisan migrate`
+7. Click on WAMP tray icon > Apache > Alias directories > Add an alias
+8. `our-food-farm`
+9. `C:\wamp\www\our-food-farm\public`
+10. Ensure browsing to *localhost/our-food-farm/* works.
+
+
+
+
+
+
+# Laravel readme below:
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
