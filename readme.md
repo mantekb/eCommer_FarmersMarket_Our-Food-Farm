@@ -1,6 +1,10 @@
 # Getting Started
 
 1. Install WAMP
+	1. Click on WAMP tray icon > phpmyadmin
+	2. Login with user: "root" pass: ""
+	3. On side nav click _new+_
+	4. Add database "homestead"
 2. Install Composer
 3. Clone this repo into C:\wamp\www
 4. `cd our-food-farm`
