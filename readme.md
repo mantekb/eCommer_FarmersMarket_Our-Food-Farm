@@ -15,7 +15,9 @@
 9. `C:\wamp\www\our-food-farm\public`
 10. Ensure browsing to *localhost/our-food-farm/* works.
 
-
+_If not already done:_
+1. Go to C:\wamp\www\our-food-farm\public\.htaccess
+2. Below line `RewriteEngine On` add `RewriteBase /our-food-farm/`
 
 
 
