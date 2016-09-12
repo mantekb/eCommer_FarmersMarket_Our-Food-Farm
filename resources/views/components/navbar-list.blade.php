@@ -1,10 +1,10 @@
 
 {{-- <li><a href="/food">Food</a></li> --}}
-<li><a href="/">Map</a></li>
-<li><a href="/learning">Learning Resources</a></li>
+<li><a href="{{url("/")}}">Map</a></li>
+<li><a href="{{url("/learning")}}">Learning Resources</a></li>
 @if(Auth::guest())
-	<li><a href="/login">Login</a></li>
-	<li><a href="/register">Register</a></li>
+	<li><a href="{{url("/login")}}">Login</a></li>
+	<li><a href="{{url("/register")}}">Register</a></li>
 @else
-	<li><a href="/account">Account</a></li>
+	<li><a href="{{url("/account")}}">Account</a></li>
 @endif

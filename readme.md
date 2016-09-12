@@ -1,3 +1,29 @@
+# Getting Started
+
+1. Install WAMP
+	1. Click on WAMP tray icon > phpmyadmin
+	2. Login with user: "root" pass: ""
+	3. On side nav click _new+_
+	4. Add database "homestead"
+2. Install Composer
+3. Clone this repo into C:\wamp\www
+4. `cd our-food-farm`
+5. `composer install`
+6. `php artisan migrate`
+7. Click on WAMP tray icon > Apache > Alias directories > Add an alias
+8. `our-food-farm`
+9. `C:\wamp\www\our-food-farm\public`
+10. Ensure browsing to *localhost/our-food-farm/* works.
+
+_If not already done:_
+1. Go to C:\wamp\www\our-food-farm\public\.htaccess
+2. Below line `RewriteEngine On` add `RewriteBase /our-food-farm/`
+
+
+
+
+# Laravel readme below:
+
 # Laravel PHP Framework
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
