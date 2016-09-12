@@ -17,6 +17,10 @@ Route::get('/', function () {
 
 Route::auth();
 
+Route::group(['prefix' => '/stand'], function() {
+	Route::match(['get', 'post'], '/create', 'StandController@create');
+});
+
 Route::get('learning', function() {
 	//Replace function with a controller function instead.
 	$articles = [
