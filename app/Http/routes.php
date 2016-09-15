@@ -11,11 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);
 
 Route::auth();
+
+Route::group(['prefix' => '/stand'], function() {
+	//Use middleware to ensure you can only make a stand if you are logged in.
+	Route::match(['get', 'post'], '/create', 'StandController@create')->middleware('auth');
+	Route::get('/{stand}', ['as' => '/{stand}', 'uses' => 'StandController@view']);
+});
 
 Route::get('learning', function() {
 	//Replace function with a controller function instead.
