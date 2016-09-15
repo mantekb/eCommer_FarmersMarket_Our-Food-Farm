@@ -16,7 +16,8 @@ Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);
 Route::auth();
 
 Route::group(['prefix' => '/stand'], function() {
-	Route::match(['get', 'post'], '/create', 'StandController@create');
+	//Use middleware to ensure you can only make a stand if you are logged in.
+	Route::match(['get', 'post'], '/create', 'StandController@create')->middleware('auth');
 	Route::get('/{stand}', ['as' => '/{stand}', 'uses' => 'StandController@view']);
 });
 
