@@ -14,8 +14,15 @@ class CreateStandsTable extends Migration
     {
         Schema::create('stands', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->index()->unsigned();
             $table->string('name');
             $table->string('description', 4096);
+            //Adress info
+            $table->string('address');
+            $table->string('city');
+            $table->string('state');
+            $table->string('zip');
+            //$table->string('country');
             $table->timestamps();
         });
     }

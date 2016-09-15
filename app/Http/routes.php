@@ -19,6 +19,7 @@ Route::auth();
 
 Route::group(['prefix' => '/stand'], function() {
 	Route::match(['get', 'post'], '/create', 'StandController@create');
+	Route::get('/{stand}', ['as' => '/{stand}', 'uses' => 'StandController@view']);
 });
 
 Route::get('learning', function() {

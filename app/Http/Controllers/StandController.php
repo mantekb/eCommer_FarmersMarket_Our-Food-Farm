@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Stand;
 
 class StandController extends Controller
 {
@@ -17,12 +18,25 @@ class StandController extends Controller
     {
     	if ($request->isMethod('POST'))
     	{
-    		//
+    		$stand = new Stand;
+            $stand->createFromForm($request);
+            // validate and return correct place?
+            // $view = Redirect('/stand/'.$stand->id);
     	}
     	else
     	{
     		$view = view('stand.create');
     	}
     	return $view;
+    }
+
+    /**
+    * View the store page for that stand.
+    *
+    * @param $stand - Automatically detected Stand by laravel.
+    */
+    public function view(Stand $stand)
+    {
+        return view('stand.view', ['stand' => $stand]);
     }
 }
