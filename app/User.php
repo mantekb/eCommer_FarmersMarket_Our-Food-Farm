@@ -23,4 +23,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+    * Assign a stand to a user
+    *
+    * @param @stand - Stand they created.
+    */
+    public function stand()
+    {
+        return $this->hasOne('App\Stand');
+    }
 }
