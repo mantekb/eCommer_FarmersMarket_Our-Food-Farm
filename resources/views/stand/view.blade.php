@@ -36,7 +36,7 @@
 
 <div class="row">
     @for($i = 0; $i < 3; $i++)
-    <div class="col s12 m4">
+    <div class="col s8 push-s2 m4 l3">
         <div class="card">
             <div class="card-image">
                 <img src="http://feelgrafix.com/data_images/out/27/956607-tomato.jpg" alt="">
@@ -54,7 +54,7 @@
 
 <div class="row">
     <div class="col s12">
-        <h5>Reviews</h5>
+        <h5>Reviews: ★★★☆☆</h5>
     </div>
 </div>
 
@@ -65,9 +65,11 @@
             <div class="card-content">
                 <span class="card-title">
                     This Food Rocked!!
-                    <span class="right">3/5</span>
+                    <span class="right">★★★☆☆</span>
                 </span>
-                <p>asldjfwaoiejfwjfsdoijfsijfwioejfweojfoijd kjasofjsljfsoafjskjfsjfslajfsofjewlfjojf</p>
+                <p>
+                    asldjfwaoiejfwjfsdoijfsijfwioejfweojfoijd kjasofjsljfsoafjskjfsjfslajfsofjewlfjojf
+                </p>
             </div>
             <div class="card-action">
                 <a href="">Read More</a>
