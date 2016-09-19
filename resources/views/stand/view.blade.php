@@ -27,12 +27,21 @@
     </div>
 </div>
 
-{{-- Here display cards of the items for sale --}}
+
+<div class="row">
+    <div class="col s12">
+        <h5>Items Currently For Sale:</h5>
+    </div>
+</div>
+
 <div class="row">
     @for($i = 0; $i < 3; $i++)
     <div class="col s12 m4">
         <div class="card">
-            <div class="card-image"><img src="http://feelgrafix.com/data_images/out/27/956607-tomato.jpg" alt=""><span class="card-title blue-text">Tomato</span></div>
+            <div class="card-image">
+                <img src="http://feelgrafix.com/data_images/out/27/956607-tomato.jpg" alt="">
+                <span class="card-title blue-text">Tomato</span>
+            </div>
             <div class="card-content">
                 <p>Buy this</p>
             </div>
@@ -43,7 +52,31 @@
 </div>
 
 
-{{-- Here display reviews of this stand --}}
+<div class="row">
+    <div class="col s12">
+        <h5>Reviews</h5>
+    </div>
+</div>
+
+<div class="row">
+    @for($j = 0; $j < 3; $j++)
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">
+                    This Food Rocked!!
+                    <span class="right">3/5</span>
+                </span>
+                <p>asldjfwaoiejfwjfsdoijfsijfwioejfweojfoijd kjasofjsljfsoafjskjfsjfslajfsofjewlfjojf</p>
+            </div>
+            <div class="card-action">
+                <a href="">Read More</a>
+                <a href="" class="right">Author Name</a>
+            </div>
+        </div>
+    </div>
+    @endfor
+</div>
 
 
 @endsection
