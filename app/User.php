@@ -33,4 +33,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Stand');
     }
+
+    public function hasStand()
+    {
+        return (bool)count($this->stand);
+    }
 }

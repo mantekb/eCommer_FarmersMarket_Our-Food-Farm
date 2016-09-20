@@ -14,7 +14,11 @@ $identity = rand(0, 1000);
 ?>
 <li><a class="dropdown-button" data-beloworigin="true" data-activates='account-{{$identity}}'>{{Auth::user()->name}}</a></li>
     <ul id="account-{{$identity}}"  class='dropdown-content'>
-	    <li><a href="{{url("/stand/create")}}">Create Stand</a></li>
+    	@if(!Auth::user()->hasStand())
+		    <li><a href="{{url("/stand/create")}}">Create Stand</a></li>
+		@else
+			<li><a href="{{url("/stand/".Auth::user()->stand->id)}}">{{Auth::user()->stand->name}}</a></li>
+		@endif
 		<li><a href="{{url("/settings")}}">Settings</a></li>
 		<li><a href="{{url("/logout")}}">Logout</a></li>
     </ul>
