@@ -6,14 +6,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 
 <script src="{{asset('js/materialize-init.js')}}"></script>
-
-<script>
-    $(window).bind('resize', function() {
-        var float_width = $('#map').width();
-        var doc_width = $(document).width();
-        if (doc_width < 601)
-        {
-        	$('#map').css('width', '80%');
-        }
-    });
-</script>

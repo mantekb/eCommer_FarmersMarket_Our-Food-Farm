@@ -10,16 +10,21 @@
     </div>
 </div>
 
-<div class="left">
+{{-- <div class="left">
     <div id='map' style='width: 250px; height: 250px; border: solid 1px;'>Map</div>
-</div>
+</div> --}}
 
 <div class="row">
-    <div class="col s8 m5 push-m1 l5 push-l2">
+
+    <div class="col s8 push-s2 m6 l4">
+        <div id="map" style='width: 250px; height: 250px; border: solid 1px;'>Map</div>
+    </div>
+
+    <div class="col s8 push-s2 m5 {{-- push-m1 --}} l5 push-l2">
         <p class="center-align">{{$stand->description}}</p>
     </div>
     <br>
-    <div class="col s8 m5 push-m1 l5 push-l2">
+    <div class="col s8 push-s2 m5 {{-- push-m1 --}} l5 push-l2">
         <p class="center-align">
             {{$stand->address}}<br>
             {{$stand->city}}, {{$stand->state}} {{$stand->zip}}
