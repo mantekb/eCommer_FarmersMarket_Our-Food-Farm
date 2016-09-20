@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Auth;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -68,5 +70,32 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+    * Overrides same named method from:
+    * vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php
+    *
+    * @return redirected view
+    */
+    protected function handleUserWasAuthenticated(Request $request, $throttles)
+    {
+        if ($throttles) {
+            $this->clearLoginAttempts($request);
+        }
+
+        if (method_exists($this, 'authenticated')) {
+            return $this->authenticated($request, Auth::guard($this->getGuard())->user());
+        }
+
+        // Override starts here
+        $user = Auth::user();
+        if ($user->hasStand())
+        {
+            $this->redirectTo = $user->standRoute();
+        }
+        // Override ends here
+
+        return redirect()->intended($this->redirectPath());
     }
 }
