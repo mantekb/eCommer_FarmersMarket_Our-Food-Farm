@@ -10,9 +10,6 @@
     </div>
 </div>
 
-{{-- <div class="left">
-    <div id='map' style='width: 250px; height: 250px; border: solid 1px;'>Map</div>
-</div> --}}
 
 <div class="row">
 
@@ -20,11 +17,11 @@
         <div id="map" style='width: 250px; height: 250px; border: solid 1px;'>Map</div>
     </div>
 
-    <div class="col s8 push-s2 m5 {{-- push-m1 --}} l5 push-l1">
+    <div class="col s8 push-s2 m5 l5 push-l1">
         <p class="center-align">{{$stand->description}}</p>
     </div>
     <br>
-    <div class="col s8 push-s2 m5 {{-- push-m1 --}} l5 push-l1">
+    <div class="col s8 push-s2 m5 l5 push-l1">
         <p class="center-align">
             {{$stand->address}}<br>
             {{$stand->city}}, {{$stand->state}} {{$stand->zip}}
@@ -32,7 +29,7 @@
     </div>
 </div>
 
-
+{{-- Placeholders below --}}
 <div class="row">
     <div class="col s12">
         <h5>Items Currently For Sale:</h5>
