@@ -16,9 +16,13 @@ class OneStand
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::guest() || Auth::user()->hasStand())
+        if (Auth::guest()) {
+            return redirect()->guest('login');
+        }
+
+        if (Auth::user()->hasStand())
         {
-            return Redirect('/');
+            return Redirect(Auth::user()->standRoute());
         }
 
         return $next($request);

@@ -17,7 +17,7 @@ $identity = rand(0, 1000);
     	@if(!Auth::user()->hasStand())
 		    <li><a href="{{url("/stand/create")}}">Create Stand</a></li>
 		@else
-			<li><a href="{{url("/stand/".Auth::user()->stand->id)}}">{{Auth::user()->stand->name}}</a></li>
+			<li><a href="{{url(Auth::user()->standRoute())}}">{{Auth::user()->stand->name}}</a></li>
 		@endif
 		<li><a href="{{url("/settings")}}">Settings</a></li>
 		<li><a href="{{url("/logout")}}">Logout</a></li>

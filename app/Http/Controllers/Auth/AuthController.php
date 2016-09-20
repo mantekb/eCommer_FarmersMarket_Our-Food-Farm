@@ -92,7 +92,7 @@ class AuthController extends Controller
         $user = Auth::user();
         if ($user->hasStand())
         {
-            $this->redirectTo = '/stand/'.$user->stand->id;
+            $this->redirectTo = $user->standRoute();
         }
         // Override ends here
 

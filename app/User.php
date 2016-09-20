@@ -38,4 +38,9 @@ class User extends Authenticatable
     {
         return (bool)count($this->stand);
     }
+
+    public function standRoute()
+    {
+        return '/stand/'.$this->stand->id;
+    }
 }
