@@ -13,8 +13,8 @@
               <p>{{$art['excerpt']}}</p>
             </div>
             <div class="card-action">
-              <a href="/article/{{--articleID--}}">Read This</a>
-              <a href="/stand/{{--author--}}">By: {{$art['author']}}</a>
+              <a href="{{url("#0")}}">Read This</a>
+              <a href="{{url("#0")}}">By: {{$art['author']}}</a>
             </div>
           </div>
         </div>

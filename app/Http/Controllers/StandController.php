@@ -38,7 +38,7 @@ class StandController extends Controller
             $stand->createFromForm($data, $user);
 
             //Send to view Stand
-            $view = Redirect('/');//'/stand/'.$stand->id);//off until view made
+            $view = Redirect('/stand/'.$stand->id);
     	}
     	else
     	{
