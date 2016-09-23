@@ -9,6 +9,9 @@
 	{{-- SweetAlert --}}
 	<link rel="stylesheet" href="{{asset('css/sweetalert.css')}}">
 
+	{{-- Stand css --}}
+	<link rel="stylesheet" href="{{asset('css/stand.css')}}">
+
 	{{-- Material icons --}}
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">       
 
