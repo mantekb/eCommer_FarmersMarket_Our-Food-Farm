@@ -31,14 +31,34 @@ function showError(error) {
     }
 }
 
+$("#zipcode").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#find").click();
+    }
+});
+
 $('#find').click(function(){
     var zip = $('#zipcode').val()
     zip = validateZip(zip);
-
+    $.post('./get-lat-long', {
+        zip : zip
+    })
+    .done(function(data) {
+        alert(data);
+    })
+    .fail(function() {
+        alert( "error" );
+    });
 });
 
 
 function validateZip(zip) {
-    zip = zip.substring(4);
-    console.log(zip);
+    if (zip.length >= 5){
+        zip = zip.substring(0, 5);
+        if (zip.match('[0-9]{5}')){
+            console.log(zip);
+            return zip;
+        } else
+            swal("Whoops!", "Please make sure your zipcode is formatted correctly");
+    }
 }

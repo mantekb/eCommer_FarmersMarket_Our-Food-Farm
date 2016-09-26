@@ -37,3 +37,5 @@ Route::get('learning', function() {
 	];
 	return view('learning.learning-resources', ['articles' => $articles]);
 });
+
+Route::post('get-lat-long', 'LocationController@getCoords');

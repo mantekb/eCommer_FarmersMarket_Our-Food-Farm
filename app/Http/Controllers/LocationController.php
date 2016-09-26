@@ -9,8 +9,8 @@ use App\Http\Requests;
 class LocationController extends Controller
 {
     //Gets the lat/long based on the zipcode given in the request
-	public function getGeoLocation(Request $request){
-		$location = Location::where('zip', $request->get('zip'));
+	public function getCoords(Request $request){
+		//$location = Location::where('zip', $request->get('zip'));
 	}
 
 	private function saveGeoLocation(Request $request){
