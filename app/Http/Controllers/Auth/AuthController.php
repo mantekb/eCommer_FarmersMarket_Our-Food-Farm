@@ -109,6 +109,6 @@ class AuthController extends Controller
     */
     protected function sendFailedLoginResponse(Request $request)
     {
-        return json_encode(['error' => $this->getFailedLoginMessage()]);
+        return 'error';
     }
 }

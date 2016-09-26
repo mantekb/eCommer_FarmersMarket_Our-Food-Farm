@@ -47,14 +47,14 @@ function login()
 	    	loginError('Username or Password Incorrect.')
 	    },
 	    success: (response) => {
-	    	if (!JSON.parse(response))
+	    	if (response !== 'error')
 	    	{
 	    		hideLogin(true);
 	    		$('#navDiv').html(response);
 	    	}
 	    	else
 	    	{
-	    		loginError(JSON.parse(response).error);
+	    		loginError('These credentials do not match our records.');
 	    	}
 	    }
 	});
