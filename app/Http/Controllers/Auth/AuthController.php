@@ -96,6 +96,19 @@ class AuthController extends Controller
         }
         // Override ends here
 
-        return redirect()->intended($this->redirectPath());
+        return view('components.navbar');
+    }
+
+    /**
+    * Get the failed login response instance.
+    * Overrides same named method from:
+    * vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php
+    *
+    * @param \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        return json_encode(['error' => $this->getFailedLoginMessage()]);
     }
 }
