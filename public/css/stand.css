@@ -1,0 +1,7 @@
+
+@media(max-width: 618px) {
+	.map {
+		display: flex;
+		justify-content: center;
+	}
+}

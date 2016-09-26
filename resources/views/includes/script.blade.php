@@ -8,3 +8,4 @@
 <script src="{{asset('js/materialize-init.js')}}"></script>
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
 <script src="{{asset('js/map.js')}}"></script>
+<script src="{{asset('js/stand.js')}}"></script>

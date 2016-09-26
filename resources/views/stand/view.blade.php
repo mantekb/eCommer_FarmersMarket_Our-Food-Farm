@@ -13,8 +13,8 @@
 
 <div class="row">
 
-    <div class="col s6 offset-s3 m6 l4">
-        <div id="map" style='width: 250px; height: 250px; border: solid 1px;'>Map</div>
+    <div class="map col m6 l4">
+        <div id="standMap" style='width: 250px; height: 250px; border: solid 1px;'>Map</div>
     </div>
 
     <div class="col s8 push-s2 m5 l5 push-l1">
