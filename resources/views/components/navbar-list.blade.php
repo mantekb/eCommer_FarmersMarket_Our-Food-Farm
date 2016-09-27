@@ -4,7 +4,7 @@
 <li><a href="{{url("/learning")}}">Learning Resources</a></li>
 @if(Auth::guest())
 	<li><a class="login" href="{{url("/login")}}">Login</a></li>
-	<li><a href="{{url("/register")}}">Register</a></li>
+	{{-- <li><a href="{{url("/register")}}">Register</a></li> --}}
 @else
 <li><a class="dropdown-button" data-beloworigin="true" data-activates='account-{{$identity}}'>{{Auth::user()->name}}</a></li>
     <ul id="account-{{$identity}}"  class='dropdown-content'>
