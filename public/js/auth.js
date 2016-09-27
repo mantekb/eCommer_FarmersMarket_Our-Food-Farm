@@ -23,6 +23,7 @@ function hideLogin(hide)
 	{
 		$('.loginForm').show();
 		loginHidden = false;
+		$('.loginForm [name="email"]').focus();
 	}
 	$('#nav-mobile').sideNav('hide');
 }
@@ -51,6 +52,8 @@ function login()
 	    	{
 	    		hideLogin(true);
 	    		$('#navDiv').html(response);
+	    		$(".button-collapse").sideNav();
+	    		$('.dropdown-button').dropdown();
 	    	}
 	    	else
 	    	{
