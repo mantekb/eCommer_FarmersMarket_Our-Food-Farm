@@ -2,9 +2,12 @@
 <html>
     @include('includes.head')
     <body>
-    	@include('components.navbar')
+        <span id="navDiv">
+        	@include('components.navbar')
+        </span>
         <div class="container">
             <div class="content">
+                @include('auth.loginForm')
 
                 @yield('content')
 
