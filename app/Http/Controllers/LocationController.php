@@ -12,12 +12,14 @@ class LocationController extends Controller
 {
     //Gets the lat/long based on the zipcode given in the request
 	public function getCoords(Request $request){
+		$result = [];
 		$zipToFind = $request->get('zip');
-		$location = Location::where('zip', $zipToFind)->get();
-		if ($location->isEmpty())
-			return "";
+		$location = Location::where('zip', $zipToFind)->first();
+		if ($location == null)
+			$result = ['error' => 'Location not found.'];
 		else
-			return "Lat: {$location->lat}  Long: {$location->long}";
+			$result = ['Lat' => $location->lat, 'Long' => $location->long];
+		return json_encode($result);
 	}
 
 	public function saveGeoLocation(Request $request){

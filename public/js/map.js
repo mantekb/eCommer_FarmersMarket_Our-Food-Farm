@@ -40,14 +40,20 @@ $("#zipcode").keyup(function(event){
 $('#find').click(function(){
     var zip = $('#zipcode').val()
     zip = validateZip(zip);
-    $.post('./get-lat-long', {
+    $.post(DOCUMENT_ROOT+'/location/get-lat-long', {
         zip : zip
     })
     .done(function(data) {
-        if (data === ""){ //i.e. we don't have the geolocation saved yet
+        var result = JSON.parse(data);
+        if (result.error){ //i.e. we don't have the geolocation saved yet
             createCoords(zip);
-            //map.flyTo newly created coords
-            //send request to saveGeoLocation
+        }
+        else {
+            var position = {};
+            position.coords = {};
+            position.coords.latitude = result.Lat;
+            position.coords.longitude = result.Long;
+            showPosition(position);
         }
     })
     .fail(function() {
@@ -73,8 +79,36 @@ function createCoords(zip){
     $.ajax({
         url: "http://api.geocod.io/v1/geocode?postal_code="+zip+"&api_key="+key,
         type: 'GET',
-    }).always(function(response) {
-        console.log(response);
-        setToken();
+        error: function(response) {
+            swal('Error', 'Sorry, we could not find your location.');
+        },
+        success: function(response) {
+            //parse response object
+            var lat = response.results[0].location.lat;
+            var long = response.results[0].location.lng;
+            //set position object to show
+            var position = {};
+            position.coords = {};
+            position.coords.latitude = lat;
+            position.coords.longitude = long;
+            showPosition(position);
+            //now save the coordinates for next time
+            saveCoords(zip, lat, long);
+        },
+    });
+    //Reset the token once call happens.
+    setToken();
+}
+
+function saveCoords(zip, lat, long)
+{
+    $.ajax({
+        url: DOCUMENT_ROOT+'/location/save',
+        type: 'POST',
+        data: {
+            zip: zip,
+            lat: lat,
+            long: long,
+        }
     });
 }
