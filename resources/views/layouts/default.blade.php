@@ -2,9 +2,13 @@
 <html>
     @include('includes.head')
     <body>
-    	@include('components.navbar')
+        <span id="navDiv">
+            @include('components.navbar')
+        </span>
         <div class="container">
+            <input id="DOCUMENT_ROOT" hidden="hidden" style="display: none;" value="{{url('/')}}">
             <div class="content">
+                @include('auth.loginForm')
 
                 @yield('content')
 
