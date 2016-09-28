@@ -23,6 +23,7 @@ function hideLogin(hide)
 	{
 		$('.loginForm').show();
 		loginHidden = false;
+		$('.loginForm [name="email"]').focus();
 	}
 	$('#nav-mobile').sideNav('hide');
 }
@@ -37,7 +38,7 @@ function login()
 	var email = $('.loginForm [name="email"]').val();
 	var password = $('.loginForm [name="password"]').val();
 	$.ajax({
-	    url: './login',
+	    url: DOCUMENT_ROOT+'/login',
 	    type: 'POST',
 	    data: {
 	    	email: email,
@@ -51,6 +52,8 @@ function login()
 	    	{
 	    		hideLogin(true);
 	    		$('#navDiv').html(response);
+	    		$(".button-collapse").sideNav();
+	    		$('.dropdown-button').dropdown();
 	    	}
 	    	else
 	    	{
