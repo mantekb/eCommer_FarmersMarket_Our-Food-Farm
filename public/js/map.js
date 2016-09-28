@@ -69,7 +69,12 @@ function validateZip(zip) {
 
 function createCoords(zip){
     var key = "6e256225eae872958e945279678fa95952f2f5a";
-    $.get("https://api.geocod.io/v1/geocode?postal_code="+zip+"&api_key="+key, function(data, status){
-        alert("Data: " + data + "\nStatus: " + status);
+    deleteToken();
+    $.ajax({
+        url: "http://api.geocod.io/v1/geocode?postal_code="+zip+"&api_key="+key,
+        type: 'GET',
+    }).always(function(response) {
+        console.log(response);
+        setToken();
     });
 }
