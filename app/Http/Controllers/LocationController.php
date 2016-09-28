@@ -6,18 +6,25 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Location;
+
 class LocationController extends Controller
 {
     //Gets the lat/long based on the zipcode given in the request
 	public function getCoords(Request $request){
-		//$location = Location::where('zip', $request->get('zip'));
+		$zipToFind = $request->get('zip');
+		$location = Location::where('zip', $zipToFind)->get();
+		if ($location->isEmpty())
+			return "";
+		else
+			return "Lat: {$location->lat}  Long: {$location->long}";
 	}
 
-	private function saveGeoLocation(Request $request){
+	public function saveGeoLocation(Request $request){
 		$location = new Location;
-		$location->zip = $request->zip;
-		$location->lat = $request->lat;
-		$location->long = $request->long;
+		$location->zip = $request->get('zip');
+		$location->lat = $request->get('lat');
+		$location->long = $request->get('long');
 		$location->save();
 	}
 }

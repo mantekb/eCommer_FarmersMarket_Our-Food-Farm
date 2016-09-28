@@ -44,10 +44,14 @@ $('#find').click(function(){
         zip : zip
     })
     .done(function(data) {
-        alert(data);
+        if (data === ""){ //i.e. we don't have the geolocation saved yet
+            createCoords(zip);
+            //map.flyTo newly created coords
+            //send request to saveGeoLocation
+        }
     })
     .fail(function() {
-        alert( "error" );
+        swal("Oops!", "An unknown error has occurred.")
     });
 });
 
@@ -61,4 +65,11 @@ function validateZip(zip) {
         } else
             swal("Whoops!", "Please make sure your zipcode is formatted correctly");
     }
+}
+
+function createCoords(zip){
+    var key = "6e256225eae872958e945279678fa95952f2f5a";
+    $.get("https://api.geocod.io/v1/geocode?postal_code="+zip+"&api_key="+key, function(data, status){
+        alert("Data: " + data + "\nStatus: " + status);
+    });
 }
