@@ -1,8 +1,24 @@
+//If the map element exists, init the map, then load the position.
 if ($('#map').length > 0){
-    if (navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(sendPosition, showError);
-    else
-        swal("Uh oh!", "Geolocation is not supported by this browser.\nTry updating your browser, or using a different one.");
+    // My personal accessToken, do not keep
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaW5zYW5lYWxlYyIsImEiOiJjaXN0Y3VtMDIwM2szMnpsOGFyNzBranpiIn0.t73_pX_gZy5govr5LM9liA';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v9'
+    });
+
+    map.on('load', function() {
+        if (navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(sendPosition, showError);
+        }
+        else
+        {
+            swal("Uh oh!", 
+                "Geolocation is not supported by this browser.\nTry updating your browser, or using a different one."
+            );
+        }
+    });
 }
 
 function sendPosition(position)
