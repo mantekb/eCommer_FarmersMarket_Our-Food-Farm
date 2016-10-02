@@ -1,16 +1,21 @@
 if ($('#map').length > 0){
 	if (navigator.geolocation)
-	    navigator.geolocation.getCurrentPosition(showPosition, showError);
+	    navigator.geolocation.getCurrentPosition(sendPosition, showError);
 	else
 	    swal("Uh oh!", "Geolocation is not supported by this browser.\nTry updating your browser, or using a different one.");
 }
 
-function showPosition(position) {
+function sendPosition(position)
+{
+    showPosition(position.coords.latitude, position.coords.longitude);
+}
+
+function showPosition(lat, long) {
 	map.flyTo({
         center: [
-            position.coords.longitude,
-            position.coords.latitude],
-            zoom: 10
+            long,
+            lat],
+            zoom: 11
     });
 }
 
@@ -49,11 +54,7 @@ $('#find').click(function(){
             createCoords(zip);
         }
         else {
-            var position = {};
-            position.coords = {};
-            position.coords.latitude = result.Lat;
-            position.coords.longitude = result.Long;
-            showPosition(position);
+            showPosition(result.Lat, result.Long);
         }
     })
     .fail(function() {
@@ -86,12 +87,7 @@ function createCoords(zip){
             //parse response object
             var lat = response.results[0].location.lat;
             var long = response.results[0].location.lng;
-            //set position object to show
-            var position = {};
-            position.coords = {};
-            position.coords.latitude = lat;
-            position.coords.longitude = long;
-            showPosition(position);
+            showPosition(lat, long);
             //now save the coordinates for next time
             saveCoords(zip, lat, long);
         },
