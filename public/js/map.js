@@ -76,6 +76,8 @@ $('#find').click(function(){
     .fail(function() {
         swal("Oops!", "An unknown error has occurred.")
     });
+    //Then we want to unfocus the input to make it easier for mobile.
+    $('#zipcode').blur();
 });
 
 
