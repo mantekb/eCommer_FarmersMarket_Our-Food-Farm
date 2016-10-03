@@ -38,6 +38,12 @@ Route::get('learning', function() {
 	return view('learning.learning-resources', ['articles' => $articles]);
 });
 
+Route::group(['prefix'=>'/settings', 'middleware'=>'auth'], function() {
+	Route::get('/', ['as' => '/', 'uses' => 'SettingsController@index']);
+	Route::post('/name', 'SettingsController@changeName');
+	Route::post('/removeStand', 'SettingsController@removeStand');
+});
+
 Route::group(['prefix' => '/location'], function() {
 	Route::post('/get-lat-long', 'LocationController@getCoords');
 	Route::post('/save', 'LocationController@saveGeoLocation');
