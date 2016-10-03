@@ -4,26 +4,104 @@
 
 @section('content')
 
-<h2>Change Your Settings</h2>
+<h2>Settings</h2>
+<div class="card">
+    <div class="card-content">
+        <div class="card-title">Change Your Name</div>
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings/name') }}">
+            {{ csrf_field() }}
 
-<h5>Name:</h5>
-<input style="width: 60%;" type="text" placeholder="New Name" id="name">
-<button id="name_change" class="btn btn-primary col s6">Change</button>
+            <div class="input-field">
+                <label for="name">Name</label>
 
-<h5>Password:</h5>
-<input style="width: 60%;" type="text" placeholder="New Password" id="pass">
-<input style="width: 60%;" type="text" placeholder="Confirm Password" id="pass_conf">
-<button id="pass_change" class="btn btn-primary col s6">Change</button>
+                <input id="name" type="text" class="form-control" name="name">
+            </div>
 
-<h5>Address:</h5>
-<input style="width: 60%;" type="text" placeholder="Address Ln 1" id="line_1">
-<input style="width: 60%;" type="text" placeholder="Address Ln 2" id="line_2">
-<input style="width: 60%;" type="text" placeholder="City" id="city">
-<input style="width: 60%;" type="text" placeholder="State" id="state">
-<input style="width: 60%;" type="text" placeholder="ZIP" id="zip">
-<button id="address_change" class="btn btn-primary col s6">Change</button>
+            <div class="input-field">
+                <button type="submit" id="changeName" class="btn btn-primary">
+                	Change Name
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 
-<h5>Your Stand</h5>
-<button id="stand_remove" class="btn btn-primary col s6">Remove</button>
+<div class="card">
+	<div class="card-content">
+		<div class="card-title">Reset Your Password</div>
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings/password') }}">
+            <div class="input-field">
+                <label for="new_password">New Password</label>
+
+                <input id="new_password" type="password" class="form-control" name="new_password">
+
+            </div>
+
+            <div class="input-field">
+                <label for="conf_password">Confirm Password</label>
+
+                <input id="conf_password" type="password" class="form-control" name="conf_password">
+
+            </div>
+
+            <div class="input-field">
+                <button type="submit" id="changePassword" class="btn btn-primary">
+                	Change Password
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+	<div class="card-content">
+		<div class="card-title">Change Your Address</div>
+        <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings/address') }}">
+            <div class="input-field">
+                <label for="address">Address</label>
+
+                <input id="address" type="text" class="form-control" name="address">
+
+
+            </div>
+
+            <div class="input-field">
+                <label for="city">City</label>
+
+                <input id="city" type="text" class="form-control" name="city">
+
+            </div>
+
+            <div class="input-field">
+                <label for="state">State</label>
+
+                <input id="state" type="text" class="form-control" name="state">
+
+            </div>
+
+            <div class="input-field">
+                <label for="zip">ZIP</label>
+
+                <input id="zip" type="text" class="form-control" name="zip">
+
+            </div>
+
+            <div class="input-field">
+                <button type="submit" class="btn btn-primary">
+	                Change Address
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+	<div class="card-content">
+		<div class="card-title">Remove Your Stand</div>
+        <button type="button" class="btn btn-primary" onclick="removeStand();">
+            Remove Your Stand
+        </button>
+	</div>
+</div>
 
 @endsection

@@ -38,8 +38,8 @@ Route::get('learning', function() {
 	return view('learning.learning-resources', ['articles' => $articles]);
 });
 
-Route::get('settings', function() {
-	return view('settings.settings');
+Route::group(['prefix'=>'/settings'], function() {
+	Route::get('/', 'SettingsController@index');
 });
 
 Route::group(['prefix' => '/location'], function() {
