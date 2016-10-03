@@ -6,7 +6,7 @@
 	<li><a class="login" href="{{url("/login")}}">Login</a></li>
 	{{-- <li><a href="{{url("/register")}}">Register</a></li> --}}
 @else
-<li><a class="dropdown-button" data-beloworigin="true" data-activates='account-{{$identity}}'>{{Auth::user()->name}}</a></li>
+<li><a class="dropdown-button" data-beloworigin="true" id="account-{{$identity}}" data-activates='account-{{$identity}}'>{{Auth::user()->name}}</a></li>
     <ul id="account-{{$identity}}"  class='dropdown-content'>
     	@if(!Auth::user()->hasStand())
 		    <li><a href="{{url("/stand/create")}}">Create Stand</a></li>

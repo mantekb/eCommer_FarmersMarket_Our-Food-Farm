@@ -14,7 +14,7 @@
             <div class="input-field">
                 <label for="name">Name</label>
 
-                <input id="name" type="text" class="form-control" name="name">
+                <input id="name" type="text" class="form-control" name="name" value="{{$user->name}}">
             </div>
 
             <div class="input-field">
@@ -30,6 +30,7 @@
 	<div class="card-content">
 		<div class="card-title">Reset Your Password</div>
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings/password') }}">
+            {{ csrf_field() }}
             <div class="input-field">
                 <label for="new_password">New Password</label>
 
@@ -57,6 +58,7 @@
 	<div class="card-content">
 		<div class="card-title">Change Your Address</div>
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings/address') }}">
+            {{ csrf_field() }}
             <div class="input-field">
                 <label for="address">Address</label>
 
@@ -95,6 +97,7 @@
     </div>
 </div>
 
+@if ($user->hasStand())
 <div class="card">
 	<div class="card-content">
 		<div class="card-title">Remove Your Stand</div>
@@ -103,5 +106,6 @@
         </button>
 	</div>
 </div>
+@endif
 
 @endsection

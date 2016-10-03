@@ -38,8 +38,9 @@ Route::get('learning', function() {
 	return view('learning.learning-resources', ['articles' => $articles]);
 });
 
-Route::group(['prefix'=>'/settings'], function() {
-	Route::get('/', 'SettingsController@index');
+Route::group(['prefix'=>'/settings', 'middleware'=>'auth'], function() {
+	Route::get('/', ['as' => '/', 'uses' => 'SettingsController@index']);
+	Route::post('/name', 'SettingsController@changeName');
 });
 
 Route::group(['prefix' => '/location'], function() {
