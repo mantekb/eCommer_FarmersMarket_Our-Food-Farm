@@ -30,4 +30,10 @@ class SettingsController extends Controller
 			return Redirect('/settings');
 		}
 	}
+
+	public function removeStand()
+	{
+		$stand = $this->user->stand;
+		$stand->delete();
+	}
 }
