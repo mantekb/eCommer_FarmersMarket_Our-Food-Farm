@@ -7,7 +7,14 @@ if ($('#map').length > 0){
         style: 'mapbox://styles/mapbox/streets-v9'
     });
 
+    //This fires slightly faster than the 'load' event.
+    map.on('source.load', function() {
+        //Prevent back button from breaking navbar
+        reloadNavBar();
+    });
+
     map.on('load', function() {
+        //Automatically get location.
         if (navigator.geolocation)
         {
             navigator.geolocation.getCurrentPosition(sendPosition, showError);
