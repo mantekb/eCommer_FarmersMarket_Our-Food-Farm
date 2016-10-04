@@ -8,6 +8,7 @@ if ($('#map').length > 0){
     });
 
     map.on('load', function() {
+        //Automatically get location.
         if (navigator.geolocation)
         {
             navigator.geolocation.getCurrentPosition(sendPosition, showError);

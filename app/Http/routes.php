@@ -13,6 +13,12 @@
 
 Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);
 
+Route::get('/navbar', ['as' => '/navbar',
+	'uses' => function() {
+	return view('components.navbar');
+	}
+]);
+
 Route::auth();
 
 Route::group(['prefix' => '/stand'], function() {

@@ -1,6 +1,6 @@
 
 var loginHidden = true;
-$('.login').on('click', function(e) {
+$(document).on('click', '.login',function(e) {
 	e.preventDefault();
 	if (loginHidden)
 	{
@@ -52,8 +52,7 @@ function login()
 	    	{
 	    		hideLogin(true);
 	    		$('#navDiv').html(response);
-	    		$(".button-collapse").sideNav();
-	    		$('.dropdown-button').dropdown();
+	    		initNavBar();
 	    	}
 	    	else
 	    	{
