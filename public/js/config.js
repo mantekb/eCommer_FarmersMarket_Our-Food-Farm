@@ -18,6 +18,7 @@ var DOCUMENT_ROOT = $('#DOCUMENT_ROOT').val();
 //Make sure hitting back button doesn't ruin the navbar.
 function reloadNavBar() {
 	$.ajax({
+		cache: false,
 	    url: DOCUMENT_ROOT+'/navbar',
 	    type: 'GET',
 	    error: (response) => {
@@ -29,7 +30,7 @@ function reloadNavBar() {
 	        initNavBar();
 	    }
 	});
-}
+} reloadNavBar();
 
 function initNavBar() {
 	$(".button-collapse").sideNav();
