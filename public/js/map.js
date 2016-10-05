@@ -21,8 +21,7 @@ if ($('#map').length > 0){
     });
 }
 
-function sendPosition(position)
-{
+function sendPosition(position) {
     showPosition(position.coords.latitude, position.coords.longitude);
 }
 

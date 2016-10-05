@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);
+Route::get('/', ['as' => '/', 'uses' => 'LandingController@index']);
+Route::get('/home', ['as' => '/home', 'uses' => 'HomeController@index']);
 
 Route::auth();
 
@@ -39,7 +40,7 @@ Route::get('learning', function() {
 });
 
 Route::group(['prefix'=>'/settings', 'middleware'=>'auth'], function() {
-	Route::get('/', ['as' => '/', 'uses' => 'SettingsController@index']);
+	Route::get('/home', ['as' => '/home', 'uses' => 'SettingsController@index']);
 	Route::post('/name', 'SettingsController@changeName');
 	Route::post('/removeStand', 'SettingsController@removeStand');
 });
