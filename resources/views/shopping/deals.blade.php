@@ -16,17 +16,23 @@
     <div class="col s8 push-s2 m4 l3">
         <div class="card">
             <div class="card-image">
-                <img src="http://feelgrafix.com/data_images/out/27/956607-tomato.jpg" alt="">
+                <h10><img src="http://feelgrafix.com/data_images/out/27/956607-tomato.jpg" alt=""></h10>
                 <span class="card-title blue-text">Tomato</span>
             </div>
             <div class="card-content">
-                <p>Buy this</p>
+                <div>
+                    <a href="">Stand Name</a>
+                    <span class="right"><h6>Reviews: ★★★☆☆</h6></span>
+                </div>
+                <p>Description of the Item </p>
             </div>
             <div class="card-action">
                 <a href="">Add To Cart</a>
+                
             </div>
         </div>
     </div>
+
     @endfor
 </div>
 
