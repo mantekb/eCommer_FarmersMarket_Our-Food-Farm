@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-content">
             <div class="card-title">Create Your Food Stand</div>
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/stand/create') }}">
+            <form class="form-horizontal" id="createStand" role="form" method="POST" action="{{ url('/stand/create') }}">
                 {{ csrf_field() }}
 
                 <div class="input-field{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -87,9 +87,13 @@
                     @endif
                 </div>
 
+                {{-- Hidden inputs for lat and long --}}
+                <input type="hidden" id="lat" name="lat">
+                <input type="hidden" id="long" name="long">
+
                 <div class="input-field">
                     <div class="col m6 push-m4">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" id="submitCreateStand" class="btn btn-primary">
                             <i class="fa fa-btn fa-sign-in"></i> Create
                         </button>
                     </div>
