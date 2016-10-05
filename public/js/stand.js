@@ -1,6 +1,6 @@
 
 //When creating a stand, get the coordinates of the stand and save it.
-$('#createStand').on('submit', function(e) {
+$('#submitCreateStand').on('click', function(e) {
 	//Stop the form from submitting.
 	e.preventDefault();
 	//Create address object to get coordinates of.
@@ -13,7 +13,7 @@ $('#createStand').on('submit', function(e) {
 		//Call back function we call when coordinates com back, so we submit form.
 		$('#lat').val(lat);
 		$('#long').val(long);
-		$('#'+e.target.id).submit();
+		$('#createStand').submit();
 	});
 })
 

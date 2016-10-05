@@ -88,12 +88,12 @@
                 </div>
 
                 {{-- Hidden inputs for lat and long --}}
-                <input type="hidden" id="lat">
-                <input type="hidden" id="long">
+                <input type="hidden" id="lat" name="lat">
+                <input type="hidden" id="long" name="long">
 
                 <div class="input-field">
                     <div class="col m6 push-m4">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" id="submitCreateStand" class="btn btn-primary">
                             <i class="fa fa-btn fa-sign-in"></i> Create
                         </button>
                     </div>

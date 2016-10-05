@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
+use App\StandAddress;
 
 class Stand extends Model
 {
@@ -22,10 +23,17 @@ class Stand extends Model
         $this->user_id      = $user->id;
         $this->name         = $data['name'];
         $this->description  = $data['description'];
-        $this->address      = $data['address'];
-        $this->city         = $data['city'];
-        $this->state        = $data['state'];
-        $this->zip          = $data['zip'];
         $this->save();
+        //Now save the address to it's table.
+        $address = new StandAddress;
+        $address->stand_id     = $this->id;
+        $address->address      = $data['address'];
+        $address->city         = $data['city'];
+        $address->state        = $data['state'];
+        $address->zip          = $data['zip'];
+        //These aren't "required" so if they don't exist, we just put blank.
+        $address->lat          = (isset($data['lat'])  ? $data['lat']  : '');
+        $address->long         = (isset($data['long']) ? $data['long'] : '');
+        $address->save();
     }
 }
