@@ -23,8 +23,8 @@
     <br>
     <div class="col s8 push-s2 m5 l5 push-l1">
         <p class="center-align">
-            {{$stand->address}}<br>
-            {{$stand->city}}, {{$stand->state}} {{$stand->zip}}
+            {{$stand->address->address}}<br>
+            {{$stand->address->city}}, {{$stand->address->state}} {{$stand->address->zip}}
         </p>
     </div>
 </div>

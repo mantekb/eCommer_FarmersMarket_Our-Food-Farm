@@ -36,4 +36,9 @@ class Stand extends Model
         $address->long         = (isset($data['long']) ? $data['long'] : '');
         $address->save();
     }
+
+    public function address()
+    {
+        return $this->hasOne('App\StandAddress');
+    }
 }
