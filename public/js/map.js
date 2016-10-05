@@ -1,3 +1,5 @@
+var GEOCODE_KEY = "6e256225eae872958e945279678fa95952f2f5a";
+
 //If the map element exists, init the map, then load the position.
 if ($('#map').length > 0){
     // My personal accessToken, do not keep
@@ -94,10 +96,9 @@ function validateZip(zip) {
 }
 
 function createCoords(zip){
-    var key = "6e256225eae872958e945279678fa95952f2f5a";
     deleteToken();
     $.ajax({
-        url: "http://api.geocod.io/v1/geocode?postal_code="+zip+"&api_key="+key,
+        url: "http://api.geocod.io/v1/geocode?postal_code="+zip+"&api_key="+GEOCODE_KEY,
         type: 'GET',
         error: function(response) {
             swal('Error', 'Sorry, we could not find your location.');
@@ -126,4 +127,39 @@ function saveCoords(zip, lat, long)
             long: long,
         }
     });
+}
+
+function createCoordsFromAddress(address, callback)
+{
+    //Remove token so we can call service
+    deleteToken();
+    //See if we passed in the callback, if not make empty.
+    callback = callback || function(lat, long){};
+    //Default to accept address as a string
+    var addressString = address;
+    //If address is an object, parse it into a string.
+    if (address !== null && typeof address === 'object')
+    {
+        addressString = address.address
+            + ", " + address.city 
+            + " " + address.state 
+            + ", " + address.zip; 
+    }
+    //Escape characters for URL
+    addressString = encodeURIComponent(addressString);
+    //Make request
+    $.ajax({
+        url: 'https://api.geocod.io/v1/geocode?q='+addressString+'&api_key='+GEOCODE_KEY,
+        type: 'GET',
+        error: (response) => {
+            //Do Nothing: could not get coordinates
+        },
+        success: (response) => {
+            var lat = response.results[0].location.lat;
+            var long = response.results[0].location.lng;
+            callback(lat, long);
+        }
+    });
+    //Reset our security token
+    setToken();
 }
