@@ -23,8 +23,9 @@ Route::auth();
 
 Route::group(['prefix' => '/stand'], function() {
 	//Use middleware to ensure you can only make a stand if you are logged in.
-	Route::match(['get', 'post'], '/create', 'StandController@create')->middleware('onestand');
+	Route::match(['get', 'post'], '/create', ['as' => '/create', 'uses' => 'StandController@create'])->middleware('onestand');
 	Route::get('/{stand}', ['as' => '/{stand}', 'uses' => 'StandController@view']);
+	Route::match(['get', 'post'], '/edit', 'StandController@edit');
 });
 
 Route::get('learning', function() {

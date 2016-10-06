@@ -74,4 +74,32 @@ class StandController extends Controller
     {
         return view('stand.view', ['stand' => $stand]);
     }
+
+    /**
+    * Edit view and method for a user's stand.
+    *
+    * @return $view - Either the form or the redirect.
+    */
+    public function edit(Request $request)
+    {
+        $user = Auth::user();
+        //Only allow to edit a stand if the user has one.
+        if ($user->hasStand())
+        {
+            if ($request->isMethod('POST'))
+            {
+                //
+            }
+            else
+            {
+                $stand = $user->stand;
+                $view = view('stand.edit', ['stand' => $stand]);
+            }
+        }
+        else
+        {
+            $view = redirect('/create');
+        }
+        return $view;
+    }
 }
