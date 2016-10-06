@@ -21,7 +21,7 @@
             </div>
             <div class="card-content">
                 <div>
-                    <a href="">Stand Name</a>
+                    <a href="{{url("/stand/1")}}">Stand Name</a>
                     <span class="right"><h6>Reviews: ★★★☆☆</h6></span>
                 </div>
                 <p>Description of the Item </p>

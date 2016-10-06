@@ -56,3 +56,6 @@ Route::group(['prefix' => '/location'], function() {
 });
 
 Route::get("/deals", "ShoppingController@deals");
+
+
+Route::get("/article", "ArticleController@article");
