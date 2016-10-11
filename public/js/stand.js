@@ -41,20 +41,22 @@ $(window).resize(function() {
 //Create the map object for a stand
 if ($('#standMap').length > 0)
 {
-	var flying = false;
-	mapboxgl.accessToken = MAPBOX_KEY;
-	var map = new mapboxgl.Map({
-		container: 'standMap',
-		style: 'mapbox://styles/mapbox/streets-v9'
-	});
 
 	//Stand information for the map.
 	var lat = $('#lat').val();
 	var long = $('#long').val();
 	var standName = $('#standName').html();
 
+	mapboxgl.accessToken = MAPBOX_KEY;
+	var map = new mapboxgl.Map({
+		container: 'standMap',
+		style: 'mapbox://styles/mapbox/streets-v9',
+		center: [long, lat],
+		zoom: 13
+	});
+
 	map.on('load', function() {
-		showPosition(lat, long, 13);
+		// showPosition(lat, long, 13);
 		placeMarker(map, lat, long, standName);
 	});
 }

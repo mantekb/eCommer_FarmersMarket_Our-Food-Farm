@@ -167,9 +167,9 @@ function createCoordsFromAddress(address, callback)
 
 function placeMarker(map, lat, long, title)
 {
-    var display = '<div class="card"><div class="card-content">'
+    var display = '<p>'
         +title
-    +'</div></div>';
+    +'</p>';
     var ll = new mapboxgl.LngLat(long, lat);
     new mapboxgl.Popup()
       .setLngLat(ll)
