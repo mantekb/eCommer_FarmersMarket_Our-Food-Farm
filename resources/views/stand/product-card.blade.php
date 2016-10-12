@@ -6,8 +6,11 @@
         </div>
         <div class="card-content">
             <p>{{$product->description or 'Buy This'}}</p>
+            <p>In Stock: {{$product->stock or '3'}}</p>
+            <p>${{$product->price or '5.00'}}</p>
         </div>
-        {{-- Stock and price somewhere --}}
-        <div class="card-action"><a href="">Add To Cart</a></div>
+        <div class="card-action">
+            <a href="{{url('/cart/add/'.$product->id)}}">Add To Cart</a>
+        </div>
     </div>
 </div>
