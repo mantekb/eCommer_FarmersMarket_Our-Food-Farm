@@ -54,3 +54,8 @@ Route::group(['prefix' => '/location'], function() {
 	Route::post('/get-lat-long', 'LocationController@getCoords');
 	Route::post('/save', 'LocationController@saveGeoLocation');
 });
+
+Route::get("/deals", "ShoppingController@deals");
+
+
+Route::get("/article", "ArticleController@article");
