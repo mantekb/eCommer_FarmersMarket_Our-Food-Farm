@@ -10,7 +10,7 @@
             <p>${{$product->price or '5.00'}}</p>
         </div>
         <div class="card-action">
-            <a href="{{url('/cart/add/'.$product->id)}}">Add To Cart</a>
+            <a class="add-to-cart" id="product_id-{{$product->id}}" href="{{url('/cart/add/'.$product->id)}}">Add To Cart</a>
         </div>
     </div>
 </div>
