@@ -1,5 +1,16 @@
 var GEOCODE_KEY = "6e256225eae872958e945279678fa95952f2f5a";
 
+
+$(document).ready( function(){ 
+    var zip = window.location.href;
+    zip = zip.substring(zip.indexOf("zip=")+4);
+    if (!(zip.trim() === "")){
+        console.log(zip);
+        $('#zipcode').val(zip);
+        $("#find").click();
+    }
+})
+
 //If the map element exists, init the map, then load the position.
 if ($('#map').length > 0){
     // My personal accessToken, do not keep
@@ -11,18 +22,12 @@ if ($('#map').length > 0){
 
     map.on('load', function() {
         //Automatically get location.
-        if (navigator.geolocation)
-        {
-            navigator.geolocation.getCurrentPosition(sendPosition, showError);
-        }
-        else
-        {
-            swal("Uh oh!", 
-                "Geolocation is not supported by this browser.\nTry updating your browser, or using a different one."
-            );
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(sendPosition);
         }
     });
 }
+
 
 function sendPosition(position) {
     showPosition(position.coords.latitude, position.coords.longitude);
@@ -37,23 +42,6 @@ function showPosition(lat, long) {
     });
 }
 
-function showError(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            swal("Uh oh!", "Looks like you denied permission for geolocation.\nThat's ok, just use the search box to enter your location.");
-            break;
-        case error.POSITION_UNAVAILABLE:
-            swal("Sorry!", "We weren't able to find you! Please try the search box.");
-            break;
-        case error.TIMEOUT:
-            swal("Error", "Request timed out, please try again");
-            break;
-        case error.UNKNOWN_ERROR:
-            swal("Error", "Please contact support.");
-            break;
-    }
-}
-
 $("#zipcode").keyup(function(event){
     if(event.keyCode == 13){
         $("#find").click();
@@ -61,7 +49,8 @@ $("#zipcode").keyup(function(event){
 });
 
 $('#find').click(function(){
-    var zip = $('#zipcode').val()
+    if (zip === undefined)
+        var zip = $('#zipcode').val();
     zip = validateZip(zip);
     $.post(DOCUMENT_ROOT+'/location/get-lat-long', {
         zip : zip

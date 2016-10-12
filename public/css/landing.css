@@ -94,7 +94,7 @@ nav ul li a {
 	top: 50%;
 }
 
-#searchButton {
+.landing {
 	background-color: white;
 	height: 3rem;
     top: -3px;

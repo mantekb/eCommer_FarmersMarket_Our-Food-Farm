@@ -8,7 +8,7 @@
 	<div class="search">
 		<label for="zipcode" id="ziplabel">Find fresh food near you</label>
 			<input id="zipcode" name="zipcode" class="zip" type="text" placeholder="Enter your zipcode"/>
-			<button id="searchButton" class="button" onclick="location.href='{{url('/home')}}?zip='+$('#zipcode').val();">
+			<button id="find" class="landing" onclick="location.href='{{url('/home')}}?zip='+$('#zipcode').val();">
 				<img class="icon" src='/our-food-farm/public/img/search.png' alt='[]' />
 			</button>
 	</div>
