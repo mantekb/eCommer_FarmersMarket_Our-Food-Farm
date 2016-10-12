@@ -1,16 +1,6 @@
 var GEOCODE_KEY = "6e256225eae872958e945279678fa95952f2f5a";
 var MAPBOX_KEY = 'pk.eyJ1IjoiaW5zYW5lYWxlYyIsImEiOiJjaXN0Y3VtMDIwM2szMnpsOGFyNzBranpiIn0.t73_pX_gZy5govr5LM9liA';
 
-$(document).ready( function(){ 
-    var zip = window.location.href;
-    zip = zip.substring(zip.indexOf("zip=")+4);
-    if (!(zip.trim() === "")){
-        console.log(zip);
-        $('#zipcode').val(zip);
-        $("#find").click();
-    }
-})
-
 //If the map element exists, init the map, then load the position.
 if ($('#map').length > 0){
     // My personal accessToken, do not keep
@@ -21,9 +11,14 @@ if ($('#map').length > 0){
     });
 
     map.on('load', function() {
-        //Automatically get location.
-        if (navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(sendPosition);
+        var zip = window.location.href;
+        zip = zip.substring(zip.indexOf("zip=")+4);
+        if (!(zip.trim() === "") && zip.length < 9){
+            $('#zipcode').val(zip);
+            $("#find").click();
+        } else {
+            if (navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(sendPosition);
         }
     });
 }
