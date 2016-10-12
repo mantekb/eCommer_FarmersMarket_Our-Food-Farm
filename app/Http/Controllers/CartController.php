@@ -38,4 +38,17 @@ class CartController extends Controller
     	//Return for javascript
     	return json_encode($cart);
     }
+
+    public function view()
+    {
+    	if (Session::has('cart'))
+    	{
+	    	$cart = Session::get('cart');
+    	}
+    	else
+    	{
+    		$cart = false;
+    	}
+    	return view('shopping.view-cart', ['cart' => $cart]);
+    }
 }

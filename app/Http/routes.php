@@ -32,6 +32,7 @@ Route::group(['prefix' => '/stand'], function() {
 
 Route::group(['prefix' => '/cart'], function() {
 	Route::post('/add/{product}', 'CartController@add');
+	Route::get('/view', 'CartController@view');
 });
 
 Route::get('learning', function() {
