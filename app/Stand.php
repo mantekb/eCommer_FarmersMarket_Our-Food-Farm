@@ -41,4 +41,20 @@ class Stand extends Model
     {
         return $this->hasOne('App\StandAddress');
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'stand_products')
+            ->withTimestamps();
+    }
+
+    public function addProduct(Product $product)
+    {
+        $this->products()->attach($product->id);
+    }
+
+    public function removeProduct(Product $product)
+    {
+        $this->products()->detach($product->id);
+    }
 }
