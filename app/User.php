@@ -43,4 +43,9 @@ class User extends Authenticatable
     {
         return '/stand/'.$this->stand->id;
     }
+
+    public function address()
+    {
+        return $this->hasOne('App\UserAddress');
+    }
 }
