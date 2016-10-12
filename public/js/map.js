@@ -1,5 +1,5 @@
 var GEOCODE_KEY = "6e256225eae872958e945279678fa95952f2f5a";
-
+var MAPBOX_KEY = 'pk.eyJ1IjoiaW5zYW5lYWxlYyIsImEiOiJjaXN0Y3VtMDIwM2szMnpsOGFyNzBranpiIn0.t73_pX_gZy5govr5LM9liA';
 
 $(document).ready( function(){ 
     var zip = window.location.href;
@@ -14,7 +14,7 @@ $(document).ready( function(){
 //If the map element exists, init the map, then load the position.
 if ($('#map').length > 0){
     // My personal accessToken, do not keep
-    mapboxgl.accessToken = 'pk.eyJ1IjoiaW5zYW5lYWxlYyIsImEiOiJjaXN0Y3VtMDIwM2szMnpsOGFyNzBranpiIn0.t73_pX_gZy5govr5LM9liA';
+    mapboxgl.accessToken = MAPBOX_KEY;
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v9'
@@ -33,12 +33,13 @@ function sendPosition(position) {
     showPosition(position.coords.latitude, position.coords.longitude);
 }
 
-function showPosition(lat, long) {
+function showPosition(lat, long, zoom) {
+    zoom = zoom || 11;
     map.flyTo({
         center: [
             long,
             lat],
-            zoom: 11
+            zoom: zoom
     });
 }
 
@@ -150,4 +151,16 @@ function createCoordsFromAddress(address, callback)
     });
     //Reset our security token
     setToken();
+}
+
+function placeMarker(map, lat, long, title)
+{
+    var display = '<p>'
+        +title
+    +'</p>';
+    var ll = new mapboxgl.LngLat(long, lat);
+    new mapboxgl.Popup()
+      .setLngLat(ll)
+      .setHTML(display)
+      .addTo(map);
 }

@@ -37,3 +37,26 @@ $(window).resize(function() {
 	repositionMap();
 });
 
+
+//Create the map object for a stand
+if ($('#standMap').length > 0)
+{
+
+	//Stand information for the map.
+	var lat = $('#lat').val();
+	var long = $('#long').val();
+	var standName = $('#standName').html();
+
+	mapboxgl.accessToken = MAPBOX_KEY;
+	var map = new mapboxgl.Map({
+		container: 'standMap',
+		style: 'mapbox://styles/mapbox/streets-v9',
+		center: [long, lat], //Start centered on stand instead of flyto
+		zoom: 13
+	});
+
+	map.on('load', function() {
+		//Once the map loads, place a marker where the stand should be.
+		placeMarker(map, lat, long, standName);
+	});
+}
