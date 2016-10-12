@@ -51,12 +51,12 @@ if ($('#standMap').length > 0)
 	var map = new mapboxgl.Map({
 		container: 'standMap',
 		style: 'mapbox://styles/mapbox/streets-v9',
-		center: [long, lat],
+		center: [long, lat], //Start centered on stand instead of flyto
 		zoom: 13
 	});
 
 	map.on('load', function() {
-		// showPosition(lat, long, 13);
+		//Once the map loads, place a marker where the stand should be.
 		placeMarker(map, lat, long, standName);
 	});
 }

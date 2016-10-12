@@ -102,4 +102,32 @@ class StandController extends Controller
         }
         return $view;
     }
+
+    /**
+    * View, edit, and create products for your stand
+    *
+    * @return $view - 
+    */
+    public function products(Request $request)
+    {
+        $user = Auth::user();
+        //only allow to create products if user has a stand
+        if ($user->hasStand())
+        {
+            if ($request->isMethod('POST'))
+            {
+                //
+            }
+            else
+            {
+                $stand = $user->stand;
+                $view = view('stand.products', ['stand' => $stand]);
+            }
+        }
+        else
+        {
+            $view = redirect('/create');
+        }
+        return $view;
+    }
 }
