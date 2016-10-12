@@ -62,29 +62,28 @@
             <div class="input-field">
                 <label for="address">Address</label>
 
-                <input id="address" type="text" class="form-control" name="address" value="{{$user->address->address}}">
-
+                <input id="address" type="text" class="form-control" name="address" value="{{$user->address->address or ''}}">
 
             </div>
 
             <div class="input-field">
                 <label for="city">City</label>
 
-                <input id="city" type="text" class="form-control" name="city" value="{{$user->address->city}}">
+                <input id="city" type="text" class="form-control" name="city" value="{{$user->address->city or ''}}">
 
             </div>
 
             <div class="input-field">
                 <label for="state">State</label>
 
-                <input id="state" type="text" class="form-control" name="state" value="{{$user->address->state}}">
+                <input id="state" type="text" class="form-control" name="state" value="{{$user->address->state or ''}}">
 
             </div>
 
             <div class="input-field">
                 <label for="zip">ZIP</label>
 
-                <input id="zip" type="text" class="form-control" name="zip" value="{{$user->address->zip}}">
+                <input id="zip" type="text" class="form-control" name="zip" value="{{$user->address->zip or ''}}">
 
             </div>
 
