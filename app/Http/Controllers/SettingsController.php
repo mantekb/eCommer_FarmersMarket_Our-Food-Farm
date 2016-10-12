@@ -38,7 +38,7 @@ class SettingsController extends Controller
 		$conf_password = $request->get('conf_password');
 		if ($new_password == $conf_password)
 		{
-			$this->user->password = $new_password;
+			$this->user->password = bcrypt($new_password);
 			$this->user->save();
 			if (!$request->ajax())
 			{
@@ -53,16 +53,24 @@ class SettingsController extends Controller
 		$city = $request->get('city');
 		$state = $request->get('state');
 		$zip = $request->get('zip');
-		$coordinates = $request->get('coordinates');
+		$lat = $request->get('lat');
+		$long = $request->get('long');
 
-		$user_address = new UserAddress;
+		if (!$this->user->hasAddress())
+		{
+			$user_address = new UserAddress;
+		}
+		else
+		{
+			$user_address = $this->user->address;
+		}
 		$user_address->user_id = $this->user->id;
 		$user_address->address = $address;
 		$user_address->city = $city;
 		$user_address->state = $state;
 		$user_address->zip = $zip;
-		$user_address->lat = $coordinates.lat;
-		$user_address->long = $coordinates.long;
+		$user_address->lat = $lat;
+		$user_address->long = $long;
 		$user_address->save();
 
 

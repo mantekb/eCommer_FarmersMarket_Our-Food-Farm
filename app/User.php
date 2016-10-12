@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\UserAddress');
     }
+
+    public function hasAddress()
+    {
+        return (bool)count($this->address);
+    }
 }

@@ -19,7 +19,7 @@ $('#changeName').on('click', function(e) {
 	});
 });
 
-$('changePassword').on('click', function(e) {
+$('#changePassword').on('click', function(e) {
 	e.preventDefault();
 	var new_password = $('new_password').val();
 	var conf_password = $('conf_password').val();
@@ -39,33 +39,33 @@ $('changePassword').on('click', function(e) {
 	});
 });
 
-$('changeAddress').on('click', function(e) {
+$('#changeAddress').on('click', function(e) {
 	e.preventDefault();
 	var address = {};
 	address.address = $('#address').val()
 	address.city = $('#city').val()
 	address.state = $('#state').val()
 	address.zip = $('#zip').val()
-	createCoordsFromAddress(address, var coordinates = function(lat, long) {
+	createCoordsFromAddress(address, function(lat, long) {
 		//Call back function we call when coordinates com back, so we submit form.
-		coordinates.lat = $('#lat').val(lat);
-		coordinates.long = $('#long').val(long);
-		return coordinates;
-	});
-
-	$.ajax({
-		url: DOCUMENT_ROOT+ '/settings/address',
-		type: 'POST',
-		data: {
-			address: address,
-			coordinates: coordinates,
-		},
-		error: (response) => {
-			swal('Error', "Unable to change address.");
-		},
-		success: (response) => {
-			swal('Success', "Your address has been changed.")
-		}
+		$.ajax({
+			url: DOCUMENT_ROOT+'/settings/address',
+			type: 'POST',
+			data: {
+				address: address.address,
+				city: address.city,
+				state: address.state,
+				zip: address.zip,
+				lat: lat,
+				long: long,
+			},
+			error: (response) => {
+				swal('Error', "Unable to change address.");
+			},
+			success: (response) => {
+				swal('Success', "Your address has been changed.")
+			}
+		});	
 	});
 });
 
