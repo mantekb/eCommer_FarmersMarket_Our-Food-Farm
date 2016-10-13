@@ -4,12 +4,14 @@
 
 @section('content')
 
-<input style="width: 60%;" type="text" placeholder="Zip Code" id="zipcode">
-<button id="find" class="btn btn-primary col s6">Find Me</button>
-
-{{-- <div class="text-center">Map goes here.</div> --}}
-
-<div id='map' style='width: 100%; height: 450px;'></div>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARhc7qq_OMKMSgQ-ONkvAxAiNmk_yf5tw"></script>
+<div class="marquee">
+	<div class="search">
+		<label for="zipcode" id="ziplabel">Find fresh food near you</label>
+			<input id="zipcode" name="zipcode" class="zip" type="text" placeholder="Enter your zipcode"/>
+			<button id="find" class="landing" onclick="location.href='{{url('/home')}}?zip='+$('#zipcode').val();">
+				<img class="icon" src='/our-food-farm/public/img/search.png' alt='[]' />
+			</button>
+	</div>
+    <img src='/our-food-farm/public/img/landing.jpg' style='width:100%;height:100%' alt='[]' />
+</div>
 @endsection

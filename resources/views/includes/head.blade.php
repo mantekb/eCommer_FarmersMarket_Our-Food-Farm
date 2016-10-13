@@ -16,6 +16,9 @@
 	{{-- Stand css --}}
 	<link rel="stylesheet" href="{{asset('css/stand.css')}}">
 
+	{{-- Landing css --}}
+	<link rel="stylesheet" href="{{asset('css/landing.css')}}">
+
 	{{-- Material icons --}}
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">       
 
