@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', ['as' => '/', 'uses' => 'LandingController@index']);
-Route::get('/home', ['as' => '/home', 'uses' => 'HomeController@index']);
+Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);
 
 Route::get('/navbar', ['as' => '/navbar',
 	'uses' => function() {
