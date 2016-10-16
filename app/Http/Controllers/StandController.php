@@ -84,25 +84,16 @@ class StandController extends Controller
     */
     public function edit(Request $request)
     {
-        $user = Auth::user();
-        //Only allow to edit a stand if the user has one.
-        if ($user->hasStand())
+        $stand = Auth::user()->stand;
+        if ($request->isMethod('POST'))
         {
-            if ($request->isMethod('POST'))
-            {
-                //
-            }
-            else
-            {
-                $stand = $user->stand;
-                $view = view('stand.edit', ['stand' => $stand]);
-            }
+            //
         }
         else
         {
-            $view = redirect('/create');
+            $view = view('stand.edit', ['stand' => $stand]);
         }
-        return $view;
+    return $view;
     }
 
     /**
@@ -112,59 +103,50 @@ class StandController extends Controller
     */
     public function products(Request $request)
     {
-        $user = Auth::user();
-        //only allow to create products if user has a stand
-        if ($user->hasStand())
+        $stand = Auth::user()->stand;
+        if ($request->isMethod('POST'))
         {
-            $stand = $user->stand;
-            if ($request->isMethod('POST'))
+            if ($request->get('type') == 'new')
             {
-                if ($request->get('type') == 'new')
+                //Create the new product
+                $product = new Product;
+                $product->name          = $request->get('name');
+                $product->description   = $request->get('description');
+                $product->price         = $request->get('price');
+                $product->stock         = $request->get('stock');
+                $product->save();
+                //Now associate the new product with the stand.
+                $stand->addProduct($product);
+                //Since we create through ajax, return full product information back to display.
+                $view = json_encode($product);
+            }
+            else
+            {
+                //Editing an existing product
+                $product_id = $request->get('product_id');
+                $product = StandProducts::where('product_id', $product_id)
+                    ->where('stand_id', $stand->id)
+                    ->first();
+                if ($product == null)
                 {
-                    //Create the new product
-                    $product = new Product;
+                    //No product by that ID was found for this stand, prevent them from moving forward
+                    $view = json_encode(['error' => 'You do not have access to this product.']);
+                }
+                else
+                {
+                    //Allow editing that product
                     $product->name          = $request->get('name');
                     $product->description   = $request->get('description');
                     $product->price         = $request->get('price');
                     $product->stock         = $request->get('stock');
                     $product->save();
-                    //Now associate the new product with the stand.
-                    $stand->addProduct($product);
-                    //Since we create through ajax, return full product information back to display.
                     $view = json_encode($product);
                 }
-                else
-                {
-                    //Editing an existing product
-                    $product_id = $request->get('product_id');
-                    $product = StandProducts::where('product_id', $product_id)
-                        ->where('stand_id', $stand->id)
-                        ->first();
-                    if ($product == null)
-                    {
-                        //No product by that ID was found for this stand, prevent them from moving forward
-                        $view = json_encode(['error' => 'You do not have access to this product.']);
-                    }
-                    else
-                    {
-                        //Allow editing that product
-                        $product->name          = $request->get('name');
-                        $product->description   = $request->get('description');
-                        $product->price         = $request->get('price');
-                        $product->stock         = $request->get('stock');
-                        $product->save();
-                        $view = json_encode($product);
-                    }
-                }
-            }
-            else
-            {
-                $view = view('stand.products', ['stand' => $stand]);
             }
         }
         else
         {
-            $view = redirect('/create');
+            $view = view('stand.products', ['stand' => $stand]);
         }
         return $view;
     }
