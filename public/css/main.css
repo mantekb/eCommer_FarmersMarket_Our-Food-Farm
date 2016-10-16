@@ -1,0 +1,146 @@
+@font-face {
+    font-family: LandDownUnder;
+    src: url('/our-food-farm/public/fonts/land_downunder/land downunder.eot?#iefix') format('embedded-opentype'), 
+         url('/our-food-farm/public/fonts/land_downunder/land downunder.woff') format('woff'), 
+         url('/our-food-farm/public/fonts/land_downunder/land downunder.ttf')  format('truetype');
+}
+
+@font-face {
+    font-family: Exo;
+    src: url('/our-food-farm/public/fonts/exo/Exo-Light.ttf');
+    unicode-range: U+30-39;
+}
+
+body {
+	font-family: LandDownUnder;
+	font-size: 2rem;
+}
+
+nav ul li a {
+	color: inherit;
+	font-size: 2.3rem;
+	text-shadow: 0 0 1px #c1f5ac;
+}
+
+.ldu {
+	font-family: LandDownUnder;
+}
+
+.logo {
+	padding-top: 2px !important;
+	text-shadow: 0 0 1px #c1f5ac;
+}
+
+.hamburger {
+	margin-left: 0.5rem;
+}
+
+.side-nav li a {
+	color: #8bc34a !important;
+	font-size: 2rem !important;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family: LandDownUnder;
+  color: #adad85;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  font-family: LandDownUnder;
+  color: #adad85;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+  font-family: LandDownUnder;
+  color: #adad85;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  font-family: LandDownUnder;
+  color: #adad85;
+}
+
+@media (max-width: 360px) { /*Mobile Dev S*/
+	.logo{
+		font-size: 3.2rem !important;
+	}
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  	font-size: 1.7rem !important;
+	}
+
+	::-moz-placeholder { /* Firefox 19+ */
+	  	font-size: 1.7rem !important;
+	}
+
+	:-ms-input-placeholder { /* IE 10+ */
+	  	font-size: 1.7rem !important;
+	}
+
+	:-moz-placeholder { /* Firefox 18- */
+	  	font-size: 1.7rem !important;
+	}
+}
+
+@media (min-width: 370px) and (max-width: 673px) { /*Mobile Dev M and L*/
+	.logo{
+		font-size: 3.5rem !important;
+	}
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  	font-size: 1.9rem !important;
+	}
+
+	::-moz-placeholder { /* Firefox 19+ */
+	  	font-size: 1.9rem !important;
+	}
+
+	:-ms-input-placeholder { /* IE 10+ */
+	  	font-size: 1.9rem !important;
+	}
+
+	:-moz-placeholder { /* Firefox 18- */
+	  	font-size: 1.9rem !important;
+	}
+}
+
+@media (min-width: 674px) and (max-width: 862px) { /*Tablet*/
+	.logo{
+		font-size: 3.9rem !important;
+	}
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  	font-size: 2.1rem !important;
+	}
+
+	::-moz-placeholder { /* Firefox 19+ */
+	  	font-size: 2.1rem !important;
+	}
+
+	:-ms-input-placeholder { /* IE 10+ */
+	  	font-size: 2.1rem !important;
+	}
+
+	:-moz-placeholder { /* Firefox 18- */
+	  	font-size: 2.1rem !important;
+	}
+}
+
+@media (min-width: 863px) { /*Laptop/Desktop*/
+	.logo{
+		font-size: 3.9rem !important;
+		margin-left: 0.5rem;
+	}
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  	font-size: 2.3rem !important;
+	}
+
+	::-moz-placeholder { /* Firefox 19+ */
+	  	font-size: 2.3rem !important;
+	}
+
+	:-ms-input-placeholder { /* IE 10+ */
+	  	font-size: 2.3rem !important;
+	}
+
+	:-moz-placeholder { /* Firefox 18- */
+	  	font-size: 2.3rem !important;
+	}
+}
