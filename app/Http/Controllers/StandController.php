@@ -74,7 +74,8 @@ class StandController extends Controller
     */
     public function view(Stand $stand)
     {
-        return view('stand.view', ['stand' => $stand]);
+        // $products = $stand->products;
+        return view('stand.view', ['stand' => $stand/*, 'products' => $products*/]);
     }
 
     /**
