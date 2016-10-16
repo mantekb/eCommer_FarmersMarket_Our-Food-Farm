@@ -11,6 +11,32 @@
 </div>
 
 {{-- First offer input for adding new products. --}}
+<div class="row">
+	<div class="card">
+		<div class="card-title">New Product
+			<div class="card-content">
+				<form method="POST" action="{{url('/stand/products')}}">
+					<div class="input-group">
+						<label for="name">Name</label>
+						<input id="name" name="name" type="text">
+					</div>
+					<div class="input-group">
+						<label for="description">Description</label>
+						<input id="description" name="description" type="text">
+					</div>
+					<div class="input-group">
+						<label for="price">Price</label>
+						<input id="price" name="price" type="text">
+					</div>
+					<div class="input-group">
+						<label for="stock">Stock</label>
+						<input id="stock" name="stock" type="text">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 {{-- Next show all existing products, and be able to delete and edit them. --}}
 <div class="row">
