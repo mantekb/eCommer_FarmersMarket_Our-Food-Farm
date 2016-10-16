@@ -16,6 +16,7 @@
 		<div class="card-content">
 			<span class="card-title">New Product</span>
 			<form method="POST" action="{{url('/stand/products')}}">
+				{{ csrf_field() }}
 				<div class="input-group">
 					<label for="name">Name</label>
 					<input id="name" name="name" type="text">
@@ -32,13 +33,15 @@
 					<label for="stock">Stock</label>
 					<input id="stock" name="stock" type="number">
 				</div>
+				<input type="hidden" name="type" value="new">
+				<button class="btn btn-primary" type="submit" id="submitCreateProduct">Create Product</button>
 			</form>
 		</div>
 	</div>
 </div>
 
 {{-- Next show all existing products, and be able to delete and edit them. --}}
-<div class="row">
+<div class="row" id="products">
 	@foreach($stand->products as $product)
 		@include('stand.product-card', ['product' => $product, 'edit' => true])
 	@endforeach
