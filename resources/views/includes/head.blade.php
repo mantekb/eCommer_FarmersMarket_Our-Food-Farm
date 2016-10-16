@@ -16,6 +16,9 @@
 	{{-- Stand css --}}
 	<link rel="stylesheet" href="{{asset('css/stand.css')}}">
 
+	{{-- Main css --}}
+	<link rel="stylesheet" href="{{asset('css/main.css')}}">
+
 	{{-- Landing css --}}
 	<link rel="stylesheet" href="{{asset('css/landing.css')}}">
 
