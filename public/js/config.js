@@ -35,4 +35,13 @@ function reloadNavBar() {
 function initNavBar() {
 	$(".button-collapse").sideNav();
 	$('.dropdown-button').dropdown();
+	//Init the side-nav closer button
+	$('#closeSideNav').on('click', function(e) {
+		e.preventDefault();
+		closeSideNav();
+	});
+}
+
+function closeSideNav() {
+	$('#nav-mobile').sideNav('hide');
 }

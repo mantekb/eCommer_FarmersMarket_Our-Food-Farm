@@ -56,6 +56,8 @@ Route::get('learning', function() {
 Route::group(['prefix'=>'/settings', 'middleware'=>'auth'], function() {
 	Route::get('/', ['as' => '/', 'uses' => 'SettingsController@index']);
 	Route::post('/name', 'SettingsController@changeName');
+	Route::post('/password', 'SettingsController@changePassword');
+	Route::post('/address', 'SettingsController@changeAddress');
 	Route::post('/removeStand', 'SettingsController@removeStand');
 });
 
