@@ -60,3 +60,31 @@ if ($('#standMap').length > 0)
 		placeMarker(map, lat, long, standName);
 	});
 }
+
+$('#submitCreateProduct').on('click', function(e) {
+	e.preventDefault();
+	//Get the form data
+	var name = $('#name').val();
+	var description = $('#description').val();
+	var price = $('#price').val();
+	var stock = $('#stock').val();
+	var type = 'new';//$('#type').val();
+	$.ajax({
+	    url: DOCUMENT_ROOT+'/stand/products',
+	    type: 'POST',
+	    data: {
+	    	name: name,
+	    	description: description,
+	    	price: price,
+	    	stock: stock,
+	    	type: type,
+	    },
+	    error: (response) => {
+	        swal('Error', 'Could not create product.');
+	    },
+	    success: (response) => {
+	        //Response is the card that has the product information
+	        $('#products').append(response);
+	    }
+	});
+});

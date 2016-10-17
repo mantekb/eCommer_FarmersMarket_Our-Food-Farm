@@ -89,14 +89,25 @@ class AuthController extends Controller
         }
 
         // Override starts here
-        $user = Auth::user();
-        if ($user->hasStand())
+        if ($request->ajax())
         {
-            $this->redirectTo = $user->standRoute();
+            $view = view('components.navbar');
+        }
+        else
+        {
+            $user = Auth::user();
+            if ($user->hasStand())
+            {
+                $view = redirect($user->standRoute());
+            }
+            else
+            {
+                $view = redirect('/');
+            }
         }
         // Override ends here
 
-        return view('components.navbar');
+        return $view;
     }
 
     /**
