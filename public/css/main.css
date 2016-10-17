@@ -37,7 +37,16 @@ nav ul li a {
 
 .side-nav li a {
 	color: #8bc34a !important;
-	font-size: 2rem !important;
+	font-size: 2.3rem !important;
+}
+
+.dropdown-content li>a {
+	font-size: 2.3rem;
+}
+
+.card {
+	font-family: sans-serif;
+	font-size: 1rem;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
