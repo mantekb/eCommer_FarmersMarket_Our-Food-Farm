@@ -10,7 +10,12 @@
             <p>${{$product->price or '5.00'}}</p>
         </div>
         <div class="card-action">
-            <a class="add-to-cart" id="product_id-{{$product->id}}" href="{{url('/cart/add/'.$product->id)}}">Add To Cart</a>
+        {{-- remove this when we don't need the placeholder stuff anytmore --}}
+        @if(isset($product->id))
+            <a class="add-to-cart" id="product_id-{{$product->id}}"  href="{{url('/cart/add/'.$product->id)}}">Add To Cart</a>
+        @else
+            <a class="add-to-cart" id="product_id-1"  href="{{url('/cart/add/1')}}">Add To Cart</a>
+        @endif
         </div>
     </div>
 </div>

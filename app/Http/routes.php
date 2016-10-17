@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);
+Route::get('/', ['as' => '/', 'uses' => 'LandingController@index']);
+Route::get('/home', ['as' => '/home', 'uses' =>'HomeController@index']);
 
 Route::get('/navbar', ['as' => '/navbar',
 	'uses' => function() {
@@ -24,8 +25,8 @@ Route::auth();
 Route::group(['prefix' => '/stand'], function() {
 	//Use middleware to ensure you can only make a stand if you are logged in.
 	Route::match(['get', 'post'], '/create', ['as' => '/create', 'uses' => 'StandController@create'])->middleware('onestand');
-	Route::match(['get', 'post'], '/edit', 'StandController@edit');
-	Route::match(['get', 'post'], '/products', 'StandController@products');
+	Route::match(['get', 'post'], '/edit', 'StandController@edit')->middleware('hasstand');
+	Route::match(['get', 'post'], '/products', 'StandController@products')->middleware('hasstand');
 	//This has to go last, otherwise other routes try to be a {Stand}
 	Route::get('/{stand}', ['as' => '/{stand}', 'uses' => 'StandController@view']);
 });
@@ -55,6 +56,8 @@ Route::get('learning', function() {
 Route::group(['prefix'=>'/settings', 'middleware'=>'auth'], function() {
 	Route::get('/', ['as' => '/', 'uses' => 'SettingsController@index']);
 	Route::post('/name', 'SettingsController@changeName');
+	Route::post('/password', 'SettingsController@changePassword');
+	Route::post('/address', 'SettingsController@changeAddress');
 	Route::post('/removeStand', 'SettingsController@removeStand');
 });
 
