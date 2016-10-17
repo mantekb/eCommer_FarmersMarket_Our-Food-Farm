@@ -14,18 +14,7 @@
 	<link rel="stylesheet" href="{{asset('css/sweetalert.css')}}">
 
 	<style type="text/css">
-		@font-face {
-		    font-family: LandDownUnder;
-		    src: url('{{asset("fonts/land_downunder/land downunder.eot?#iefix")}}') format('embedded-opentype'), 
-		         url('{{asset("fonts/land_downunder/land downunder.woff")}}') format('woff'), 
-		         url('{{asset("fonts/land_downunder/land downunder.ttf")}}')  format('truetype');
-		}
-
-		@font-face {
-		    font-family: Exo;
-		    src: url('{{asset("fonts/exo/Exo-Light.ttf")}}');
-		    unicode-range: U+30-39;
-		}
+		
 	</style>
 
 	{{-- Stand css --}}
