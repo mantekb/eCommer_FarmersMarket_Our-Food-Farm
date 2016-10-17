@@ -11,7 +11,7 @@
 </div>
 
 
-<div class="row">
+<div class="row stand-address">
 
     {{-- hidden --}}
     <input type="hidden" id="lat" value="{{$stand->address->lat}}">
