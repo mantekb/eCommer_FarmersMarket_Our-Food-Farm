@@ -1,4 +1,4 @@
-<nav class="green darken-4">
+<nav class="white ldu z-depth-0">
 	<div class="nav-wrapper">
 		<a href="{{url("/home")}}" class="brand-logo light-green-text logo">OurFoodFarm</a>
 		<a href="#" data-activates="nav-mobile" class="hamburger light-green-text button-collapse"><i class="material-icons">menu</i></a>
