@@ -12,7 +12,7 @@
 				<p>Nothing in your cart!</p>
 			@else
 				@foreach($cart->members as $product)
-					<p>{{$product->name}} at ${{$product->price}}</p>
+					<p>{{$product->name}} at ${{$product->price}} quantity: {{$product->quantity}}</p>
 				@endforeach
 			@endif
 		</div>

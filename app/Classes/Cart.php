@@ -17,8 +17,26 @@ class Cart
 	*
 	* @
 	*/
-	public function add($product)
+	public function add($product, $quantity)
 	{
-		$this->members[] = $product;
+		$product->quantity = $quantity;
+		//See if the product is in the cart
+		$isFound = false;
+		$i = 0;
+		$numMembers = count($this->members);
+		while ($i < $numMembers && !$isFound)
+		{
+			if ($this->members[$i]->id == $product->id)
+			{
+				//Increment Quantity for Producct
+				$isFound = true;
+				$this->members[$i]->quantity += $quantity;
+			}
+			$i++;
+		}
+		if (!$isFound)
+		{
+			$this->members[] = $product;
+		}
 	}
 }
