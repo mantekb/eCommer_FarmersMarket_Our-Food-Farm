@@ -1,6 +1,6 @@
 
 {{-- <li><a href="/food">Food</a></li> --}}
-<li><a href="{{url("#0")}}">Deals of Day</a></li>
+<li><a href="{{url("/deals")}}">Deals of the Day</a></li>
 <li><a href="{{url("/learning")}}">Learning Resources</a></li>
 @if(Auth::guest())
 	<li><a class="login" href="{{url("/login")}}">Login</a></li>

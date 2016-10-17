@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStandsTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,13 @@ class CreateStandsTable extends Migration
      */
     public function up()
     {
-        Schema::create('stands', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->index()->unsigned();
             $table->string('name');
-            $table->string('description', 4096);
+            $table->string('description');
+            $table->decimal('price'); //unit price
+            $table->integer('stock'); //total stock for this product by this stand
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +29,6 @@ class CreateStandsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('stands');
+        Schema::drop('products');
     }
 }
