@@ -30,6 +30,11 @@ Route::group(['prefix' => '/stand'], function() {
 	Route::get('/{stand}', ['as' => '/{stand}', 'uses' => 'StandController@view']);
 });
 
+Route::group(['prefix' => '/cart'], function() {
+	Route::post('/add/{product}', 'CartController@add');
+	Route::get('/view', 'CartController@view');
+});
+
 Route::get('learning', function() {
 	//Replace function with a controller function instead.
 	$articles = [

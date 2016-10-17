@@ -12,5 +12,6 @@
 <script src="{{asset('js/config.js')}}"></script>
 <script src="{{asset('js/map.js')}}"></script>
 <script src="{{asset('js/auth.js')}}"></script>
+<script src="{{asset('js/cart.js')}}"></script>
 <script src="{{asset('js/stand.js')}}"></script>
 <script src="{{asset('js/settings.js')}}"></script>
