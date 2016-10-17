@@ -49,6 +49,10 @@ nav ul li a {
 	font-size: 1rem;
 }
 
+.stand-address {
+	font-family: sans-serif;
+	font-size: 1rem;
+}
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   font-family: LandDownUnder;
   color: #adad85;
