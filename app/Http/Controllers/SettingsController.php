@@ -36,7 +36,7 @@ class SettingsController extends Controller
 	{
 		$new_password = $request->get('new_password');
 		$conf_password = $request->get('conf_password');
-		if ($new_password == $conf_password)
+		if ($new_password == $conf_password && $new_password != "")
 		{
 			$this->user->password = bcrypt($new_password);
 			$this->user->save();
@@ -44,6 +44,18 @@ class SettingsController extends Controller
 			{
 				return Redirect('/settings');
 			}
+		}
+		else
+		{
+			if ($new_password == "")
+			{
+				return json_encode(['error' => 'Password must not be empty.']);
+			}
+			else
+			{
+				return json_encode(['error' => 'Passwords do not match.']);
+			}
+			
 		}
 	}
 

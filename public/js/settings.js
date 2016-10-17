@@ -21,8 +21,8 @@ $('#changeName').on('click', function(e) {
 
 $('#changePassword').on('click', function(e) {
 	e.preventDefault();
-	var new_password = $('new_password').val();
-	var conf_password = $('conf_password').val();
+	var new_password = $('#new_password').val();
+	var conf_password = $('#conf_password').val();
 	$.ajax({
 		url: DOCUMENT_ROOT+'/settings/password',
 		type: 'POST',
@@ -34,7 +34,15 @@ $('#changePassword').on('click', function(e) {
 			swal('Error', "Unable to change password.");
 		},
 		success: (response) => {
-			swal('Success', "Your password has been changed.");
+			var res = JSON.parse(response);
+			if (!res.error)
+			{
+				swal('Success', "Your password has been changed.");
+			}
+			else
+			{
+				swal('Error', res.error);
+			}
 		}
 	});
 });

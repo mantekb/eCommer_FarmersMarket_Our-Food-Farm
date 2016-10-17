@@ -31,18 +31,17 @@
 		<div class="card-title">Reset Your Password</div>
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings/password') }}">
             {{ csrf_field() }}
+
             <div class="input-field">
                 <label for="new_password">New Password</label>
 
                 <input id="new_password" type="password" class="form-control" name="new_password">
-
             </div>
 
             <div class="input-field">
                 <label for="conf_password">Confirm Password</label>
 
                 <input id="conf_password" type="password" class="form-control" name="conf_password">
-
             </div>
 
             <div class="input-field">
