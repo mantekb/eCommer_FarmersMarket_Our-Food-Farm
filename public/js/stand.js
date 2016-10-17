@@ -85,6 +85,11 @@ $('#submitCreateProduct').on('click', function(e) {
 	    success: (response) => {
 	        //Response is the card that has the product information
 	        $('#products').append(response);
+	        //Clear inputs.
+	        $('#name').val('');
+			$('#description').val('');
+			$('#price').val('');
+			$('#stock').val('');
 	    }
 	});
 });
