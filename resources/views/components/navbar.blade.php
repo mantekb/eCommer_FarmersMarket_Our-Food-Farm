@@ -6,6 +6,7 @@
 			@include('components.navbar-list', ['identity' => 'main'])
 		</ul>
 		<ul id="nav-mobile" class="side-nav">
+			<li class="black light-green-text"><a id="closeSideNav">Close Menu</a></li>
 			@include('components.navbar-list', ['identity' => 'mobile'])
 		</ul>
 	</div>
