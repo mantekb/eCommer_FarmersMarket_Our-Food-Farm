@@ -12,9 +12,9 @@
         <div class="card-action">
         {{-- remove this when we don't need the placeholder stuff anytmore --}}
         @if(isset($product->id))
-            <a href="{{url('/cart/add/'.$product->id)}}">Add To Cart</a>
+            <a class="add-to-cart" id="product_id-{{$product->id}}"  href="{{url('/cart/add/'.$product->id)}}">Add To Cart</a>
         @else
-            <a href="{{url('/cart/add/1')}}">Add To Cart</a>
+            <a class="add-to-cart" id="product_id-1"  href="{{url('/cart/add/1')}}">Add To Cart</a>
         @endif
         </div>
     </div>

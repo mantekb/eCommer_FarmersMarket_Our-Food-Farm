@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', ['as' => '/', 'uses' => 'LandingController@index']);
-Route::get('/home', ['as' => '/home', 'uses' => 'HomeController@index']);
+Route::get('/', ['as' => '/', 'uses' => 'HomeController@index']);
 
 Route::get('/navbar', ['as' => '/navbar',
 	'uses' => function() {
@@ -29,6 +28,11 @@ Route::group(['prefix' => '/stand'], function() {
 	Route::match(['get', 'post'], '/products', 'StandController@products')->middleware('hasstand');
 	//This has to go last, otherwise other routes try to be a {Stand}
 	Route::get('/{stand}', ['as' => '/{stand}', 'uses' => 'StandController@view']);
+});
+
+Route::group(['prefix' => '/cart'], function() {
+	Route::post('/add/{product}', 'CartController@add');
+	Route::get('/view', 'CartController@view');
 });
 
 Route::get('learning', function() {
