@@ -48,6 +48,11 @@ class Stand extends Model
             ->withTimestamps();
     }
 
+    public function hasProducts()
+    {
+        return (bool)count($this->products);
+    }
+
     public function addProduct(Product $product)
     {
         $this->products()->attach($product->id);
