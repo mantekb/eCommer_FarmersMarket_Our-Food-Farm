@@ -16,7 +16,7 @@
     <div class="col s8 push-s2 m4 l3">
         <div class="card">
             <div class="card-image">
-                <h10><img src="http://feelgrafix.com/data_images/out/27/956607-tomato.jpg" alt=""></h10>
+                <h10><img src='{{asset("img/tomato.jpg")}}' alt=""></h10>
                 <span class="card-title blue-text">Tomato</span>
             </div>
             <div class="card-content">
