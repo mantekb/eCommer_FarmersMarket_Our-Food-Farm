@@ -70,3 +70,9 @@ Route::get("/deals", "ShoppingController@deals");
 
 
 Route::get("/article", "ArticleController@article");
+
+
+//Routes to error pages below
+Route::get('/404', function() {
+	return view('errors.not-found');
+});

@@ -16,6 +16,8 @@ if ($('#map').length > 0){
         if (!(zip.trim() === "") && zip.length < 9){
             $('#zipcode').val(zip);
             $("#find").click();
+        } else if ($('#user-lat').length > 0 && $('#user-long').length > 0) {
+            retrieveUserAddress();
         } else {
             if (navigator.geolocation)
                 navigator.geolocation.getCurrentPosition(sendPosition);
@@ -158,4 +160,19 @@ function placeMarker(map, lat, long, title)
       .setLngLat(ll)
       .setHTML(display)
       .addTo(map);
+}
+
+function retrieveUserAddress()
+{
+    var lat = $('#user-lat').val()
+    var long = $('#user-long').val()
+    showPosition(lat, long);
+    // var address = {};
+    // address.address = $('#user-address').val();
+    // address.city = $('#user-city').val();
+    // address.state = $('#user-state').val();
+    // address.zip = $('#user-zip').val();
+    // createCoordsFromAddress(address, function(lat, long) {
+    //     showPosition(lat, long);
+    // });
 }
