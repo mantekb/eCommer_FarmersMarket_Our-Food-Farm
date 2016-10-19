@@ -43,4 +43,14 @@ class User extends Authenticatable
     {
         return '/stand/'.$this->stand->id;
     }
+
+    public function address()
+    {
+        return $this->hasOne('App\UserAddress');
+    }
+
+    public function hasAddress()
+    {
+        return (bool)count($this->address);
+    }
 }
