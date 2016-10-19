@@ -115,12 +115,13 @@ function saveCoords(zip, lat, long)
     });
 }
 
-function createCoordsFromAddress(address, callback)
+function createCoordsFromAddress(address, callback, errorCallback)
 {
     //Remove token so we can call service
     deleteToken();
     //See if we passed in the callback, if not make empty.
     callback = callback || function(lat, long){};
+    errorCallback = errorCallback || function(lat, long){};
     //Default to accept address as a string
     var addressString = address;
     //If address is an object, parse it into a string.
@@ -138,7 +139,7 @@ function createCoordsFromAddress(address, callback)
         url: 'https://api.geocod.io/v1/geocode?q='+addressString+'&api_key='+GEOCODE_KEY,
         type: 'GET',
         error: (response) => {
-            //Do Nothing: could not get coordinates
+            errorCallback();
         },
         success: (response) => {
             var lat = response.results[0].location.lat;

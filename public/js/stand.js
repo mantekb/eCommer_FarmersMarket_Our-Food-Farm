@@ -14,6 +14,10 @@ $('#submitCreateStand').on('click', function(e) {
 		$('#lat').val(lat);
 		$('#long').val(long);
 		$('#createStand').submit();
+	}, 
+	function() {
+		// This function is called if there is an error retrieving coordinates.
+		swal('Error', 'Could not retrieve coordinates for showing on map. Please ensure your location is correct.');
 	});
 })
 
