@@ -72,21 +72,10 @@ class StandController extends Controller
     *
     * @param $stand - Automatically detected Stand by laravel.
     */
-    public function view($standID)
+    public function view(Stand $stand)
     {
-        //Instead of using implicit binding, we do this. To avoid 404 error.
-        $stand = Stand::find($standID);
-        //Make sure stand exists otherwise don't allow going to route.
-        if ($stand == null)
-        {
-            $view = back();
-        }
-        else
-        {
-            // $products = $stand->products;
-            $view = view('stand.view', ['stand' => $stand/*, 'products' => $products*/]);
-        }
-        return $view;
+        // $products = $stand->products;
+        return view('stand.view', ['stand' => $stand/*, 'products' => $products*/]);
     }
 
     /**
