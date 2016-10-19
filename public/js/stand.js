@@ -93,3 +93,10 @@ $('#submitCreateProduct').on('click', function(e) {
 	    }
 	});
 });
+
+$('.edit-product').on('click', function(e) {
+	e.preventDefault();
+	var id = e.target.id.replace('product_edit-', '');
+	//Display modal to edit the product.
+	// 
+});
