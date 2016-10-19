@@ -74,8 +74,12 @@ class StandController extends Controller
     */
     public function view(Stand $stand)
     {
-        // $products = $stand->products;
-        return view('stand.view', ['stand' => $stand/*, 'products' => $products*/]);
+        $params = ['stand' => $stand];
+        if ($stand->hasProducts())
+        {
+            $params += ['products' => $stand->products];
+        }
+        return view('stand.view', $params);
     }
 
     /**
@@ -109,6 +113,9 @@ class StandController extends Controller
         {
             if ($request->get('type') == 'new')
             {
+                // TODO: 
+                // Something similar to stand creation where we validate and pass back erors
+                // And then we'd be able to clean this section up by passing the data into a constructor.
                 //Create the new product
                 $product = new Product;
                 $product->name          = $request->get('name');

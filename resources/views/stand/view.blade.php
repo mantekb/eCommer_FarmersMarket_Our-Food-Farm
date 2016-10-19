@@ -40,9 +40,16 @@
 </div>
 
 <div class="row">
-    @for($i = 0; $i < 3; $i++)
-        @include('stand.product-card')
-    @endfor
+    {{-- Display products if they exist, otherwise show placeholders. --}}
+    @if(isset($products) && count($products) > 0)
+        @foreach($products as $product)
+            @include('stand.product-card', ['product' => $product])
+        @endforeach
+    @else
+        @for($i = 0; $i < 3; $i++)
+            @include('stand.product-card')
+        @endfor
+    @endif
 </div>
 
 
