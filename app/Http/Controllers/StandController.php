@@ -113,6 +113,9 @@ class StandController extends Controller
         {
             if ($request->get('type') == 'new')
             {
+                // TODO: 
+                // Something similar to stand creation where we validate and pass back erors
+                // And then we'd be able to clean this section up by passing the data into a constructor.
                 //Create the new product
                 $product = new Product;
                 $product->name          = $request->get('name');
