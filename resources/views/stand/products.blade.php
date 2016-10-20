@@ -47,4 +47,30 @@
 	@endforeach
 </div>
 
+{{-- Modal for editing a product --}}
+<div id="edit_product_modal" class="modal">
+    <div class="modal-content">
+        <h4>Edit Your Product</h4>
+        <div class="input-field">
+            <label for="edit_product_name">Name</label>
+            <input type="text" class="form-control" id="edit_product_name">
+        </div>
+        <div class="input-field">
+            <label for="edit_product_description">Description</label>
+            <input type="text" class="form-control" id="edit_product_description">
+        </div>
+        <div class="input-field">
+            <label for="edit_product_stock">Stock</label>
+            <input type="number" class="form-control" id="edit_product_stock">
+        </div>
+        <div class="input-field">
+            <label for="edit_product_price">Price</label>
+            <input type="text" class="form-control" id="edit_product_price">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+
 @endsection

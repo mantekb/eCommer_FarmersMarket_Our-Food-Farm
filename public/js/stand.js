@@ -100,7 +100,13 @@ $('#submitCreateProduct').on('click', function(e) {
 
 $('.edit-product').on('click', function(e) {
 	e.preventDefault();
+	var editPrefix = '#edit_product_';
 	var id = e.target.id.replace('product_edit-', '');
+	//Prefill the values in the modal.
+	$(editPrefix+'name').val($('#product_name-'+id).html());
+	$(editPrefix+'description').val($('#product_description-'+id).html());
+	$(editPrefix+'stock').val($('#product_stock-'+id).html());
+	$(editPrefix+'price').val($('#price-'+id).html());
 	//Display modal to edit the product.
-	// 
+	$(editPrefix+'modal').openModal();
 });
