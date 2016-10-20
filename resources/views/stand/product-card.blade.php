@@ -12,10 +12,11 @@
             <p id="product_price-{{$product->id}}">${{$product->price}}</p>
         </div>
         <div class="card-action">
+        @if(isset($edit) && $edit == true)
+            <a href="#0" class="edit-product" id="product_edit-{{$product->id}}">Edit Product</a>
+        @else
             <a class="add-to-cart" id="product_id-{{$product->id}}"  href="{{url('/cart/add/'.$product->id)}}">Add To Cart</a>
-            @if(isset($edit) && $edit == true)
-                <a href="#0" class="edit-product" id="product_edit-{{$product->id}}">Edit Product</a>
-            @endif
+        @endif
         </div>
     </div>
 </div>
