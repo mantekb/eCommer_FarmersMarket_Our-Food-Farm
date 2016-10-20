@@ -102,19 +102,14 @@ $('.edit-product').on('click', function(e) {
 	e.preventDefault();
 	var editPrefix = '#edit_product_';
 	var id = e.target.id.replace('product_edit-', '');
+	var inputNames = ['name', 'description', 'price', 'stock'];
 	//Prefill the values in the modal.
-	$(editPrefix+'name').val($('#product_name-'+id).html());
-	//Trigger the label to move out of the way of the input - materialize
-	$(editPrefix+'name').change();
-
-	$(editPrefix+'description').val($('#product_description-'+id).html());
-	$(editPrefix+'description').change();
-
-	$(editPrefix+'stock').val($('#product_stock-'+id).html());
-	$(editPrefix+'stock').change();
-
-	$(editPrefix+'price').val($('#price-'+id).html());
-	$(editPrefix+'price').change();
+	for (var i = 0; i < inputNames.length; i++)
+	{
+		$(editPrefix+inputNames[i]).val($('#product_'+inputNames[i]+'-'+id).html());
+		//Trigger the label to move out of the way of the input - materialize
+		$(editPrefix+inputNames[i]).change();
+	}
 
 	//Display modal to edit the product.
 	$(editPrefix+'modal').openModal();
