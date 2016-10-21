@@ -27,7 +27,7 @@
 				</div>
 				<div class="input-group">
 					<label for="price">Price</label>
-					<input id="price" name="price" type="text">
+					<input id="price" name="price" type="number">
 				</div>
 				<div class="input-group">
 					<label for="stock">Stock</label>
@@ -48,7 +48,7 @@
 </div>
 
 {{-- Modal for editing a product --}}
-<div id="edit_product_modal" class="modal">
+<div id="edit_product_modal" class="modal modal-fixed-footer">
     <div class="modal-content">
         <h4>Edit Your Product</h4>
         <div class="input-field">
@@ -65,11 +65,11 @@
         </div>
         <div class="input-field">
             <label for="edit_product_price">Price</label>
-            <input type="text" class="form-control" id="edit_product_price">
+            <input type="number" class="form-control" id="edit_product_price">
         </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a href="#!" id="edit_product_update" class="modal-action waves-effect waves-green btn-flat">Update</a>
     </div>
 </div>
 
