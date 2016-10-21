@@ -32,25 +32,20 @@
     </div>
 </div>
 
-{{-- Placeholders below --}}
-<div class="row">
-    <div class="col s12">
-        <h5>Items Currently For Sale:</h5>
+{{-- Only show products if they exist. --}}
+@if(isset($products) && count($products) > 0)
+    <div class="row">
+        <div class="col s12">
+            <h3>Items Currently For Sale:</h3>
+        </div>
     </div>
-</div>
 
-<div class="row">
-    {{-- Display products if they exist, otherwise show placeholders. --}}
-    @if(isset($products) && count($products) > 0)
+    <div class="row">
         @foreach($products as $product)
             @include('stand.product-card', ['product' => $product])
         @endforeach
-    @else
-        @for($i = 0; $i < 3; $i++)
-            @include('stand.product-card')
-        @endfor
-    @endif
-</div>
+    </div>
+@endif
 
 
 <div class="row">

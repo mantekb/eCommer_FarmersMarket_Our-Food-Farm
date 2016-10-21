@@ -133,16 +133,17 @@ class StandController extends Controller
             {
                 //Editing an existing product
                 $product_id = $request->get('product_id');
-                $product = StandProducts::where('product_id', $product_id)
+                $productExists = StandProducts::where('product_id', $product_id)
                     ->where('stand_id', $stand->id)
                     ->first();
-                if ($product == null)
+                if ($productExists == null)
                 {
                     //No product by that ID was found for this stand, prevent them from moving forward
                     $view = json_encode(['error' => 'You do not have access to this product.']);
                 }
                 else
                 {
+                    $product = Product::find($product_id);
                     //Allow editing that product
                     $product->name          = $request->get('name');
                     $product->description   = $request->get('description');
