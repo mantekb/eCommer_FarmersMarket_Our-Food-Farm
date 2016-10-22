@@ -9,17 +9,17 @@
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                     {{ csrf_field() }}
 
-                    <div class="input-field{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <div class="input-field">
                         <label for="email">E-Mail Address</label>
 
-                        <input id="email" type="email" class="validate form-control" name="email" value="{{ old('email') }}">
+                        <input id="email" type="email" class="validate form-control" name="email">
 
                         <span style="display: none;" class="help-block">
                             <strong id="loginError"></strong>
                         </span>
                     </div>
 
-                    <div class="input-field{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <div class="input-field">
                         <label for="password">Password</label>
 
                         <input id="password" type="password" class="validate form-control" name="password">

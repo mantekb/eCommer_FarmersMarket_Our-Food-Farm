@@ -16,6 +16,8 @@ if ($('#map').length > 0){
         if (!(zip.trim() === "") && zip.length < 9){
             $('#zipcode').val(zip);
             $("#find").click();
+        } else if ($('#user-lat').length > 0 && $('#user-long').length > 0) {
+            retrieveUserAddress();
         } else {
             if (navigator.geolocation)
                 navigator.geolocation.getCurrentPosition(sendPosition);
@@ -113,12 +115,13 @@ function saveCoords(zip, lat, long)
     });
 }
 
-function createCoordsFromAddress(address, callback)
+function createCoordsFromAddress(address, callback, errorCallback)
 {
     //Remove token so we can call service
     deleteToken();
     //See if we passed in the callback, if not make empty.
     callback = callback || function(lat, long){};
+    errorCallback = errorCallback || function(lat, long){};
     //Default to accept address as a string
     var addressString = address;
     //If address is an object, parse it into a string.
@@ -136,7 +139,7 @@ function createCoordsFromAddress(address, callback)
         url: 'https://api.geocod.io/v1/geocode?q='+addressString+'&api_key='+GEOCODE_KEY,
         type: 'GET',
         error: (response) => {
-            //Do Nothing: could not get coordinates
+            errorCallback();
         },
         success: (response) => {
             var lat = response.results[0].location.lat;
@@ -158,4 +161,19 @@ function placeMarker(map, lat, long, title)
       .setLngLat(ll)
       .setHTML(display)
       .addTo(map);
+}
+
+function retrieveUserAddress()
+{
+    var lat = $('#user-lat').val()
+    var long = $('#user-long').val()
+    showPosition(lat, long);
+    // var address = {};
+    // address.address = $('#user-address').val();
+    // address.city = $('#user-city').val();
+    // address.state = $('#user-state').val();
+    // address.zip = $('#user-zip').val();
+    // createCoordsFromAddress(address, function(lat, long) {
+    //     showPosition(lat, long);
+    // });
 }
