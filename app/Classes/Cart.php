@@ -56,6 +56,24 @@ class Cart
 	}
 
 	/**
+	* Updates the quantity of a single item
+	*
+	* @param $product - Product to edit.
+	* @param $quantity - The NEW quantity for the item.
+	*/
+	public function update($product, $quantity)
+	{
+		//Was the product updated?
+		$updated = false;
+		$index = $this->getIndex($product);
+		if ($index != -1)
+		{
+			$this->members[$index]->quantity = $quantity;
+		}
+		return $updated;
+	}
+
+	/**
 	* Obtain the index of a product.
 	*
 	* @param $product - What we are searching for.
