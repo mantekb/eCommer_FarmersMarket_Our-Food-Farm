@@ -10,6 +10,7 @@
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
 {{-- Make sure config.js comes first! --}}
 <script src="{{asset('js/config.js')}}"></script>
+<script src="{{asset('js/landing.js')}}"></script>
 <script src="{{asset('js/map.js')}}"></script>
 <script src="{{asset('js/auth.js')}}"></script>
 <script src="{{asset('js/cart.js')}}"></script>

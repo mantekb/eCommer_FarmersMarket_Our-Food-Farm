@@ -1,3 +1,7 @@
+.no-scroll {
+	overflow: hidden;
+}
+
 #ziplabel {
 	color: white;
 	font-weight: 600;
@@ -32,7 +36,7 @@
     font-size: 11px;
 }
 
-.marquee {
+#marquee {
 	text-align: center;
 	position:absolute;
 	z-index: -1;
@@ -42,7 +46,7 @@
 }
 
 @media (max-width: 360px) { /*Mobile Dev S*/
-	.marquee{
+	#marquee{
 		top: -50px;
 	}
 	#ziplabel{
@@ -57,7 +61,7 @@
 }
 
 @media (min-width: 370px) and (max-width: 673px) { /*Mobile Dev M and L*/
-	.marquee{
+	#marquee{
 		top: -55px;
 	}
 	#ziplabel{
@@ -72,7 +76,7 @@
 }
 
 @media (min-width: 674px) and (max-width: 862px) { /*Tablet*/
-	.marquee{
+	#marquee{
 		top: -50px;
 	}
 	#ziplabel{
@@ -87,7 +91,7 @@
 }
 
 @media (min-width: 863px) { /*Laptop/Desktop*/
-	.marquee {
+	#marquee {
 		top: -70px;
 	}
 	#ziplabel{
