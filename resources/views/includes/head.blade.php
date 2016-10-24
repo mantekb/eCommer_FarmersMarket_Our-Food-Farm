@@ -5,10 +5,10 @@
 	
     {{-- Materializecss.com --}}
 	<!-- Compiled and minified CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+	<link rel="stylesheet" href="{{asset('css/materialize.min.css')}}">
 
 	{{-- MapBox css --}}
-	<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.css' rel='stylesheet' />
+	<link rel="stylesheet" href="{{asset('css/mapbox-gl.css')}}">
 	
 	{{-- SweetAlert --}}
 	<link rel="stylesheet" href="{{asset('css/sweetalert.css')}}">
