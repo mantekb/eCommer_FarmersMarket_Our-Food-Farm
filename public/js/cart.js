@@ -4,6 +4,9 @@ $('.add-to-cart').on('click', function(e) {
 	$.ajax({
 	    url: DOCUMENT_ROOT+'/cart/add/'+product_id,
 	    type: 'POST',
+	    data: {
+	    	quantity: 1,
+	    },
 	    error: (response) => {
 	        swal('Error', 'Could not add product to your cart.');
 	    },

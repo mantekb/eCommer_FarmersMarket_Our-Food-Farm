@@ -16,7 +16,7 @@ class CartController extends Controller
     *
     * @
     */
-    public function add(Product $product)
+    public function add(Product $product, Request $request)
     {
     	// $user = Auth::user();
     	//check if a cart exists in the session
@@ -30,7 +30,7 @@ class CartController extends Controller
     	}
 
     	//Cart object handles adding one
-    	$cart->add($product);
+    	$cart->add($product, $request->get('quantity'));
 
     	//Save the cart to the session
     	Session::set('cart', $cart);
