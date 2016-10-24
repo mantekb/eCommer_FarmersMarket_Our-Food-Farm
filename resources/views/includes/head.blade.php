@@ -37,6 +37,9 @@
 	{{-- Landing css --}}
 	<link rel="stylesheet" href="{{asset('css/landing.css')}}">
 
+	{{-- Cart css --}}
+	<link rel="stylesheet" href="{{asset('css/cart.css')}}">
+
 	{{-- Material icons --}}
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">       
 
