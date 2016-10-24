@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="marquee">
+<div id="marquee">
 	<div class="search">
 		<label for="zipcode" id="ziplabel">Find fresh food near you</label>
 			<input id="zipcode" name="zipcode" class="zip" type="text" placeholder="Enter your zipcode"/>
