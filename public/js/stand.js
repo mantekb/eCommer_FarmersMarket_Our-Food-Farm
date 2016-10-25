@@ -100,7 +100,7 @@ $('#submitCreateProduct').on('click', function(e) {
 
 var editPrefix = '#edit_product_';
 var inputNames = ['name', 'description', 'price', 'stock'];
-$('.edit-product').on('click', function(e) {
+$(document).on('click', '.edit-product', function(e) {
 	e.preventDefault();
 	var id = e.target.id.replace('product_edit-', '');
 	//Prefill the values in the modal.
