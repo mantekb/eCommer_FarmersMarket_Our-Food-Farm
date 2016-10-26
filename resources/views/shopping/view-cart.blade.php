@@ -35,8 +35,8 @@
 				<tr>
 					<th>Image</th>
 					<th>Name</th>
-					<th>Price</th>
 					<th>Quantity</th>
+					<th>Price</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,8 +44,8 @@
 					<tr>
 						<td><img src="{{asset("img/tomato.jpg")}}" alt=""></td>
 						<td><span class="name">{{$product->name}}</span></td>
-						<td><span class="price">{{$product->price}}</span></td>
 						<td><span class="quantity">{{$product->quantity}}</span></td>
+						<td><span class="price">{{$product->price}}</span></td>
 					</tr>
 				@endforeach
 				<tr>
