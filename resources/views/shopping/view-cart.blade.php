@@ -25,44 +25,31 @@
 	</div>
 </div>
 
-{{-- Needs more work, this is good for dropdown, but not for viewcart page. --}}
 <div class="row">
-	<div class="cart">
-		@if($cart == false)
-			<p>Nothing in your cart!</p>
-		@else
-			<div class="cart-item head">
-				<div class="col s1 m2">
-					<p>Image</p>
-				</div>
-				<div class="col s1 m2">
-					<p>Name</p>
-				</div>
-				<div class="col s1 m2">
-					<p>Price</p>
-				</div>
-				<div class="col s1 m2">
-					<p>Quantity</p>
-				</div>
-			</div>
-			@foreach($cart->members as $product)
-			<div class="cart-item">
-				<div class="col s1 m2">
-					<img src="{{asset("img/tomato.jpg")}}" alt="">
-				</div>
-				<div class="col s1 m2">
-					<h6 class="name">{{$product->name}}</h6>
-				</div>
-				<div class="col s1 m2">
-					<p class="price">{{$product->price}}</p>
-				</div>
-				<div class="col s1 m2">
-					<p class="quantity">{{$product->quantity}}</p>
-				</div>
-			</div>
-			@endforeach
-		@endif
-	</div>
+	@if($cart == false)
+		<h5>Nothing in your cart!</h5>
+	@else
+		<table class="cart striped">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Quantity</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach($cart->members as $product)
+					<tr>
+						<td><img src="{{asset("img/tomato.jpg")}}" alt=""></td>
+						<td><span class="name">{{$product->name}}</span></td>
+						<td><span class="price">{{$product->price}}</span></td>
+						<td><span class="quantity">{{$product->quantity}}</span></td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+	@endif
 </div>
 
 @endsection
