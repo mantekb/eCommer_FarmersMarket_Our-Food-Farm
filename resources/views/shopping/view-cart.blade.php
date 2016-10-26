@@ -22,6 +22,7 @@
 <div class="row">
 	<div class="col s12">
 		<h1 class="center-align">Cart</h1>
+		<h3 class="center-align">Scroll to the bottom to move on to checkout.</h3>
 	</div>
 </div>
 
@@ -47,6 +48,14 @@
 						<td><span class="quantity">{{$product->quantity}}</span></td>
 					</tr>
 				@endforeach
+				<tr>
+					<td colspan="3">Total Quantity:</td>
+					<td>{{-- $cart->getTotalQuantity() --}}</td>
+				</tr>
+				<tr>
+					<td colspan="3">Total Price:</td>
+					<td>{{-- $cart->getTotalPrice() --}}</td>
+				</tr>
 			</tbody>
 		</table>
 	@endif
