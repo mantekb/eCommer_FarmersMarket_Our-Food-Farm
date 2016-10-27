@@ -94,4 +94,33 @@ class Cart
 		}
 		return $index;
 	}
+
+	/**
+	* Get the total quantity of all items in the cart.
+	*
+	* @return $totalQuant
+	*/
+	public function getTotalQuantity()
+	{
+		$totalQuant = 0;
+		// Using a foreach here because it passes by value, not reference.
+		foreach ($this->members as $product) {
+			$totalQuant += $product->quantity;
+		}
+		return $totalQuant;
+	}
+
+	/**
+	* Calculate the total price of all items in cart.
+	*
+	* @return $totalPrice
+	*/
+	public function getTotalPrice()
+	{
+		$totalPrice = 0;
+		foreach ($this->members as $product) {
+			$totalPrice += $product->quantity * $product->price;
+		}
+		return $totalPrice;
+	}
 }

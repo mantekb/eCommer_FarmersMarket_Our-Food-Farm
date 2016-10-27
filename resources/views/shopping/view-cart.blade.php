@@ -49,12 +49,9 @@
 					</tr>
 				@endforeach
 				<tr>
-					<td colspan="3">Total Quantity:</td>
-					<td>{{-- $cart->getTotalQuantity() --}}</td>
-				</tr>
-				<tr>
-					<td colspan="3">Total Price:</td>
-					<td>{{-- $cart->getTotalPrice() --}}</td>
+					<td colspan="2">Subtotal:</td>
+					<td>({{ $cart->getTotalQuantity() }} items)</td>
+					<td>{{ $cart->getTotalPrice() }}</td>
 				</tr>
 			</tbody>
 		</table>
