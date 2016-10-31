@@ -4,21 +4,6 @@
 
 @section('content')
 
-{{-- <div class="row">
-	<div class="card">
-		<div class="card-title">Cart</div>
-		<div class="card-content">
-			@if($cart == false)
-				<p>Nothing in your cart!</p>
-			@else
-				@foreach($cart->members as $product)
-					<p>{{$product->name}} at ${{$product->price}} quantity: {{$product->quantity}}</p>
-				@endforeach
-			@endif
-		</div>
-	</div>
-</div> --}}
-
 <div class="row">
 	<div class="col s12">
 		<h1 class="center-align">Cart</h1>
