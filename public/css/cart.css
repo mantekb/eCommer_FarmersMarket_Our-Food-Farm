@@ -9,6 +9,9 @@
 }
 
 /* For the slideout/dropdown: */
+#cart-mobile-trigger {
+	float: right;
+}
 /*
 .cart-wrapper {
 	position: relative;

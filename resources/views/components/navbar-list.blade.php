@@ -20,11 +20,4 @@
 		<li><a href="{{url("/settings")}}">Settings</a></li>
 		<li><a href="{{url("/logout")}}">Logout</a></li>
     </ul>
-<li><a class="dropdown-button" id="cart-dropdown-trigger-{{$identity}}"
- data-beloworigin="true" data-activates="cart-dropdown-{{$identity}}" data-constrainwidth="false">
-	Cart
-</a></li>
-	<ul class="dropdown-content" id="cart-dropdown-{{$identity}}">
-		{{-- Cart Data Goes Here --}}
-	</ul>
 @endif
