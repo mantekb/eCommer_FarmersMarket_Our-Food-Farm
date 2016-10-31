@@ -6,7 +6,6 @@
 <script src="{{asset('js/materialize.min.js')}}"></script>
 <script src='{{asset('js/mapbox-gl.js')}}'></script>
 
-<script src="{{asset('js/materialize-init.js')}}"></script>
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
 {{-- Make sure config.js comes first! --}}
 <script src="{{asset('js/config.js')}}"></script>
