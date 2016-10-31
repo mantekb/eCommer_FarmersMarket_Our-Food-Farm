@@ -6,8 +6,11 @@
 	<li><a class="login" href="{{url("/login")}}">Login</a></li>
 	{{-- <li><a href="{{url("/register")}}">Register</a></li> --}}
 @else
-<li><a class="dropdown-button" data-beloworigin="true" id="name-account-{{$identity}}" data-activates='account-{{$identity}}'>{{Auth::user()->name}}</a></li>
-    <ul id="account-{{$identity}}"  class='dropdown-content'>
+<li><a class="dropdown-button" id="name-account-{{$identity}}"
+ data-beloworigin="true" data-activates="account-{{$identity}}" data-constrainwidth="false">
+	{{Auth::user()->name}}
+</a></li>
+    <ul id="account-{{$identity}}"  class="dropdown-content">
     	@if(!Auth::user()->hasStand())
 		    <li><a href="{{url("/stand/create")}}">Create Stand</a></li>
 		@else
@@ -17,4 +20,11 @@
 		<li><a href="{{url("/settings")}}">Settings</a></li>
 		<li><a href="{{url("/logout")}}">Logout</a></li>
     </ul>
+<li><a class="dropdown-button" id="cart-dropdown-trigger-{{$identity}}"
+ data-beloworigin="true" data-activates="cart-dropdown-{{$identity}}" data-constrainwidth="false">
+	Cart
+</a></li>
+	<ul class="dropdown-content" id="cart-dropdown-{{$identity}}">
+		{{-- Cart Data Goes Here --}}
+	</ul>
 @endif
