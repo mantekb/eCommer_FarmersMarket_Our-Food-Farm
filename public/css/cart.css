@@ -12,6 +12,11 @@
 #cart-mobile-trigger {
 	float: right;
 }
+
+#toast-container {
+	font-family: sans-serif;
+	font-size: 1rem;
+}
 /*
 .cart-wrapper {
 	position: relative;

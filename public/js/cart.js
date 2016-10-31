@@ -13,6 +13,7 @@ $('.add-to-cart').on('click', function(e) {
 	    success: (response) => {
 	    	//Update the cart slideout with the new display.
 	        $('#cartSlideOut').html(response);
+	        Materialize.toast($('#product_name-'+product_id).html()+" added to cart.", 4000);
 	    }
 	});
 });
