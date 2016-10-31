@@ -23,6 +23,13 @@
 		</ul>
 		<ul id="cart-mobile" class="side-nav">
 			<li class="black light-green-text"><a id="closeSideCart">Close Cart</a></li>
+			<li class="light-green-text" id="cartSlideOut">
+				@if(Session::has('cart'))
+					@include('shopping.cart-table', ['cart' => Session::get('cart')])
+				@else
+					<h3 class="center-align">Nothing in your cart.</h3>
+				@endif
+			</li>
 		</ul>
 	</div>
 </nav>
