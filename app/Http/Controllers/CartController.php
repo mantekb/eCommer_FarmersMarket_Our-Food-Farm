@@ -35,8 +35,8 @@ class CartController extends Controller
     	//Save the cart to the session
     	Session::set('cart', $cart);
 
-    	//Return for javascript
-    	return json_encode($cart);
+    	//Return for updating side-cart slide-out
+    	return view('shopping.cart-table', ['cart' => $cart]);
     }
 
     public function view()

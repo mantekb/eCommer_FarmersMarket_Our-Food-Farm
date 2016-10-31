@@ -76,3 +76,9 @@ Route::get("/article", "ArticleController@article");
 Route::get('/404', function() {
 	return view('errors.not-found');
 });
+
+
+// This is for testing, remove once testing complete
+Route::get('/session/flush', function() {
+	Session::flush();
+});
