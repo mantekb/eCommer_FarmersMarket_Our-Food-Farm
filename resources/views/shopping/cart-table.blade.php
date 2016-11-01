@@ -31,8 +31,8 @@ if (!isset($view))
 		@endforeach
 		<tr>
 			<td colspan="2">Subtotal:</td>
-			<td>({{ $cart->getTotalQuantity() }} items)</td>
-			<td>{{ $cart->getTotalPrice() }}</td>
+			<td>(<span class="totalQuantity">{{ $cart->getTotalQuantity() }}</span> items)</td>
+			<td><span class="totalPrice">{{ $cart->getTotalPrice() }}</span></td>
 			@if($view)
 				<td></td>
 			@endif
