@@ -23,6 +23,7 @@
 		</ul>
 		<ul id="cart-mobile" class="side-nav">
 			<li class="black light-green-text"><a id="closeSideCart">Close Cart</a></li>
+			<li class="red darken-4"><a href="{{url('/cart/view')}}">Review Order</a></li>
 			<li class="light-green-text" id="cartSlideOut">
 				@if(Session::has('cart'))
 					@include('shopping.cart-table', ['cart' => Session::get('cart')])

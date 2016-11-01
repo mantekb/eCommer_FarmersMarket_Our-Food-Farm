@@ -39,6 +39,26 @@ class CartController extends Controller
     	return view('shopping.cart-table', ['cart' => $cart]);
     }
 
+    /**
+    * Completely remove a product from the cart.
+    *
+    * @param $product - to remove
+    */
+    public function remove(Product $product)
+    {
+        if (Session::has('cart'))
+        {
+            $cart = Session::get('cart');
+            $cart->remove($product);
+            Session::set('cart', $cart);
+        }
+        else
+        {
+            //Do nothing if not cart exists, faulty post method.
+        }
+        return view('shopping.cart-table', ['cart' => $cart]);
+    }
+
     public function view()
     {
     	if (Session::has('cart'))
