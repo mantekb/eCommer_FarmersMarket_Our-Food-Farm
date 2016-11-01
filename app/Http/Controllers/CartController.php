@@ -74,7 +74,7 @@ class CartController extends Controller
 
     public function getTotalQuantityAndPrice()
     {
-        $totals = [];
+        $totals = ['error' => 'No Cart'];
         if (Session::has('cart'))
         {
             $cart = Session::get('cart');

@@ -49,7 +49,7 @@ function getTotalQuantityAndPrice()
 	    success: (response) => {
 	        var totals = JSON.parse(response);
 	        // Check to make sure something was returned.
-	        if (totals.quantity)
+	        if (!totals.error)
 	        {
 	        	$('.totalQuantity').html(totals.quantity);
 	        	$('.totalPrice').html(totals.price);
