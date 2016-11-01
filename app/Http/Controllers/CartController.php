@@ -71,4 +71,18 @@ class CartController extends Controller
     	}
     	return view('shopping.view-cart', ['cart' => $cart]);
     }
+
+    public function getTotalQuantityAndPrice()
+    {
+        $totals = [];
+        if (Session::has('cart'))
+        {
+            $cart = Session::get('cart');
+            $totals = [
+                'quantity' => $cart->getTotalQuantity(),
+                'price' => $cart->getTotalPrice()
+            ];
+        }
+        return json_encode($totals);
+    }
 }

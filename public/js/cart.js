@@ -32,6 +32,28 @@ $('.remove-product').on('click', function(e) {
 	        $('#'+e.target.id).parent().parent().remove();
 	        //Update the slideout with the response.
 	        $('#cartSlideOut').html(response);
+	        //Update the new total quantity and price
+	        getTotalQuantityAndPrice();
 	    }
 	});
-})
+});
+
+function getTotalQuantityAndPrice()
+{
+	$.ajax({
+	    url: DOCUMENT_ROOT+'/cart/getTotals',
+	    type: 'GET',
+	    error: (response) => {
+	        //Do nothing
+	    },
+	    success: (response) => {
+	        var totals = JSON.parse(response);
+	        // Check to make sure something was returned.
+	        if (totals.quantity)
+	        {
+	        	$('.totalQuantity').html(totals.quantity);
+	        	$('.totalPrice').html(totals.price);
+	        }
+	    }
+	});
+}
