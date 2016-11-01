@@ -33,6 +33,7 @@ Route::group(['prefix' => '/stand'], function() {
 
 Route::group(['prefix' => '/cart'], function() {
 	Route::post('/add/{product}', 'CartController@add');
+	Route::post('/remove/{product}', 'CartController@remove');
 	Route::get('/view', 'CartController@view');
 });
 

@@ -17,3 +17,21 @@ $('.add-to-cart').on('click', function(e) {
 	    }
 	});
 });
+
+$('.remove-product').on('click', function(e) {
+	e.preventDefault();
+	var product_id = e.target.id.replace('rm-', '');
+	$.ajax({
+	    url: DOCUMENT_ROOT+'/cart/remove/'+product_id,
+	    type: 'POST',
+	    error: (response) => {
+	        swal('Error', 'Could not remove product from cart.');
+	    },
+	    success: (response) => {
+	        //Remove that row from the table.
+	        $('#'+e.target.id).parent().parent().remove();
+	        //Update the slideout with the response.
+	        $('#cartSlideOut').html(response);
+	    }
+	});
+})

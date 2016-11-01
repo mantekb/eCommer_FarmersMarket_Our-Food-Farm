@@ -15,7 +15,9 @@
 	@if($cart == false)
 		<h5>Nothing in your cart!</h5>
 	@else
-		@include('shopping.cart-table', ['cart' => $cart])
+		<div id="cart-table">
+			@include('shopping.cart-table', ['cart' => $cart, 'view' => true])
+		</div>
 	@endif
 </div>
 
