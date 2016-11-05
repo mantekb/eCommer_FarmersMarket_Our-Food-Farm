@@ -73,6 +73,8 @@ Route::get("/deals", "ShoppingController@deals");
 
 Route::get("/article", "ArticleController@article");
 
+Route::get("/payment", "PaymentController@PaymentInfo");
+
 
 //Routes to error pages below
 Route::get('/404', function() {
