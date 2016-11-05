@@ -7,14 +7,15 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "stanley/geocodio-php": "~1.0"
+        "stanley/geocodio-php": "~1.0",
+        "stripe/stripe-php": "3.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
         "symfony/css-selector": "2.8.*|3.0.*",
-        "symfony/dom-crawler": "2.8.*|3.0.*"
+        "symfony/dom-crawler": "2.8.*|3.0.*"        
     },
     "autoload": {
         "classmap": [
@@ -48,4 +49,5 @@
     "config": {
         "preferred-install": "dist"
     }
+
 }

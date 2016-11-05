@@ -5,40 +5,41 @@
 @section('content')
 
 <h2>Save Payment Information</h2>
+<form class="form-horizontal" role="form" method="POST" action="{{ url('/payment') }}">
 <div class="card">
     <div class="card-content">
         <div class="card-title">Legal First Name</div>
-        <form class="form-horizontal" role="form" method="POST" action="{{ url('/payment/name') }}">
+        
             {{ csrf_field() }}
 
             <div class="input-field">
                 <label for="name">Legal First Name</label>
 
-                <input id="name" type="text" class="form-control" name="name" value="{{$user->name}}">
+                <input id="firstname" type="text" class="form-control" name="name" value="{{$user->name}}">
             </div>
-        </form>
+        
         <div class="card-title">Legal Last Name</div>
-        <form class="form-horizontal" role="form" method="POST" action="{{ url('/payment/name') }}">
+        
             {{ csrf_field() }}
 
             <div class="input-field">
                 <label for="name">Legal Last Name</label>
 
-                <input id="name" type="text" class="form-control" name="name">
+                <input id="lastname" type="text" class="form-control" name="name">
             </div>
-        </form>
+        
     </div>
 </div>
 
 <div class="card">
     <div class="card-content">
         <div class="card-title">Date Of Birth</div>
-        <form class="form-horizontal" role="form" method="POST" action="{{ url('/payment/DOB') }}">
+        
             {{ csrf_field() }}
 
-                <input type="date" class="datepicker">
+                <input id="DOB" type="date" class="datepicker">
             </div>
-        </form>
+        
     </div>
 </div>
 
@@ -47,7 +48,7 @@
 <div class="card">
     <div class="card-content">
         <div class="card-title">Address</div>
-        <form class="form-horizontal" role="form" method="POST" action="{{ url('/settings/address') }}">
+        
             {{ csrf_field() }}
             <div class="input-field">
                 <label for="address">Address</label>
@@ -77,18 +78,19 @@
 
             </div>
 
-        </form>
+        
     </div>
 </div>
 <div class="row">
     <div class="col s1 m1">
         <div class="card">
             <div class="input-field">
-                <button type="submit" id="Sumbit" class="btn btn-primary">
+                <button type="submit" id="sumbitpayinfo" class="btn btn-primary">
                     Sumbit
                 </button>
             </div>
         </div>
     </div>
 </div>
+</form>
 @endsection
