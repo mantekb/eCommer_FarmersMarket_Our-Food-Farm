@@ -59,8 +59,8 @@ class User extends Authenticatable
         return $this->hasOne('App\PaymentInfo');
     }
 
-    publc function hasPaymentInfo()
+    public function hasPaymentInfo()
     {
-        return (bool)count($this->paymentInfo)
+        return (bool)count($this->paymentInfo);
     }
 }
