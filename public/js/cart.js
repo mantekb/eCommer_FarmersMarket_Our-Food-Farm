@@ -60,15 +60,21 @@ function getTotalQuantityAndPrice()
 
 //The below checks if an item's quantity has been updated,
 // if so, prevent moving on to checkout
+var changedQuantities = [];
 //Only run on the view-cart page
 if ($('.remove-product').length > 0)
 {
 	$('.quantity :input').on('change', function(e) {
 		var id = e.target.id;
 		var jQElem = $('#'+id);
-		if (jQElem.data('origQuant') != jQElem.val())
+		var newQuant = jQElem.val();
+		//Remove from the list if it's in there.
+		removeFromChangedQuantities(id);
+		if (jQElem.data('origQuant') != newQuant)
 		{
+			//Quantity has changed, make input red and disable the checkout button.
 			jQElem.addClass('red');
+			changedQuantities.push({'id':id, 'quantity':newQuant})
 			disableCheckoutLink();
 		}
 		else
@@ -81,18 +87,35 @@ if ($('.remove-product').length > 0)
 			var isOkay = true;
 			while(i < numProducts && isOkay)
 			{
+				//Regex returns true if red is in the list of classes.
 				if (/\bred\b/.test(inputs[i].className))
 				{
 					isOkay = false;
 				}
 				i++;
 			}
+			//If red isn't in any of them, re-enable the checkout button.
 			if(isOkay)
 			{
 				enableCheckoutLink();
 			}
 		}
 	});
+}
+
+function removeFromChangedQuantities(id)
+{
+	var numChanged = changedQuantities.length;
+	var i = 0;
+	var removed = false;
+	while(i < numChanged && !removed) {
+		if(changedQuantities[i].id == id)
+		{
+			changedQuantities.splice(i, 1);
+			removed = true;
+		}
+		i++;
+	}
 }
 
 function disableCheckoutLink()
@@ -110,4 +133,8 @@ function enableCheckoutLink()
 $('#checkoutBtn').on('click', function() {
 	var link = $('#checkoutBtn').data('link');
 	window.location.href = link;
+});
+
+$('#updateCartBtn').on('click', function(e) {
+	//Grab a list of the changed products.
 });
