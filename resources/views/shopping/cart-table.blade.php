@@ -22,7 +22,14 @@ if (!isset($view))
 			<tr>
 				<td><img src="{{asset("img/tomato.jpg")}}" alt=""></td>
 				<td><span class="name">{{$product->name}}</span></td>
-				<td><span class="quantity">{{$product->quantity}}</span></td>
+				<td><span class="quantity">
+				@if($view)
+					<input type="number" id="quant_input-{{$product->id}}" min="1" 
+					data-orig-quant="{{$product->quantity}}" value="{{$product->quantity}}" >
+				@else
+					{{$product->quantity}}
+				@endif
+				</span></td>
 				<td><span class="price">{{$product->price}}</span></td>
 				@if($view)
 					<td><a class="btn red remove-product" id="rm-{{$product->id}}">X</a></td>

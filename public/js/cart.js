@@ -57,3 +57,57 @@ function getTotalQuantityAndPrice()
 	    }
 	});
 }
+
+//The below checks if an item's quantity has been updated,
+// if so, prevent moving on to checkout
+//Only run on the view-cart page
+if ($('.remove-product').length > 0)
+{
+	$('.quantity :input').on('change', function(e) {
+		var id = e.target.id;
+		var jQElem = $('#'+id);
+		if (jQElem.data('origQuant') != jQElem.val())
+		{
+			jQElem.addClass('red');
+			disableCheckoutLink();
+		}
+		else
+		{
+			jQElem.removeClass('red');
+			//Check if all the inputs are back to normal.
+			var inputs = $('.quantity :input');
+			var numProducts = inputs.length;
+			var i = 0;
+			var isOkay = true;
+			while(i < numProducts && isOkay)
+			{
+				if (/\bred\b/.test(inputs[i].className))
+				{
+					isOkay = false;
+				}
+				i++;
+			}
+			if(isOkay)
+			{
+				enableCheckoutLink();
+			}
+		}
+	});
+}
+
+function disableCheckoutLink()
+{
+	$('#checkoutBtn').prop('disabled', true);
+	$('#updateCartForm').show();
+}
+
+function enableCheckoutLink()
+{
+	$('#checkoutBtn').prop('disabled', false);
+	$('#updateCartForm').hide();
+}
+
+$('#checkoutBtn').on('click', function() {
+	var link = $('#checkoutBtn').data('link');
+	window.location.href = link;
+});

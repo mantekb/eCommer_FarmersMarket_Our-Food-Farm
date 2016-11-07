@@ -21,4 +21,10 @@
 	@endif
 </div>
 
+<div class="row">
+	<div class="col s12">
+		<button data-link="{{url('/checkout')}}" class="btn btn-success" id="checkoutBtn">Proceed To Checkout</button>
+	</div>
+</div>
+
 @endsection
