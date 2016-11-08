@@ -78,12 +78,16 @@ class CartController extends Controller
     * @param $product - to update
     * @param $quantity - the new quantity for that product
     */
-    public function update(Product $product, $quantity)
+    public function update(Request $request)
     {
+        $list = json_decode($request->get('list'));
         if ($this->hasCart)
         {
             $cart = $this->cart;
-            $cart->update($product, $quantity);
+            for ($i=0; $i < count($list); $i++)
+            { 
+                $cart->update(Product::find($list[$i]->id), $list[$i]->quantity);
+            }
             Session::set('cart', $cart);
         }
         else
