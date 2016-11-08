@@ -11,6 +11,18 @@ use Session;
 
 class CartController extends Controller
 {
+    private $hasCart = false;
+    private $cart;
+
+    public function __construct()
+    {
+        if (Session::has('cart'))
+        {
+            $this->cart = Session::get('cart');
+            $this->hasCart = true;
+        }
+    }
+
     /**
     * Add a product to the cart
     *
@@ -20,9 +32,9 @@ class CartController extends Controller
     {
     	// $user = Auth::user();
     	//check if a cart exists in the session
-    	if (Session::has('cart'))
+    	if ($this->hasCart)
     	{
-    		$cart = Session::get('cart');
+    		$cart = $this->cart;
     	}
     	else
     	{
@@ -46,24 +58,50 @@ class CartController extends Controller
     */
     public function remove(Product $product)
     {
-        if (Session::has('cart'))
+        if ($this->hasCart)
         {
-            $cart = Session::get('cart');
+            $cart = $this->cart;
             $cart->remove($product);
             Session::set('cart', $cart);
         }
         else
         {
             //Do nothing if not cart exists, faulty post method.
+            abort(403);
+        }
+        return view('shopping.cart-table', ['cart' => $cart]);
+    }
+
+    /**
+    * Update quantity of a product in the cart.
+    *
+    * @param $product - to update
+    * @param $quantity - the new quantity for that product
+    */
+    public function update(Request $request)
+    {
+        $list = json_decode($request->get('list'));
+        if ($this->hasCart)
+        {
+            $cart = $this->cart;
+            for ($i=0; $i < count($list); $i++)
+            { 
+                $cart->update(Product::find($list[$i]->id), $list[$i]->quantity);
+            }
+            Session::set('cart', $cart);
+        }
+        else
+        {
+            abort(403);
         }
         return view('shopping.cart-table', ['cart' => $cart]);
     }
 
     public function view()
     {
-    	if (Session::has('cart'))
+    	if ($this->hasCart)
     	{
-	    	$cart = Session::get('cart');
+	    	$cart = $this->cart;
     	}
     	else
     	{
@@ -75,9 +113,9 @@ class CartController extends Controller
     public function getTotalQuantityAndPrice()
     {
         $totals = ['error' => 'No Cart'];
-        if (Session::has('cart'))
+        if ($this->hasCart)
         {
-            $cart = Session::get('cart');
+            $cart = $this->cart;
             $totals = [
                 'quantity' => $cart->getTotalQuantity(),
                 'price' => $cart->getTotalPrice()
