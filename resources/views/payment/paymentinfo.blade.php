@@ -86,7 +86,7 @@
         <div class="card">
             <div class="input-field">
                 <button type="submit" id="sumbitpayinfo" class="btn btn-primary">
-                    Sumbit
+                    Submit
                 </button>
             </div>
         </div>

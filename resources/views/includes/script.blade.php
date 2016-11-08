@@ -15,3 +15,5 @@
 <script src="{{asset('js/cart.js')}}"></script>
 <script src="{{asset('js/stand.js')}}"></script>
 <script src="{{asset('js/settings.js')}}"></script>
+<script src="{{asset('js/payment.js')}}"></script>
+<script src="{{asset('js/pickdate.js')}}"></script>
