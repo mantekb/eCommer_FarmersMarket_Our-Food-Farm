@@ -21,4 +21,13 @@
 	@endif
 </div>
 
+<div class="row">
+	<div class="col s12 m5">
+		<button data-link="{{url('/checkout')}}" class="btn btn-success" id="checkoutBtn">Proceed To Checkout</button>
+	</div>
+	<div class="col s12 m5" id="updateCartForm" style="display:none;">
+		<button class="btn btn-warning" id="updateCartBtn">Update Cart</button>
+	</div>
+</div>
+
 @endsection
