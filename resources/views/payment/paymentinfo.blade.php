@@ -15,7 +15,7 @@
             <div class="input-field">
                 <label for="name">Legal First Name</label>
 
-                <input id="firstname" type="text" class="form-control" name="name" value="{{$user->name}}">
+                <input id="firstname" type="text" class="form-control" name="name" >
             </div>
         
         <div class="card-title">Legal Last Name</div>
