@@ -15,7 +15,7 @@
             <div class="input-field">
                 <label for="firstname">Legal First Name</label>
 
-                <input id="firstname" type="text" class="form-control" name="firstname">
+                <input id="firstname" type="text" class="form-control" name="name" >
             </div>
         
         <div class="card-title">Legal Last Name</div>
