@@ -14,7 +14,8 @@
 	<div class="card">
 		<div class="card-content">
 			<span class="card-title">Choose A Payment Method To Proceed</span>
-			<form>
+			<form method="POST" action="{{url('/checkout/pay')}}">
+
 				{{-- This only shows if payment info is saved. --}}
 				@if(!empty($paymentInfo))
 				<p>
@@ -35,7 +36,30 @@
 					<input class="with-gap" name="paymentGroup" type="radio" id="payCard">
 					<label for="payCard">Use A Card</label>
 				</p>
+
+				<div id="ccForm" style="display: none;">
+					<div class="input-field">
+						<label for="ccNum">Credit/Debit Card Number</label>
+						<input type="number" class="form-control" name="ccNum" id="ccNum">
+					</div>
+					<div class="input-field">
+						<label for="ccCVV">CVV Number</label>
+						<input type="number" class="form-control" name="ccCVV" id="ccCVV">
+					</div>
+					<div class="input-field">
+						<label for="ccMonth">Expiration Month</label>
+						<input type="number" class="form-control" name="ccMonth" id="ccMonth">
+					</div>
+					<div class="input-field">
+						<label for="ccYear">Expiration Year</label>
+						<input type="number" class="form-control" name="ccYear" id="ccYear">
+					</div>
+				</div>
+
+				<br>
+				<button id="submitCheckoutPaymentForm" type="submit" class="btn btn-success">Checkout</button>
 			</form>
+
 		</div>
 	</div>
 </div>
