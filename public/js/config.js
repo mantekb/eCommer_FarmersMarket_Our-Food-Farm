@@ -1,3 +1,7 @@
+// Ensure all the pre-filled materialize inputs have the label moved out of the way.
+$(document).ready(function () {
+	Materialize.updateTextFields();
+});
 
 function setToken() {
 	$.ajaxSetup({

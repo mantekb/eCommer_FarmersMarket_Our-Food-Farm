@@ -107,9 +107,9 @@ $(document).on('click', '.edit-product', function(e) {
 	for (var i = 0; i < inputNames.length; i++)
 	{
 		$(editPrefix+inputNames[i]).val($('#product_'+inputNames[i]+'-'+id).html());
-		//Trigger the label to move out of the way of the input - materialize
-		$(editPrefix+inputNames[i]).change();
 	}
+	//Trigger the label to move out of the way of the input - materialize
+	Materialize.updateTextFields();
 
 	$(editPrefix+'modal').attr('data-product', id);
 
