@@ -5,6 +5,19 @@
 @section('content')
 
 <h2>Save Payment Information</h2>
+
+<h4>
+<p>
+We do not store any information that you have provided us above.
+This information is used to create an account with Stripe for 
+accepting payments directly into your account (as a stand owner) 
+and saving your card information for future transactions (as a buyer).<br>
+The link below provides Stripe's Documentation for you to look at: <br>
+
+<a href="https://stripe.com">Stripe Documentation</a>
+</p>
+</h4>
+
 <form class="form-horizontal" role="form" method="POST" action="{{ url('/payment') }}">
 <div class="card">
     <div class="card-content">
@@ -34,22 +47,23 @@
 <div class="card">
     <div class="card-content">
         <div class="card-title">Debit Card Information</div>
+        <p> only debit cards are accepted as of now</p>
         {{ csrf_field() }}
 
         <div class="input-field">
-            <label for="cardNumber">Card Number</label>
+            <label for="cardNumber">Card Number (no spaces)</label>
 
             <input id="cardNumber" type="text" class="form-control" name="cardNumber">
         </div>
 
         <div class="input-field">
-            <label for="expDate">Expiration Date</label>
+            <label for="expDate">Expiration Date (MM/YY)</label>
 
             <input id="expDate" type="text" class="form-control" name="expDate">
         </div>
 
         <div class="input-field">
-            <label for="cvc">CVC</label>
+            <label for="cvc">CVC (3 digit code on the back of your card)</label>
 
             <input id="cvc" type="text" class="form-control" name="cvc">
         </div>
@@ -107,6 +121,7 @@
         
     </div>
 </div>
+
 <div class="row">
     <div class="col s1 m1">
         <div class="card">
