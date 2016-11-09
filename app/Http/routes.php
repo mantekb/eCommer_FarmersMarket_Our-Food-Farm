@@ -79,7 +79,10 @@ Route::get("/deals", "ShoppingController@deals");
 
 Route::get("/article", "ArticleController@article");
 
-Route::get("/payment", "PaymentController@PaymentInfo");
+Route::group(['prefix'=>'/payment', 'middleware'=>'auth'], function() {
+	Route::get('/', ['as' => '/', 'uses' => 'PaymentController@PaymentInfo']);
+	Route::post('/createStripeAccount', 'PaymentController@createStripeAccount');
+});
 
 
 //Routes to error pages below
