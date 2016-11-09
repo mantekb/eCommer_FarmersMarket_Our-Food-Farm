@@ -18,8 +18,13 @@
 				{{-- This only shows if payment info is saved. --}}
 				@if(!empty($paymentInfo))
 				<p>
-					<input class="with-gap" name="paymentGroup" type="radio" id="savedCC">
+					<input class="with-gap" name="paymentGroup" type="radio" id="savedCC" checked="checked">
 					<label for="savedCC">Use Card Ending In *{{$paymentInfo->lastFour}}</label>
+				</p>
+				@else
+				<p>
+					<a href="{{url('/payment')}}">Click This Link To Go Save Your Payment Info</a>
+					<br><br>
 				</p>
 				@endif
 				<p>
