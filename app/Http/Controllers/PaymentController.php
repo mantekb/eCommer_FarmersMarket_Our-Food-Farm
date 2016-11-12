@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests;
+use App\PaymentInfo;
 
 class PaymentController extends Controller
 {
@@ -57,7 +58,78 @@ class PaymentController extends Controller
 		$DOBParts = explode(' ', $DOB);
 		$DOBParts[1] = str_replace(',', '', $DOBParts[1]);
 		$DOBday = intval($DOBParts[0]);
-		$DOBmonth = $months[$DOBParts[1]];
+		$DOBmonth = intval($months[$DOBParts[1]]);
 		$DOByear = intval($DOBParts[2]);
+
+		//API Calls
+		\Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET_KEY'));
+
+		if (!$this->user->hasPaymentInfo())
+		{
+			$acct_info = \Stripe\Account::create(array(
+				"managed" => true,
+				"country" => "US",
+				"legal_entity" => array(
+					"type" => "individual",
+					"first_name" => $firstname,
+					"last_name" => $lastname,
+					"dob" => array(
+						"day" => $DOBday,
+						"month" => $DOBmonth,
+						"year" => $DOByear
+					),
+					"address" => array(
+						"line1" => $address,
+						"city" => $city,
+						"state" => $state,
+						"postal_code" => $zip
+					)
+				)
+			));
+		}
+		else
+		{
+			$acct_info = \Stripe\Account::retrieve($this->user->paymentInfo->stripe_id);
+		}
+
+		$cardToken = \Stripe\Token::create(array(
+			"card" => array(
+				"number" => $cardNumber,
+				"exp_month" => $expDateMonth,
+				"exp_year" => $expDateYear,
+				"cvc" => $cvc,
+				"currency" => "usd"
+			)
+		));
+
+		$acct_info->external_accounts->create(array(
+			"external_account" => $cardToken["id"]
+		));
+
+		//Save Data to the Database
+		if (!$this->user->hasPaymentInfo())
+		{
+			$payment_info = new PaymentInfo;
+		}
+		else
+		{
+			$payment_info = $this->user->paymentInfo;
+		}
+
+		$payment_info->user_id = $this->user->id;
+		$payment_info->stripe_id = $acct_info["id"];
+		if (!$this->user->hasPaymentInfo())
+		{
+			$payment_info->secret_key = $acct_info["keys"]["secret"];
+			$payment_info->publishable_key = $acct_info["keys"]["publishable"];
+		}
+		$payment_info->card_token_id = $cardToken["id"];
+		$payment_info->last_four = $cardToken["card"]["last4"];
+		$payment_info->save();
+
+		if (!$request->ajax())
+		{
+			return Redirect('/payment');
+		}
 	}
 }

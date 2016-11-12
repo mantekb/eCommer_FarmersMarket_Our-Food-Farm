@@ -8,7 +8,7 @@
 
 <h4>
 <p>
-We do not store any information that you have provided us above.
+We do not store any information that you have provided us below.
 This information is used to create an account with Stripe for 
 accepting payments directly into your account (as a stand owner) 
 and saving your card information for future transactions (as a buyer).<br>
@@ -47,7 +47,7 @@ The link below provides Stripe's Documentation for you to look at: <br>
 <div class="card">
     <div class="card-content">
         <div class="card-title">Debit Card Information</div>
-        <p> only debit cards are accepted as of now</p>
+        <p> Only debit cards are accepted as of now</p>
         {{ csrf_field() }}
 
         <div class="input-field">

@@ -18,6 +18,8 @@ class CreatePaymentInfosTable extends Migration
             $table->string('stripe_id');
             $table->string('secret_key');
             $table->string('publishable_key');
+            $table->string('card_token_id');
+            $table->string('last_four');
             $table->timestamps();
         });
     }
