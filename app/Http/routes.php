@@ -39,6 +39,11 @@ Route::group(['prefix' => '/cart'], function() {
 	Route::get('/getTotals', 'CartController@getTotalQuantityAndPrice');
 });
 
+Route::group(['prefix' => '/checkout'], function() {
+	Route::get('/', 'CheckoutController@index');
+	Route::get('/error/{type}', ['as' => '/error/{type}', 'uses' => 'CheckoutController@showError']);
+});
+
 Route::get('learning', function() {
 	//Replace function with a controller function instead.
 	$articles = [
@@ -73,6 +78,11 @@ Route::get("/deals", "ShoppingController@deals");
 
 
 Route::get("/article", "ArticleController@article");
+
+Route::group(['prefix'=>'/payment', 'middleware'=>'auth'], function() {
+	Route::get('/', ['as' => '/', 'uses' => 'PaymentController@PaymentInfo']);
+	Route::post('/createStripeAccount', 'PaymentController@createStripeAccount');
+});
 
 
 //Routes to error pages below

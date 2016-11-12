@@ -53,4 +53,14 @@ class User extends Authenticatable
     {
         return (bool)count($this->address);
     }
+
+    public function paymentInfo()
+    {
+        return $this->hasOne('App\PaymentInfo');
+    }
+
+    public function hasPaymentInfo()
+    {
+        return (bool)count($this->paymentInfo);
+    }
 }
