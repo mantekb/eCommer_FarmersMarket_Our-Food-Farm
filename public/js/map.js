@@ -1,11 +1,12 @@
 var GEOCODE_KEY = "6e256225eae872958e945279678fa95952f2f5a";
 var MAPBOX_KEY = 'pk.eyJ1IjoiaW5zYW5lYWxlYyIsImEiOiJjaXN0Y3VtMDIwM2szMnpsOGFyNzBranpiIn0.t73_pX_gZy5govr5LM9liA';
+var map = null;
 
 //If the map element exists, init the map, then load the position.
 if ($('#map').length > 0){
     // My personal accessToken, do not keep
     mapboxgl.accessToken = MAPBOX_KEY;
-    var map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v9'
     });
@@ -32,7 +33,7 @@ function sendPosition(position) {
 }
 
 function showPosition(lat, long, zoom) {
-    zoom = zoom || 11;
+    zoom = zoom || 10;
     map.flyTo({
         center: [
             long,
@@ -69,6 +70,7 @@ $('#zip-search').click(function(){
     });
     //Then we want to unfocus the input to make it easier for mobile.
     $('#zipcode').blur();
+    showResults("", zip);
 });
 
 
@@ -76,7 +78,6 @@ function validateZip(zip) {
     if (zip.length >= 5){
         zip = zip.substring(0, 5);
         if (zip.match('[0-9]{5}')){
-            console.log(zip);
             return zip;
         } else
             swal("Whoops!", "Please make sure your zipcode is formatted correctly");
@@ -155,14 +156,18 @@ function createCoordsFromAddress(address, callback, errorCallback)
 
 function placeMarker(map, lat, long, title)
 {
-    var display = '<p>'
-        +title
-    +'</p>';
+    var display = '<p>'+title+'</p>';
     var ll = new mapboxgl.LngLat(long, lat);
     new mapboxgl.Popup()
       .setLngLat(ll)
       .setHTML(display)
       .addTo(map);
+}
+
+function removeMarkers(){
+    $('.mapboxgl-popup-close-button').each(function(){
+        $(this).click();
+    });
 }
 
 function retrieveUserAddress()
@@ -195,4 +200,37 @@ window.onclick = function(event) {
             openDropdown.classList.add('hide');
         }
     }
+}
+
+$('#zip-search').click(function(){
+    var searchTerms = $('#search-input').val();
+    var zip = $('#zip').text();
+    showResults(searchTerms, zip);
+})
+
+$('#search-button').click(function(){
+    var searchTerms = $('#search-input').val();
+    var zip = $('#zip').text();
+    showResults(searchTerms, zip);
+})
+
+function showResults(term, zip){
+    $.ajax({
+        url: DOCUMENT_ROOT+'/search',
+        type: 'POST',
+        data: {
+            val: term,
+            zip: zip
+        },
+        error: function(response) {
+            swal('Error', 'Sorry, we could not find your location.');
+        },
+        success: function(response) {
+            var results = response;
+            removeMarkers();
+            for (var i = 0; i < results.length; i++){
+                placeMarker(map, results[i].lat, results[i].long, results[i].name);
+            }
+        },
+    });
 }
