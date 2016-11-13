@@ -14,8 +14,9 @@ if ($('#map').length > 0){
         var zip = window.location.href;
         zip = zip.substring(zip.indexOf("zip=")+4);
         if (!(zip.trim() === "") && zip.length < 9){
-            $('#zipcode').val(zip);
-            $("#find").click();
+            $('#zip').text(zip);
+            $('#zip-input').val(zip);
+            $("#zip-search").click();
         } else if ($('#user-lat').length > 0 && $('#user-long').length > 0) {
             retrieveUserAddress();
         } else {
@@ -40,16 +41,17 @@ function showPosition(lat, long, zoom) {
     });
 }
 
-$("#zipcode").keyup(function(event){
+$("#zip-input").keyup(function(event){
     if(event.keyCode == 13){
-        $("#find").click();
+        $("#zip-search").click();
     }
 });
 
-$('#find').click(function(){
+$('#zip-search').click(function(){
     if (zip === undefined)
-        var zip = $('#zipcode').val();
+        var zip = $('#zip-input').val();
     zip = validateZip(zip);
+    $('#zip').text(zip);
     $.post(DOCUMENT_ROOT+'/location/get-lat-long', {
         zip : zip
     })
@@ -176,4 +178,21 @@ function retrieveUserAddress()
     // createCoordsFromAddress(address, function(lat, long) {
     //     showPosition(lat, long);
     // });
+}
+
+$('#change-zip').click(function(){
+    document.getElementById("zip-dropdown").classList.toggle("hide");
+})
+
+$('#zip-input').click(function(){
+    $('#zip-input').val("");
+})
+
+window.onclick = function(event) {
+    if (!event.target.matches('.zip-dropdown-items')) {
+        var openDropdown = document.getElementById("zip-dropdown");
+        if (!openDropdown.classList.contains('hide')) {
+            openDropdown.classList.add('hide');
+        }
+    }
 }

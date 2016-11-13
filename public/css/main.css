@@ -3,6 +3,14 @@ body {
 	font-size: 2rem;
 }
 
+.no-scroll {
+	overflow: hidden;
+}
+
+.hide {
+	display: none;
+}
+
 nav ul li a {
 	color: inherit;
 	font-size: 2.3rem;

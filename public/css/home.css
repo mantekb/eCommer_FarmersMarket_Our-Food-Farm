@@ -1,0 +1,150 @@
+#searchbar {
+	border-top: solid 1px rgba(172, 212, 131, 0.42);
+	background-color: rgb(194, 239, 149);
+}
+
+#zip, #zip-text {
+	color: white;
+	font-family: BebasKai;
+	text-shadow: 0 0 1px #34482b;
+}
+
+#change-zip {
+	height: 50%;
+    font-family: BebasKai;
+    font-size: 1rem;
+    border: none;
+    background-color: #9fca74;
+    border-radius: 1.5px;
+    color: white;
+    position: relative;
+    top: -2px;
+}
+
+#change-zip:hover, #change-zip:active {
+	background-color: #759456;
+}
+
+#zip-dropdown {
+	background-color: white;
+    border-radius: 0px 0px 3px 3px;
+}
+
+#zip-input {
+	width: 145px;
+    text-align: center;
+    font-family: Exo;
+    border: solid 1px #9fca74;
+    border-radius: 5px;
+    box-shadow: 0 0 0.5px #6f985d;
+    position: relative;
+    top: 7px;
+}
+
+#zip-search {
+    border: none;
+    background-color: #9fca74;
+    border-radius: 1.5px;
+    color: white;
+    position: relative;
+    top: 10px;
+    height: 44px
+}
+
+#zip-search .search-icon {
+	-webkit-filter: invert(1);
+	filter: invert(1);
+}
+
+@media (max-width: 360px) { /*Mobile Dev S*/
+	#searchbar {
+		margin: -20px -9% 0px;
+		height: 38px;
+		text-align: center;
+	}
+	#zip, #zip-text {
+		font-size: 1.1rem;
+	}
+	#zip-dropdown {
+		text-align: center;
+	}
+	#zip-section {
+		
+	}
+}
+
+@media (min-width: 361px) and (max-width: 673px) { /*Mobile Dev M and L*/
+	#searchbar {
+		margin: -20px -9% 0px;
+		height: 38px;
+		text-align: center;
+	}
+	#zip, #zip-text {
+		font-size: 1.2rem;
+	}
+	#zip-dropdown {
+		text-align: center;
+	}
+	#zip-section {
+		
+	}
+}
+
+@media (min-width: 674px) and (max-width: 862px) { /*Tablet*/
+	#searchbar {
+		margin: -20px -9% 0px;
+		height: 43px;
+		text-align: center;
+	}
+	#zip, #zip-text {
+		font-size: 1.4rem;
+	}
+	#zip-dropdown {
+    	text-align: center;
+	}
+	#zip-section {
+		
+	}
+}
+
+@media (min-width: 863px) and (max-width: 992px) { /*Laptop/Desktop*/
+	#searchbar {
+		margin: -20px -9% 0px;
+		height: 43px;
+	}
+	#zip-text {
+		margin-left: 15px;
+	}
+	#zip, #zip-text {
+		font-size: 1.4rem;
+	}
+	#zip-dropdown {
+		position: absolute;
+    	z-index: 1;
+	}
+	#zip-section {
+		
+	}
+}
+
+@media (min-width: 992px) { /*Larger Laptop/Desktop*/
+	#searchbar {
+		margin: -20px -22% 0px;
+		height: 43px;
+	}
+	#zip-text {
+		margin-left: 15px;
+	}
+	#zip, #zip-text {
+		font-size: 1.4rem;
+	}
+	#zip-dropdown {
+		position: absolute;
+    	z-index: 1;
+		width: 200px;
+    	left: 6%;
+	}
+	#zip-section {
+		width: 350px;
+	}
+}

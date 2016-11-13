@@ -1,33 +1,29 @@
-.no-scroll {
-	overflow: hidden;
-}
-
-#ziplabel {
+#marquee #ziplabel {
 	color: white;
 	font-weight: 600;
 	text-shadow: 0 0 4px #666;
 	display: block;
 }
 
-.zip {
+#marquee .zip {
     background: white !important;
     text-align: center;
     font-family: Exo;
     border: none;
 }
 
-.icon {
+.search-icon {
 	height: 10px;
 	width: 10px;
 	padding-top: 1px;
 }
 
-.search {
+#marquee .search {
 	position: relative;
 	top: 50%;
 }
 
-.landing {
+#marquee .landing {
 	background-color: white;
 	height: 3rem;
     top: -3px;
@@ -49,12 +45,12 @@
 	#marquee{
 		top: -50px;
 	}
-	#ziplabel{
+	#marquee #ziplabel{
 		font-size: 1.9rem;
 		margin-left: 25%;
     	margin-right: 25%;
 	}
-	.zip {
+	#marquee .zip {
 	    width: 40% !important;
 	    font-size: 1.3rem !important;
 	}
@@ -64,12 +60,12 @@
 	#marquee{
 		top: -55px;
 	}
-	#ziplabel{
+	#marquee #ziplabel{
 		font-size: 2.3rem;
 		margin-left: 25%;
     	margin-right: 25%;
 	}
-	.zip {
+	#marquee .zip {
 	    width: 40% !important;
 	    font-size: 1.3rem !important;
 	}
@@ -79,12 +75,12 @@
 	#marquee{
 		top: -50px;
 	}
-	#ziplabel{
+	#marquee #ziplabel{
 		font-size: 2.5rem;
 		margin-left: 35%;
     	margin-right: 35%;
 	}
-	.zip {
+	#marquee .zip {
 	    width: 40% !important;
 	    font-size: 1.3rem !important;
 	}
@@ -94,12 +90,12 @@
 	#marquee {
 		top: -70px;
 	}
-	#ziplabel{
+	#marquee #ziplabel{
 		font-size: 3.2rem;
 		margin-left: 35%;
     	margin-right: 35%;
 	}
-	.zip {
+	#marquee .zip {
 	    width: 30% !important;
 	    font-size: 1.3rem !important;
 	}
