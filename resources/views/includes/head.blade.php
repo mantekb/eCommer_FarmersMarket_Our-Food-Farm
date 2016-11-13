@@ -22,6 +22,13 @@
 		}
 
 		@font-face {
+		    font-family: BebasKai;
+		    src: url('{{asset("fonts/bebas_kai/BebasKai-Regular.eot?#iefix")}}') format('embedded-opentype'), 
+		         url('{{asset("fonts/bebas_kai/BebasKai-Regular.woff")}}') format('woff'), 
+		         url('{{asset("fonts/bebas_kai/BebasKai-Regular.ttf")}}')  format('truetype');
+		}
+
+		@font-face {
 		    font-family: Exo;
 		    src: url('{{asset("fonts/exo/Exo-Light.ttf")}}');
 		    unicode-range: U+30-39;
@@ -36,6 +43,9 @@
 
 	{{-- Landing css --}}
 	<link rel="stylesheet" href="{{asset('css/landing.css')}}">
+
+	{{-- Home css --}}
+	<link rel="stylesheet" href="{{asset('css/home.css')}}">
 
 	{{-- Material icons --}}
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">       
