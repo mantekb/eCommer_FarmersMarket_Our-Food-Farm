@@ -51,5 +51,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'onestand' => \App\Http\Middleware\OneStand::class,
         'hasstand' => \App\Http\Middleware\HasStand::class,
+        'checkout' => \App\Http\Middleware\Checkout::class,
     ];
 }

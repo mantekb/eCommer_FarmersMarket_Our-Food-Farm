@@ -1,3 +1,7 @@
+// Ensure all the pre-filled materialize inputs have the label moved out of the way.
+$(document).ready(function () {
+	Materialize.updateTextFields();
+});
 
 function setToken() {
 	$.ajaxSetup({
@@ -33,15 +37,26 @@ function reloadNavBar() {
 } reloadNavBar();
 
 function initNavBar() {
-	$(".button-collapse").sideNav();
+	$("#nav-mobile-trigger").sideNav();
 	$('.dropdown-button').dropdown();
+	$(".cart-mobile-trigger").sideNav({
+		edge: "right"
+	});
 	//Init the side-nav closer button
 	$('#closeSideNav').on('click', function(e) {
 		e.preventDefault();
 		closeSideNav();
 	});
+	$('#closeSideCart').on('click', function(e) {
+		e.preventDefault();
+		closeSideCart();
+	});
 }
 
 function closeSideNav() {
 	$('#nav-mobile').sideNav('hide');
+}
+
+function closeSideCart() {
+	$('.cart-mobile-trigger').sideNav('hide');
 }

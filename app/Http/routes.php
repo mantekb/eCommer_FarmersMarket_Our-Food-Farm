@@ -33,7 +33,15 @@ Route::group(['prefix' => '/stand'], function() {
 
 Route::group(['prefix' => '/cart'], function() {
 	Route::post('/add/{product}', 'CartController@add');
+	Route::post('/remove/{product}', 'CartController@remove');
+	Route::post('/update', 'CartController@update');
 	Route::get('/view', 'CartController@view');
+	Route::get('/getTotals', 'CartController@getTotalQuantityAndPrice');
+});
+
+Route::group(['prefix' => '/checkout'], function() {
+	Route::get('/', 'CheckoutController@index');
+	Route::get('/error/{type}', ['as' => '/error/{type}', 'uses' => 'CheckoutController@showError']);
 });
 
 Route::get('learning', function() {
@@ -71,8 +79,19 @@ Route::get("/deals", "ShoppingController@deals");
 
 Route::get("/article", "ArticleController@article");
 
+Route::group(['prefix'=>'/payment', 'middleware'=>'auth'], function() {
+	Route::get('/', ['as' => '/', 'uses' => 'PaymentController@PaymentInfo']);
+	Route::post('/createStripeAccount', 'PaymentController@createStripeAccount');
+});
+
 
 //Routes to error pages below
 Route::get('/404', function() {
 	return view('errors.not-found');
+});
+
+
+// This is for testing, remove once testing complete
+Route::get('/session/flush', function() {
+	Session::flush();
 });

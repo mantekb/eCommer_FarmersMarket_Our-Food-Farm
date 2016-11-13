@@ -127,7 +127,7 @@ class StandController extends Controller
                 $stand->addProduct($product);
                 //Since we create through ajax, return full product information back to display.
                 // $view = json_encode($product);
-                $view = view('stand.product-card', ['product' => $product]);
+                $view = view('stand.product-card', ['product' => $product, 'edit' => true]);
             }
             else
             {
