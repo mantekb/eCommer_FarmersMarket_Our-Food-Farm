@@ -14,6 +14,15 @@
 	<div class="card">
 		<div class="card-content">
 			<span class="card-title">Choose A Payment Method To Proceed</span>
+
+			<div class="card">
+				<div class="card-content">
+					<span class="card-title">Please Note:</span>
+					<p>This WILL submit your card for payment if that is the option chosen.</p>
+					<p>Go to <a href="{{url('/cart/view')}}">Review Order</a> to make sure your order is correct.</p>
+				</div>
+			</div>
+
 			<form method="POST" action="{{url('/checkout/pay')}}" id="checkoutPayment">
 				{{ csrf_field() }}
 

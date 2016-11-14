@@ -42,21 +42,24 @@ class CheckoutController extends Controller
     }
 
     /**
-    * Submit what type of payment we are using.
+    * Submit the payment to stripe
     *
-    * @
+    * @return Redirect back with errors, or proceed to showing where to go.
     */
-    public function payChoose(Request $request)
+    public function pay(Request $request)
     {
         $payType = $request->get('payType');
         //Set up payment method based on type chosen.
         if ($payType === "payCard")
         {
-            $ccInfo = [];
-            $ccInfo['ccNum'] = $request->get('ccNum');
-            $ccInfo['ccCVC'] = $request->get('ccCVC');
-            $ccInfo['ccMonth'] = $request->get('ccMonth');
-            $ccInfo['ccYear'] = $request->get('ccYear');
+            $ccNum = $request->get('ccNum');
+            $ccCVC = $request->get('ccCVC');
+            $ccMonth = $request->get('ccMonth');
+            $ccYear = $request->get('ccYear');
+        }
+        else if ($payType === "savedCC")
+        {
+            $paymentInfo = $this->user->paymentInfo;
         }
     }
 
