@@ -18,6 +18,7 @@
 			<div class="card">
 				<div class="card-content">
 					<span class="card-title">Please Note:</span>
+					<p>${{Session::get('cart')->getTotalPrice()}} will be charged.</p>
 					<p>This WILL submit your card for payment if that is the option chosen.</p>
 					<p>Go to <a href="{{url('/cart/view')}}">Review Order</a> to make sure your order is correct.</p>
 				</div>
