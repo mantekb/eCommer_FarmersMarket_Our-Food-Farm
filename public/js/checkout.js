@@ -1,6 +1,17 @@
+//Check if a radion button is checked when entering the page.
+if ($('input[name="paymentGroup"]:checked').length > 0)
+{
+	showCCForm($('input[name="paymentGroup"]:checked').attr('id'));
+}
+//When the radio button is clicked, properly show the CC form.
 $('input[name="paymentGroup"]').on('click', function(e) {
+	showCCForm(e.target.id);
+});
+
+function showCCForm(id)
+{
 	//Show the form to fill out credit card if that's what they choose.
-	if (e.target.id == 'payCard')
+	if (id == 'payCard')
 	{
 		$('#ccForm').show();
 	}
@@ -8,7 +19,7 @@ $('input[name="paymentGroup"]').on('click', function(e) {
 	{
 		$('#ccForm').hide();
 	}
-});
+}
 
 $('#submitCheckoutPaymentForm').on('click', function(e) {
 	e.preventDefault();
@@ -34,7 +45,7 @@ $('#submitCheckoutPaymentForm').on('click', function(e) {
 
 	if (proceed)
 	{
-		//Submit the form.
+		//Submit the form. TODO: maybe use ajax instead?
 		$('#checkoutPayment').submit();
 	}
 	else

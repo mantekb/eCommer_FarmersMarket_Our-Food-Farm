@@ -52,48 +52,47 @@ class CheckoutController extends Controller
         \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET_KEY'));
         //Set up payment method based on type chosen.
         $payType = $request->get('payType');
-        if ($payType === "payCard")
-        {
-            //Create a token to charge 
-            $cardToken = \Stripe\Token::create(array(
-                "card" => array(
-                    "number" => $request->get('ccNum'),
-                    "exp_month" => $request->get('ccMonth'),
-                    "exp_year" => $request->get('ccYear'),
-                    "cvc" => $request->get('ccCVC'),
-                    "currency" => "usd"
-                )
-            ));
 
-            //Do a single charge.
-            try {
+        //Things may fail, catch them.
+        try {
+            if ($payType === "payCard")
+            {
+                //Create a token to charge 
+                $cardToken = \Stripe\Token::create(array(
+                    "card" => array(
+                        "number" => $request->get('ccNum'),
+                        "exp_month" => $request->get('ccMonth'),
+                        "exp_year" => $request->get('ccYear'),
+                        "cvc" => $request->get('ccCVC'),
+                        "currency" => "usd"
+                    )
+                ));
+
+                //Do a single charge.
                 $charge = \Stripe\Charge::create(array(
-                    "amount" => ($this->cart->getTotalprice() * 100), // Amount in cents
+                    // Amount in cents
+                    "amount" => ($this->cart->getTotalprice() * 100),
                     "currency" => "usd",
+                    //Card token we just obtained.
                     "source" => $cardToken['id'],
                     "description" => "Our Food Farm Purchase"
                 ));
-            } catch(\Stripe\Error\Card $e) {
-                //The card has been declined.
-                dd($e);
             }
-        }
-        else if ($payType === "savedCC")
-        {
-            $paymentInfo = $this->user->paymentInfo;
-
-            //Charge and save the new token for this user.
-            try {
+            else if ($payType === "savedCC")
+            {
+                //Charge and save the new token for this user.
                 $charge = \Stripe\Charge::create(array(
-                    "amount" => ($this->cart->getTotalprice() * 100), // Amount in cents
+                    // Amount in cents
+                    "amount" => ($this->cart->getTotalprice() * 100),
                     "currency" => "usd",
-                    "customer" => $paymentInfo->stripe_id, //Stripe Customer ID instead of token
+                    //Stripe Customer ID instead of token
+                    "customer" => $this->user->paymentInfo->stripe_id,
                     "description" => "Our Food Farm Purchase"
                 ));
-            } catch(\Stripe\Error\Card $e) {
-                //The card has been declined.
-                dd($e);
             }
+        } catch(\Stripe\Error\Card $e) {
+            //The card has been declined.
+            dd($e);
         }
     }
 
