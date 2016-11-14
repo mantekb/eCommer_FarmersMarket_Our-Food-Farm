@@ -56,6 +56,9 @@
 					</div>
 				</div>
 
+				{{-- This is used so the backend can more easily determine how to bill. --}}
+				<input hidden value="" type="text" name="payType" id="payType">
+
 				<br>
 				<button id="submitCheckoutPaymentForm" type="submit" class="btn btn-success">Checkout</button>
 			</form>

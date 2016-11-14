@@ -194,7 +194,7 @@ $('#zip-input').click(function(){
 })
 
 window.onclick = function(event) {
-    if (!event.target.matches('.zip-dropdown-items')) {
+    if (!event.target.matches('.zip-dropdown-items') && $('.zip-dropdown-items').length > 0) {
         var openDropdown = document.getElementById("zip-dropdown");
         if (!openDropdown.classList.contains('hide')) {
             openDropdown.classList.add('hide');

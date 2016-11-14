@@ -26,4 +26,6 @@ $('#submitCheckoutPaymentForm').on('click', function(e) {
 	{
 		// In the backend, use the saved token
 	}
+
+	$('#payType').val(payType);
 });
