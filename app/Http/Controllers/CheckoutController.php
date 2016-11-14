@@ -92,8 +92,9 @@ class CheckoutController extends Controller
             }
         } catch(\Stripe\Error\Card $e) {
             //The card has been declined.
-            dd($e);
+            return $this->showError('card', $e->getMessage());
         }
+        return "true";
     }
 
     /**
@@ -103,7 +104,7 @@ class CheckoutController extends Controller
     *
     * @return $view with params - params is the array of variables for the page.
     */
-    public function showError($type)
+    public function showError($type, $mess="")
     {
     	switch ($type) {
     		case 'login':
@@ -120,11 +121,11 @@ class CheckoutController extends Controller
     			$btn = "Go To Map";
     			$link = "/home";
     			break;
-    		case 'unicorns':
-    			$title = "";
-    			$message = "";
-    			$btn = "";
-    			$link = "";
+    		case 'card':
+    			$title = "There was an issue processing your card.";
+    			$message = $mess;
+    			$btn = "Re-Enter Payment Information";
+    			$link = "/checkout";
     			break;
     		default:
     			$title = "An unknown error happened.";
