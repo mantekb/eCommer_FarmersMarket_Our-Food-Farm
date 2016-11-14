@@ -18,17 +18,17 @@
 @endif
 <div class="container-fluid">
 	<div id="searchbar" class="row">
-		<div id="zip-section" class="col-md-3">
+		<div id="zip-section" class="col s3">
 			<span id="zip-text">Searching near </span><span id="zip">{{-- zip code will be inserted here --}}</span>
 			<button id="change-zip" class="zip-dropdown-items">Change Location</button>
 		</div>
-		<div id="search-section" class="col-md-5">
+		<div id="search-section" class="col s5">
 			<input type="text" id="search-input" placeholder="Enter an item or stand">
 			<button id="search-button">
 	    		<img class="search-icon" src='{{asset("img/search.png")}}' alt='[]' />
 	    	</button>
 	    </div>
-	    <div id="filters" class="col-md-4">
+	    <div id="filters" class="col s4">
 	    </div>
 	</div>
 	<div id="zip-dropdown" class="zip-dropdown-items hide">

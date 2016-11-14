@@ -41,6 +41,38 @@
     top: 7px;
 }
 
+#search-input {
+	background-color: white;
+	font-family: BebasKai;
+	width: 90%;
+	border-bottom: none;
+	border-radius: 2px;
+}
+
+#search-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	font-family: BebasKai !important;
+	color: #adad85;
+	font-size: 1.4rem;
+}
+
+#search-input::-moz-placeholder { /* Firefox 19+ */
+  font-family: BebasKai !important;
+  color: #adad85;
+  font-size: 1.4rem !important;
+}
+
+#search-input:-ms-input-placeholder { /* IE 10+ */
+  font-family: BebasKai !important;
+  color: #adad85;
+  font-size: 1.4rem;
+}
+
+#search-input:-moz-placeholder { /* Firefox 18- */
+  font-family: BebasKai !important;
+  color: #adad85;
+  font-size: 1.4rem;
+}	
+
 #zip-search {
     border: none;
     background-color: #9fca74;
@@ -146,5 +178,12 @@
 	}
 	#zip-section {
 		width: 350px;
+	}
+
+	#search-input {
+		height: 32px;
+	    position: relative;
+	    top: -6px;
+	    width: 90%;
 	}
 }

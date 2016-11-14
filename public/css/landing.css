@@ -41,6 +41,26 @@
 	height:100%;
 }
 
+#zipcode::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family: LandDownUnder;
+  color: #adad85;
+}
+
+#zipcode::-moz-placeholder { /* Firefox 19+ */
+  font-family: LandDownUnder;
+  color: #adad85;
+}
+
+#zipcode:-ms-input-placeholder { /* IE 10+ */
+  font-family: LandDownUnder;
+  color: #adad85;
+}
+
+#zipcode:-moz-placeholder { /* Firefox 18- */
+  font-family: LandDownUnder;
+  color: #adad85;
+}
+
 @media (max-width: 360px) { /*Mobile Dev S*/
 	#marquee{
 		top: -50px;
@@ -53,6 +73,22 @@
 	#marquee .zip {
 	    width: 40% !important;
 	    font-size: 1.3rem !important;
+	}
+	
+	#zipcode::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  	font-size: 1.7rem !important;
+	}
+
+	#zipcode::-moz-placeholder { /* Firefox 19+ */
+	  	font-size: 1.7rem !important;
+	}
+
+	#zipcode:-ms-input-placeholder { /* IE 10+ */
+	  	font-size: 1.7rem !important;
+	}
+
+	#zipcode:-moz-placeholder { /* Firefox 18- */
+	  	font-size: 1.7rem !important;
 	}
 }
 
@@ -69,6 +105,21 @@
 	    width: 40% !important;
 	    font-size: 1.3rem !important;
 	}
+	#zipcode::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  	font-size: 1.9rem !important;
+	}
+
+	#zipcode::-moz-placeholder { /* Firefox 19+ */
+	  	font-size: 1.9rem !important;
+	}
+
+	#zipcode:-ms-input-placeholder { /* IE 10+ */
+	  	font-size: 1.9rem !important;
+	}
+
+	#zipcode:-moz-placeholder { /* Firefox 18- */
+	  	font-size: 1.9rem !important;
+	}
 }
 
 @media (min-width: 674px) and (max-width: 862px) { /*Tablet*/
@@ -84,6 +135,21 @@
 	    width: 40% !important;
 	    font-size: 1.3rem !important;
 	}
+	#zipcode::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  	font-size: 2.1rem !important;
+	}
+
+	#zipcode::-moz-placeholder { /* Firefox 19+ */
+	  	font-size: 2.1rem !important;
+	}
+
+	#zipcode:-ms-input-placeholder { /* IE 10+ */
+	  	font-size: 2.1rem !important;
+	}
+
+	#zipcode:-moz-placeholder { /* Firefox 18- */
+	  	font-size: 2.1rem !important;
+	}
 }
 
 @media (min-width: 863px) { /*Laptop/Desktop*/
@@ -98,5 +164,20 @@
 	#marquee .zip {
 	    width: 30% !important;
 	    font-size: 1.3rem !important;
+	}
+	#zipcode::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  	font-size: 2.3rem !important;
+	}
+
+	#zipcode::-moz-placeholder { /* Firefox 19+ */
+	  	font-size: 2.3rem !important;
+	}
+
+	#zipcode:-ms-input-placeholder { /* IE 10+ */
+	  	font-size: 2.3rem !important;
+	}
+
+	#zipcode:-moz-placeholder { /* Firefox 18- */
+	  	font-size: 2.3rem !important;
 	}
 }
