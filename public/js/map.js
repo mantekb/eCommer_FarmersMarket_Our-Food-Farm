@@ -1,11 +1,12 @@
 var GEOCODE_KEY = "6e256225eae872958e945279678fa95952f2f5a";
 var MAPBOX_KEY = 'pk.eyJ1IjoiaW5zYW5lYWxlYyIsImEiOiJjaXN0Y3VtMDIwM2szMnpsOGFyNzBranpiIn0.t73_pX_gZy5govr5LM9liA';
+var map = null;
 
 //If the map element exists, init the map, then load the position.
 if ($('#map').length > 0){
     // My personal accessToken, do not keep
     mapboxgl.accessToken = MAPBOX_KEY;
-    var map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v9'
     });
@@ -14,8 +15,9 @@ if ($('#map').length > 0){
         var zip = window.location.href;
         zip = zip.substring(zip.indexOf("zip=")+4);
         if (!(zip.trim() === "") && zip.length < 9){
-            $('#zipcode').val(zip);
-            $("#find").click();
+            $('#zip').text(zip);
+            $('#zip-input').val(zip);
+            $("#zip-search").click();
         } else if ($('#user-lat').length > 0 && $('#user-long').length > 0) {
             retrieveUserAddress();
         } else {
@@ -31,7 +33,7 @@ function sendPosition(position) {
 }
 
 function showPosition(lat, long, zoom) {
-    zoom = zoom || 11;
+    zoom = zoom || 10;
     map.flyTo({
         center: [
             long,
@@ -40,16 +42,17 @@ function showPosition(lat, long, zoom) {
     });
 }
 
-$("#zipcode").keyup(function(event){
+$("#zip-input").keyup(function(event){
     if(event.keyCode == 13){
-        $("#find").click();
+        $("#zip-search").click();
     }
 });
 
-$('#find').click(function(){
+$('#zip-search').click(function(){
     if (zip === undefined)
-        var zip = $('#zipcode').val();
+        var zip = $('#zip-input').val();
     zip = validateZip(zip);
+    $('#zip').text(zip);
     $.post(DOCUMENT_ROOT+'/location/get-lat-long', {
         zip : zip
     })
@@ -67,6 +70,7 @@ $('#find').click(function(){
     });
     //Then we want to unfocus the input to make it easier for mobile.
     $('#zipcode').blur();
+    showResults("", zip);
 });
 
 
@@ -74,7 +78,6 @@ function validateZip(zip) {
     if (zip.length >= 5){
         zip = zip.substring(0, 5);
         if (zip.match('[0-9]{5}')){
-            console.log(zip);
             return zip;
         } else
             swal("Whoops!", "Please make sure your zipcode is formatted correctly");
@@ -153,14 +156,18 @@ function createCoordsFromAddress(address, callback, errorCallback)
 
 function placeMarker(map, lat, long, title)
 {
-    var display = '<p>'
-        +title
-    +'</p>';
+    var display = '<p>'+title+'</p>';
     var ll = new mapboxgl.LngLat(long, lat);
     new mapboxgl.Popup()
       .setLngLat(ll)
       .setHTML(display)
       .addTo(map);
+}
+
+function removeMarkers(){
+    $('.mapboxgl-popup-close-button').each(function(){
+        $(this).click();
+    });
 }
 
 function retrieveUserAddress()
@@ -176,4 +183,54 @@ function retrieveUserAddress()
     // createCoordsFromAddress(address, function(lat, long) {
     //     showPosition(lat, long);
     // });
+}
+
+$('#change-zip').click(function(){
+    document.getElementById("zip-dropdown").classList.toggle("hide");
+})
+
+$('#zip-input').click(function(){
+    $('#zip-input').val("");
+})
+
+window.onclick = function(event) {
+    if (!event.target.matches('.zip-dropdown-items')) {
+        var openDropdown = document.getElementById("zip-dropdown");
+        if (!openDropdown.classList.contains('hide')) {
+            openDropdown.classList.add('hide');
+        }
+    }
+}
+
+$('#zip-search').click(function(){
+    var searchTerms = $('#search-input').val();
+    var zip = $('#zip').text();
+    showResults(searchTerms, zip);
+})
+
+$('#search-button').click(function(){
+    var searchTerms = $('#search-input').val();
+    var zip = $('#zip').text();
+    showResults(searchTerms, zip);
+})
+
+function showResults(term, zip){
+    $.ajax({
+        url: DOCUMENT_ROOT+'/search',
+        type: 'POST',
+        data: {
+            val: term,
+            zip: zip
+        },
+        error: function(response) {
+            swal('Error', 'Sorry, we could not find your location.');
+        },
+        success: function(response) {
+            var results = response;
+            removeMarkers();
+            for (var i = 0; i < results.length; i++){
+                placeMarker(map, results[i].lat, results[i].long, results[i].name);
+            }
+        },
+    });
 }
