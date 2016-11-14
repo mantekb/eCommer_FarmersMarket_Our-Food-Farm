@@ -20,7 +20,7 @@
 				@if(!empty($paymentInfo))
 				<p>
 					<input class="with-gap" name="paymentGroup" type="radio" id="savedCC" checked="checked">
-					<label for="savedCC">Use Card Ending In *{{$paymentInfo->lastFour}}</label>
+					<label for="savedCC">Use Card Ending In *{{$paymentInfo->last_four}}</label>
 				</p>
 				@else
 				<p>

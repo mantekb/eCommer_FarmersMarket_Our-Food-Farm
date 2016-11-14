@@ -12,4 +12,18 @@ $('input[name="paymentGroup"]').on('click', function(e) {
 
 $('#submitCheckoutPaymentForm').on('click', function(e) {
 	e.preventDefault();
+	//Check what is checked in order to determine to proceed.
+	var payType = $('input[name="paymentGroup"]:checked').attr('id');
+	if (payType === "payCash")
+	{
+		// Don't do any payment stuff
+	}
+	else if (payType === "payCard")
+	{
+		// collect payment information
+	}
+	else if (payType === "savedCC")
+	{
+		// In the backend, use the saved token
+	}
 });
