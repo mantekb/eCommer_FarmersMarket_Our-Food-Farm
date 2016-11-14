@@ -42,13 +42,73 @@ class CheckoutController extends Controller
     }
 
     /**
+    * Submit the payment to stripe
+    *
+    * @return Redirect back with errors, or proceed to showing where to go.
+    */
+    public function pay(Request $request)
+    {
+        //API Calls
+        \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET_KEY'));
+        //Set up payment method based on type chosen.
+        $payType = $request->get('payType');
+
+        //Things may fail, catch them.
+        try {
+            if ($payType === "payCard")
+            {
+                //Create a token to charge 
+                $cardToken = \Stripe\Token::create(array(
+                    "card" => array(
+                        "number" => $request->get('ccNum'),
+                        "exp_month" => $request->get('ccMonth'),
+                        "exp_year" => $request->get('ccYear'),
+                        "cvc" => $request->get('ccCVC'),
+                        "currency" => "usd"
+                    )
+                ));
+
+                //Do a single charge.
+                $charge = \Stripe\Charge::create(array(
+                    // Amount in cents
+                    "amount" => ($this->cart->getTotalprice() * 100),
+                    "currency" => "usd",
+                    //Card token we just obtained.
+                    "source" => $cardToken['id'],
+                    "description" => "Our Food Farm Purchase"
+                ));
+            }
+            else if ($payType === "savedCC")
+            {
+                //Charge and save the new token for this user.
+                $charge = \Stripe\Charge::create(array(
+                    // Amount in cents
+                    "amount" => ($this->cart->getTotalprice() * 100),
+                    "currency" => "usd",
+                    //Stripe Customer ID instead of token
+                    "customer" => $this->user->paymentInfo->stripe_id,
+                    "description" => "Our Food Farm Purchase"
+                ));
+            }
+        } catch(\Stripe\Error\Card $e) {
+            //The card has been declined.
+            return $this->showError('card', $e->getMessage());
+        }
+
+        //Here we should probably clear the cart, so they can't go back to it and pay again.
+        //Then we will show the user the stands they need to go to, and what they ordered.
+        //And also email them the receipt.
+        return "Need to show stands to go to on a map.";
+    }
+
+    /**
     * Show an error if it happens during checkout
     *
     * @param $type - Type of error to report.
     *
     * @return $view with params - params is the array of variables for the page.
     */
-    public function showError($type)
+    public function showError($type, $mess="")
     {
     	switch ($type) {
     		case 'login':
@@ -65,11 +125,11 @@ class CheckoutController extends Controller
     			$btn = "Go To Map";
     			$link = "/home";
     			break;
-    		case 'unicorns':
-    			$title = "";
-    			$message = "";
-    			$btn = "";
-    			$link = "";
+    		case 'card':
+    			$title = "There was an issue processing your card.";
+    			$message = $mess;
+    			$btn = "Re-Enter Payment Information";
+    			$link = "/checkout";
     			break;
     		default:
     			$title = "An unknown error happened.";

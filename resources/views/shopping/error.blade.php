@@ -16,7 +16,7 @@
 			<span class="card-title">{{$title}}</span>
 			<p>{{$message}}</p>
 		</div>
-		<div class="card-action"><a href="{{$link}}">{{$btn}}</a></div>
+		<div class="card-action"><a href="{{url($link)}}">{{$btn}}</a></div>
 	</div>
 </div>
 
