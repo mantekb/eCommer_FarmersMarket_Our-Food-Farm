@@ -14,7 +14,7 @@
             </div>
             <div class="card-action">
               <a href="{{url("/article")}}">Read This</a>
-              <a href="{{url("#0")}}">By: {{$art['author']}}</a>
+              <a href="{{url("/stand/1")}}">By: {{$art['author']}}</a>
             </div>
           </div>
         </div>

@@ -19,6 +19,7 @@
 			<li><a href="{{url('/stand/products')}}">Add/Edit Products</a></li>
 		@endif
 		<li><a href="{{url("/settings")}}">Settings</a></li>
+		<li><a href="{{url("/payment")}}">Activate Payment Options</a></li>
 		<li><a href="{{url("/logout")}}">Logout</a></li>
     </ul>
 @endif

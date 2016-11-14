@@ -1,16 +1,3 @@
-// Ensure all the pre-filled materialize inputs have the label moved out of the way.
-if (window.location.href == DOCUMENT_ROOT+'/settings')
-{
-	//Change all inputs in order to move label out of way of input - materialize
-	$('form input[type=text]').each(function() {
-		if($(this).val() != undefined)
-		{
-			$(this).change();
-		}
-	});
-}
-
-
 $('#changeName').on('click', function(e) {
 	e.preventDefault();
 	var name = $('#name').val();
