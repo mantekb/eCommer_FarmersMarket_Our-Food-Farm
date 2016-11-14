@@ -14,7 +14,8 @@
 	<div class="card">
 		<div class="card-content">
 			<span class="card-title">Choose A Payment Method To Proceed</span>
-			<form method="POST" action="{{url('/checkout/pay')}}">
+			<form method="POST" action="{{url('/checkout/pay')}}" id="checkoutPayment">
+				{{ csrf_field() }}
 
 				{{-- This only shows if payment info is saved. --}}
 				@if(!empty($paymentInfo))
@@ -43,8 +44,8 @@
 						<input type="number" class="form-control" name="ccNum" id="ccNum">
 					</div>
 					<div class="input-field">
-						<label for="ccCVV">CVV Number</label>
-						<input type="number" class="form-control" name="ccCVV" id="ccCVV">
+						<label for="ccCVC">CVC Number</label>
+						<input type="number" class="form-control" name="ccCVC" id="ccCVC">
 					</div>
 					<div class="input-field">
 						<label for="ccMonth">Expiration Month</label>

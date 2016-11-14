@@ -13,19 +13,32 @@ $('input[name="paymentGroup"]').on('click', function(e) {
 $('#submitCheckoutPaymentForm').on('click', function(e) {
 	e.preventDefault();
 	//Check what is checked in order to determine to proceed.
+	var proceed = true;
 	var payType = $('input[name="paymentGroup"]:checked').attr('id');
-	if (payType === "payCash")
+	if (payType === "payCard")
 	{
-		// Don't do any payment stuff
+		//Ensure CC form filled out before submitting
+		if (
+			$('#ccNum').val() == '' &&
+			$('#ccCVC').val() == '' &&
+			$('#ccMonth').val() == '' &&
+			$('#ccYear').val() == ''
+		)
+		{
+			proceed = false;
+		}
+		
 	}
-	else if (payType === "payCard")
-	{
-		// collect payment information
-	}
-	else if (payType === "savedCC")
-	{
-		// In the backend, use the saved token
-	}
-
+	//More easily pass payment type.
 	$('#payType').val(payType);
+
+	if (proceed)
+	{
+		//Submit the form.
+		$('#checkoutPayment').submit();
+	}
+	else
+	{
+		swal('Error', 'Ensure all fields are filled out before continuing.');
+	}
 });

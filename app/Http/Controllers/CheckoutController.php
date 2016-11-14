@@ -42,6 +42,25 @@ class CheckoutController extends Controller
     }
 
     /**
+    * Submit what type of payment we are using.
+    *
+    * @
+    */
+    public function payChoose(Request $request)
+    {
+        $payType = $request->get('payType');
+        //Set up payment method based on type chosen.
+        if ($payType === "payCard")
+        {
+            $ccInfo = [];
+            $ccInfo['ccNum'] = $request->get('ccNum');
+            $ccInfo['ccCVC'] = $request->get('ccCVC');
+            $ccInfo['ccMonth'] = $request->get('ccMonth');
+            $ccInfo['ccYear'] = $request->get('ccYear');
+        }
+    }
+
+    /**
     * Show an error if it happens during checkout
     *
     * @param $type - Type of error to report.
