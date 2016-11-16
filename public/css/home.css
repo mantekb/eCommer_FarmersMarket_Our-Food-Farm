@@ -3,7 +3,7 @@
 	background-color: rgb(194, 239, 149);
 }
 
-#zip, #zip-text {
+span#zip, #zip-text {
 	color: white;
 	font-family: BebasKai;
 	text-shadow: 0 0 1px #34482b;

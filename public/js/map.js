@@ -42,6 +42,19 @@ function showPosition(lat, long, zoom) {
     });
 }
 
+$("#zipcode").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#find").click();
+    }
+});
+
+$("#search-input").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#search-button").click();
+        $('#search-input').blur();
+    }
+});
+
 $("#zip-input").keyup(function(event){
     if(event.keyCode == 13){
         $("#zip-search").click();
