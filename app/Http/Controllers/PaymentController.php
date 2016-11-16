@@ -108,7 +108,6 @@ class PaymentController extends Controller
 				"default_for_currency" => true
 			));
 
-			return json_encode(['success' => 0]);
 		} catch(\Stripe\Error\InvalidRequest $e) {
             //One of the \Stripe\Account requests above failed.
 			return json_encode(['error' => $e->getMessage()]);
