@@ -141,5 +141,9 @@ class PaymentController extends Controller
 		{
 			return Redirect('/payment');
 		}
+		else
+		{
+			return json_encode(['success' => 0]);
+		}
 	}
 }
