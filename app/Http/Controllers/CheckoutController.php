@@ -46,12 +46,33 @@ class CheckoutController extends Controller
     *
     * @return Redirect back with errors, or proceed to showing where to go.
     */
-    public function pay(Request $request)
+    public function checkout(Request $request)
+    {
+        //Set up payment method based on type chosen.
+        $payType = $request->get('payType');
+        if ($payType !== "payCash")
+        {
+            $error = $this->makePayment($payType, $request);
+            if ($error)
+                return $error;
+        }
+
+        //Here we should probably clear the cart, so they can't go back to it and pay again.
+        //Then we will show the user the stands they need to go to, and what they ordered.
+        //And also email them the receipt.
+        return "Need to show stands to go to on a map.";
+    }
+
+    /**
+    * Use the Stripe API to make a payment.
+    *
+    * @param $payType - type of payment we are making
+    * @param $request - post data passed in
+    */
+    public function makePayment($payType, $request)
     {
         //API Calls
         \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET_KEY'));
-        //Set up payment method based on type chosen.
-        $payType = $request->get('payType');
 
         //Things may fail, catch them.
         try {
@@ -95,10 +116,8 @@ class CheckoutController extends Controller
             return $this->showError('card', $e->getMessage());
         }
 
-        //Here we should probably clear the cart, so they can't go back to it and pay again.
-        //Then we will show the user the stands they need to go to, and what they ordered.
-        //And also email them the receipt.
-        return "Need to show stands to go to on a map.";
+        //Return false if nothing went wrong.
+        return false;
     }
 
     /**
