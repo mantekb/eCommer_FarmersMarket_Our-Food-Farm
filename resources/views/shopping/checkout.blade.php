@@ -24,7 +24,7 @@
 				</div>
 			</div>
 
-			<form method="POST" action="{{url('/checkout/pay')}}" id="checkoutPayment">
+			<form method="POST" action="{{url('/checkout')}}" id="checkoutPayment">
 				{{ csrf_field() }}
 
 				{{-- This only shows if payment info is saved. --}}
