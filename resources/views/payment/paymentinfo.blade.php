@@ -4,17 +4,17 @@
 
 @section('content')
 
-<h2>Save Payment Information</h2>
+<h2>Update Payment Information</h2>
 
 <h4>
 <p>
-We do not store any information that you have provided us below.
+We do not store any of the information that you have provided us below.
 This information is used to create an account with Stripe for 
 accepting payments directly into your account (as a stand owner) 
 and saving your card information for future transactions (as a buyer).<br>
-The link below provides Stripe's Documentation for you to look at: <br>
+The link below provides Stripe's website for you to look at: <br>
 
-<a href="https://stripe.com">Stripe Documentation</a>
+<a href="https://stripe.com">Stripe</a>
 </p>
 </h4>
 

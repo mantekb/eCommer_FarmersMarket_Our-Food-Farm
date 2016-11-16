@@ -64,47 +64,58 @@ class PaymentController extends Controller
 		//API Calls
 		\Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET_KEY'));
 
-		if (!$this->user->hasPaymentInfo())
-		{
-			$acct_info = \Stripe\Account::create(array(
-				"managed" => true,
-				"country" => "US",
-				"legal_entity" => array(
-					"type" => "individual",
-					"first_name" => $firstname,
-					"last_name" => $lastname,
-					"dob" => array(
-						"day" => $DOBday,
-						"month" => $DOBmonth,
-						"year" => $DOByear
-					),
-					"address" => array(
-						"line1" => $address,
-						"city" => $city,
-						"state" => $state,
-						"postal_code" => $zip
+		try {
+			if (!$this->user->hasPaymentInfo())
+			{
+				$acct_info = \Stripe\Account::create(array(
+					"managed" => true,
+					"country" => "US",
+					"legal_entity" => array(
+						"type" => "individual",
+						"first_name" => $firstname,
+						"last_name" => $lastname,
+						"dob" => array(
+							"day" => $DOBday,
+							"month" => $DOBmonth,
+							"year" => $DOByear
+						),
+						"address" => array(
+							"line1" => $address,
+							"city" => $city,
+							"state" => $state,
+							"postal_code" => $zip
+						)
 					)
+				));
+			}
+			else
+			{
+				$acct_info = \Stripe\Account::retrieve($this->user->paymentInfo->stripe_id);
+			}
+
+			$cardToken = \Stripe\Token::create(array(
+				"card" => array(
+					"number" => $cardNumber,
+					"exp_month" => $expDateMonth,
+					"exp_year" => $expDateYear,
+					"cvc" => $cvc,
+					"currency" => "usd"
 				)
 			));
-		}
-		else
-		{
-			$acct_info = \Stripe\Account::retrieve($this->user->paymentInfo->stripe_id);
-		}
 
-		$cardToken = \Stripe\Token::create(array(
-			"card" => array(
-				"number" => $cardNumber,
-				"exp_month" => $expDateMonth,
-				"exp_year" => $expDateYear,
-				"cvc" => $cvc,
-				"currency" => "usd"
-			)
-		));
+			$acct_info->external_accounts->create(array(
+				"external_account" => $cardToken["id"],
+				"default_for_currency" => true
+			));
 
-		$acct_info->external_accounts->create(array(
-			"external_account" => $cardToken["id"]
-		));
+			return json_encode(['success' => 0]);
+		} catch(\Stripe\Error\InvalidRequest $e) {
+            //One of the \Stripe\Account requests above failed.
+			return json_encode(['error' => $e->getMessage()]);
+        } catch(\Stripe\Error\Card $e) {
+            //The \Stripe\Card request above failed.
+        	return json_encode(['error' => $e->getMessage()]);
+        }
 
 		//Save Data to the Database
 		if (!$this->user->hasPaymentInfo())
