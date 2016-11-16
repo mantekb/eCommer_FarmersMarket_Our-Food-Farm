@@ -121,6 +121,6 @@ class Cart
 		foreach ($this->members as $product) {
 			$totalPrice += $product->quantity * $product->price;
 		}
-		return $totalPrice;
+		return number_format($totalPrice, 2);
 	}
 }
