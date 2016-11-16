@@ -44,9 +44,6 @@ class CartController extends Controller
     	//Cart object handles adding one
     	$cart->add($product, $request->get('quantity'));
 
-    	//Save the cart to the session
-    	Session::set('cart', $cart);
-
     	//Return for updating side-cart slide-out
     	return view('shopping.cart-table', ['cart' => $cart]);
     }
@@ -62,7 +59,6 @@ class CartController extends Controller
         {
             $cart = $this->cart;
             $cart->remove($product);
-            Session::set('cart', $cart);
         }
         else
         {
@@ -88,7 +84,7 @@ class CartController extends Controller
             { 
                 $cart->update(Product::find($list[$i]->id), $list[$i]->quantity);
             }
-            Session::set('cart', $cart);
+            $cart->persist();
         }
         else
         {

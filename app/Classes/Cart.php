@@ -2,6 +2,9 @@
 
 namespace App\Classes;
 
+use App\Product;
+use Session;
+
 class Cart
 {
 	/**
@@ -34,6 +37,8 @@ class Cart
 			//If the part is in the cart, increment the quantity
 			$this->members[$index]->quantity += $quantity;
 		}
+		//Save this to the Session.
+		$this->persist();
 	}
 
 	/**
@@ -52,6 +57,7 @@ class Cart
 			array_splice($this->members, $index, 1);
 			$removed = true;
 		}
+		$this->persist();
 		return $removed;
 	}
 
@@ -122,5 +128,33 @@ class Cart
 			$totalPrice += $product->quantity * $product->price;
 		}
 		return number_format($totalPrice, 2);
+	}
+
+	/**
+	* Changes the stock of each item upon placing an order.
+	* Also saves this order in the DB.
+	*
+	* @
+	*/
+	public function placeOrder()
+	{
+		$this->forget();
+		return true;
+	}
+
+	/**
+	* Persist this object in the Session.
+	*/
+	public function persist()
+	{
+		Session::set('cart', $this);
+	}
+
+	/**
+	* Remove this object from the Session.
+	*/
+	public function forget()
+	{
+		Session::forget('cart');
 	}
 }

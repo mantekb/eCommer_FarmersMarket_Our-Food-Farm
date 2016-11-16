@@ -57,10 +57,13 @@ class CheckoutController extends Controller
                 return $error;
         }
 
+        //Edit stock of items, save checkout details, remove from session.
+        $this->cart->placeOrder();
+
         //Here we should probably clear the cart, so they can't go back to it and pay again.
         //Then we will show the user the stands they need to go to, and what they ordered.
         //And also email them the receipt.
-        return "Need to show stands to go to on a map.";
+        return view('shopping.view-cart', ['cart' => $this->cart]);
     }
 
     /**
