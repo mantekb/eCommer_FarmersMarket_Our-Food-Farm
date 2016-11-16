@@ -9,7 +9,7 @@
 <li><a href="{{url('/cart/view')}}">Review Order</a></li>
 <li><a class="dropdown-button" id="name-account-{{$identity}}"
  data-beloworigin="true" data-activates="account-{{$identity}}" data-constrainwidth="false">
-	{{Auth::user()->name}}
+	{{Auth::user()->name}}<small class="material-icons">arrow_drop_down</small>
 </a></li>
     <ul id="account-{{$identity}}"  class="dropdown-content">
     	@if(!Auth::user()->hasStand())
