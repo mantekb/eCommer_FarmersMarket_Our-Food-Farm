@@ -82,7 +82,7 @@ if ($('.remove-product').length > 0)
 		else
 		{
 			jQElem.removeClass('red');
-			changedQuantities();
+			checkQuantities();
 		}
 	});
 }
@@ -90,12 +90,14 @@ if ($('.remove-product').length > 0)
 function disableCheckoutLink()
 {
 	$('#checkoutBtn').prop('disabled', true);
+	$('#checkoutBtn').hide();
 	$('#updateCartForm').show();
 }
 
 function enableCheckoutLink()
 {
 	$('#checkoutBtn').prop('disabled', false);
+	$('#checkoutBtn').show();
 	$('#updateCartForm').hide();
 }
 
