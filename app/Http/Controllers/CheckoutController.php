@@ -42,7 +42,7 @@ class CheckoutController extends Controller
     }
 
     /**
-    * Submit the payment to stripe
+    * Submit the payment to stripe, place the order in the DB, send emails.
     *
     * @return Redirect back with errors, or proceed to showing where to go.
     */
@@ -60,9 +60,9 @@ class CheckoutController extends Controller
         //Edit stock of items, save checkout details, remove from session.
         $this->cart->placeOrder();
 
-        //Here we should probably clear the cart, so they can't go back to it and pay again.
-        //Then we will show the user the stands they need to go to, and what they ordered.
-        //And also email them the receipt.
+        //Send mails to the buyer and sellers.
+        //
+
         return view('shopping.view-cart', ['cart' => $this->cart]);
     }
 

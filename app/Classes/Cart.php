@@ -138,8 +138,14 @@ class Cart
 	*/
 	public function placeOrder()
 	{
+		//Create the order object and add the products to the order.
+		//
+
+		//Edit the stock remaining for the product.
+		//
+
+		//Remove this cart from the session.
 		$this->forget();
-		return true;
 	}
 
 	/**
