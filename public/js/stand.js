@@ -43,26 +43,35 @@ $(window).resize(function() {
 
 
 //Create the map object for a stand
-if ($('#standMap').length > 0)
+if ($('.standMap').length > 0)
 {
+	var maps = $('.standMap');
+	for (var i = 0; i < maps.length; i++)
+	{
+		//Current stand id
+		var stand_id = maps[i].id.replace('standMap', '');
+		//Current stand object
+		var stand = JSON.parse($('#standData'+stand_id).val());
+		var address = JSON.parse($('#standAddress'+stand_id).val());
 
-	//Stand information for the map.
-	var lat = $('#lat').val();
-	var long = $('#long').val();
-	var standName = $('#standName').html();
+		//Stand information for the map.
+		var lat = address.lat;
+		var long = address.long;
+		var standName = stand.name;
 
-	mapboxgl.accessToken = MAPBOX_KEY;
-	var map = new mapboxgl.Map({
-		container: 'standMap',
-		style: 'mapbox://styles/mapbox/streets-v9',
-		center: [long, lat], //Start centered on stand instead of flyto
-		zoom: 13
-	});
+		mapboxgl.accessToken = MAPBOX_KEY;
+		var map = new mapboxgl.Map({
+			container: maps[i].id,
+			style: 'mapbox://styles/mapbox/streets-v9',
+			center: [long, lat], //Start centered on stand instead of flyto
+			zoom: 13
+		});
 
-	map.on('load', function() {
-		//Once the map loads, place a marker where the stand should be.
-		placeMarker(map, lat, long, standName);
-	});
+		map.on('load', function() {
+			//Once the map loads, place a marker where the stand should be.
+			placeMarker(map, lat, long, standName);
+		});
+	}
 }
 
 $('#submitCreateProduct').on('click', function(e) {
