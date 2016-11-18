@@ -60,6 +60,9 @@ class CheckoutController extends Controller
         //Edit stock of items, save checkout details, remove from session.
         $this->cart->placeOrder();
 
+        //Get the list of stands and products that were ordered.
+        $stands = $this->cart->standsToVisit();
+
         //Send mails to the buyer and sellers.
         //
 

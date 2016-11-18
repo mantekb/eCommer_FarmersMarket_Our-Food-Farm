@@ -142,10 +142,24 @@ class Cart
 		//
 
 		//Edit the stock remaining for the product.
-		//
+		foreach ($this->members as $product) {
+			$product->stock -= $product->quantity;
+			unset($product->quantity);
+			$product->save();
+		}
 
 		//Remove this cart from the session.
 		$this->forget();
+	}
+
+	/**
+	* Get the list of stands and products in this cart, for that stand.
+	*
+	* @return $stands - object holding stand information and also products that were bought
+	*/
+	public function standsToVisit()
+	{
+		return [];
 	}
 
 	/**
