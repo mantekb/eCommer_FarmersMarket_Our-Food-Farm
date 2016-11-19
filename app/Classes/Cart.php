@@ -159,7 +159,40 @@ class Cart
 	*/
 	public function standsToVisit()
 	{
-		return [];
+		$stands = [];
+		$numMembers = count($this->members);
+		for($i = 0; $i < $numMembers; $i++) {
+			//Stand for the current product.
+			$stand = $this->members[$i]->stand[0];
+
+			//Essentially getIndex() for the stands array
+			$inStands = -1;
+			$j = 0;
+			$numStands = count($stands);
+			while ($j < $numStands && $inStands == -1)
+			{
+				//Check to see if the stand is already in our array
+				if ($stands[$j]['stand']->id == $stand->id)
+				{
+					$inStands = $j;
+				}
+				$j++;
+			}
+
+			if ($inStands == -1)
+			{
+				//Add the product we are retrieving to the stand.
+				$stands[$i]['products'][] = $this->members[$i];
+				//If the stand is not in our array, just append it.
+				$stands[$i]['stand'] = $stand;
+			}
+			else
+			{
+				//If the stand is in our array, add the product to it.
+				$stands[$inStands]['products'][] = $this->members[$i];
+			}
+		}
+		return $stands;
 	}
 
 	/**

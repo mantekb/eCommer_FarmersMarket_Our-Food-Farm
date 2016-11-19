@@ -66,7 +66,10 @@ class CheckoutController extends Controller
         //Send mails to the buyer and sellers.
         //
 
-        return view('shopping.view-cart', ['cart' => $this->cart]);
+        return view('shopping.order-complete', [
+            'cart' => $this->cart,
+            'stands' => $stands
+        ]);
     }
 
     /**
