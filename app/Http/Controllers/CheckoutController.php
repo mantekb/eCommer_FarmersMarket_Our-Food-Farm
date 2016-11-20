@@ -72,6 +72,10 @@ class CheckoutController extends Controller
         ]);
     }
 
+    /*TODO: I just realized this function doesn't pay the stand, but pays us instead,
+    make sure to switch that over. It may be best to obtain stands from the cart,
+    then to do this function and loop through and pay the stripe account
+    for ech of those stands.*/
     /**
     * Use the Stripe API to make a payment.
     *
