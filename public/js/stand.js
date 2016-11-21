@@ -96,13 +96,20 @@ $('#submitCreateProduct').on('click', function(e) {
 	        swal('Error', 'Could not create product.');
 	    },
 	    success: (response) => {
-	        //Response is the card that has the product information
-	        $('#products').append(response);
-	        //Clear inputs.
-	        $('#name').val('');
-			$('#description').val('');
-			$('#price').val('');
-			$('#stock').val('');
+	    	try
+	    	{
+	    		swal('Error', JSON.parse(response).error);
+	    	}
+	    	catch(e)
+	    	{
+		        //Response is the card that has the product information
+		        $('#products').append(response);
+		        //Clear inputs.
+		        $('#name').val('');
+				$('#description').val('');
+				$('#price').val('');
+				$('#stock').val('');
+			}
 	    }
 	});
 });
