@@ -126,7 +126,8 @@ class CheckoutController extends Controller
                     "amount" => ($this->cart->getTotalprice() * 100),
                     "currency" => "usd",
                     //Stripe Customer ID instead of token- NOT WORKING FOR SOME REASON
-                    "customer" => $this->user->paymentInfo->stripe_id,
+                    //Possibly because no ssnLastFour associated with account?
+                    "source" => $this->user->paymentInfo->stripe_id,
                     "description" => "Our Food Farm Purchase"
                 ),
                 array(
