@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Session;
 use App\Http\Requests;
+use App\User;
 
 class CheckoutController extends Controller
 {
@@ -48,20 +49,22 @@ class CheckoutController extends Controller
     */
     public function checkout(Request $request)
     {
+        //Get the list of stands and products that were ordered.
+        $stands = $this->cart->standsToVisit();
+
         //Set up payment method based on type chosen.
         $payType = $request->get('payType');
         if ($payType !== "payCash")
         {
-            $error = $this->makePayment($payType, $request);
-            if ($error)
-                return $error;
+            foreach ($stands as $stand) {
+                $error = $this->makePayment($payType, $request, $stand);
+                if ($error)
+                    return $error;
+            }
         }
 
         //Edit stock of items, save checkout details, remove from session.
-        $this->cart->placeOrder();
-
-        //Get the list of stands and products that were ordered.
-        $stands = $this->cart->standsToVisit();
+        // $this->cart->placeOrder();
 
         //Send mails to the buyer and sellers.
         //
@@ -72,23 +75,23 @@ class CheckoutController extends Controller
         ]);
     }
 
-    /*TODO: I just realized this function doesn't pay the stand, but pays us instead,
-    make sure to switch that over. It may be best to obtain stands from the cart,
-    then to do this function and loop through and pay the stripe account
-    for ech of those stands.*/
     /**
     * Use the Stripe API to make a payment.
     *
     * @param $payType - type of payment we are making
     * @param $request - post data passed in
+    * @param $stand - Stand we are paying and the products we're buying.
     */
-    public function makePayment($payType, $request)
+    public function makePayment($payType, $request, $stand)
     {
         //API Calls
         \Stripe\Stripe::setApiKey(env('STRIPE_TEST_SECRET_KEY'));
 
         //Things may fail, catch them.
         try {
+            //Stand's stripe account so we can pay them.
+            $payToAccount = User::find($stand['stand']->user_id)->paymentInfo->stripe_id;
+
             if ($payType === "payCard")
             {
                 //Create a token to charge 
@@ -110,6 +113,9 @@ class CheckoutController extends Controller
                     //Card token we just obtained.
                     "source" => $cardToken['id'],
                     "description" => "Our Food Farm Purchase"
+                ),
+                array(
+                    'stripe_account' => $payToAccount
                 ));
             }
             else if ($payType === "savedCC")
@@ -119,9 +125,12 @@ class CheckoutController extends Controller
                     // Amount in cents
                     "amount" => ($this->cart->getTotalprice() * 100),
                     "currency" => "usd",
-                    //Stripe Customer ID instead of token
+                    //Stripe Customer ID instead of token- NOT WORKING FOR SOME REASON
                     "customer" => $this->user->paymentInfo->stripe_id,
                     "description" => "Our Food Farm Purchase"
+                ),
+                array(
+                    'stripe_account' => $payToAccount
                 ));
             }
         } catch(\Stripe\Error\Card $e) {

@@ -39,8 +39,8 @@ class StandController extends Controller
     		$stand = new Stand;
             $stand->createFromForm($data, $user);
 
-            //Send to view Stand
-            $view = Redirect('/stand/'.$stand->id);
+            //Send to set payment information.
+            $view = Redirect('/payment');
     	}
     	else
     	{
@@ -111,47 +111,56 @@ class StandController extends Controller
         $stand = Auth::user()->stand;
         if ($request->isMethod('POST'))
         {
-            if ($request->get('type') == 'new')
+            //Only allow posting products if payment information is set.
+            if (Auth::user()->hasPaymentInfo())
             {
-                // TODO: 
-                // Something similar to stand creation where we validate and pass back erors
-                // And then we'd be able to clean this section up by passing the data into a constructor.
-                //Create the new product
-                $product = new Product;
-                $product->name          = $request->get('name');
-                $product->description   = $request->get('description');
-                $product->price         = $request->get('price');
-                $product->stock         = $request->get('stock');
-                $product->save();
-                //Now associate the new product with the stand.
-                $stand->addProduct($product);
-                //Since we create through ajax, return full product information back to display.
-                // $view = json_encode($product);
-                $view = view('stand.product-card', ['product' => $product, 'edit' => true]);
-            }
-            else
-            {
-                //Editing an existing product
-                $product_id = $request->get('product_id');
-                $productExists = StandProducts::where('product_id', $product_id)
-                    ->where('stand_id', $stand->id)
-                    ->first();
-                if ($productExists == null)
+                if ($request->get('type') == 'new')
                 {
-                    //No product by that ID was found for this stand, prevent them from moving forward
-                    $view = json_encode(['error' => 'You do not have access to this product.']);
-                }
-                else
-                {
-                    $product = Product::find($product_id);
-                    //Allow editing that product
+                    // TODO: 
+                    // Something similar to stand creation where we validate and pass back erors
+                    // And then we'd be able to clean this section up by passing the data into a constructor.
+                    //Create the new product
+                    $product = new Product;
                     $product->name          = $request->get('name');
                     $product->description   = $request->get('description');
                     $product->price         = $request->get('price');
                     $product->stock         = $request->get('stock');
                     $product->save();
-                    $view = json_encode($product);
+                    //Now associate the new product with the stand.
+                    $stand->addProduct($product);
+                    //Since we create through ajax, return full product information back to display.
+                    // $view = json_encode($product);
+                    $view = view('stand.product-card', ['product' => $product, 'edit' => true]);
                 }
+                else
+                {
+                    //Editing an existing product
+                    $product_id = $request->get('product_id');
+                    $productExists = StandProducts::where('product_id', $product_id)
+                        ->where('stand_id', $stand->id)
+                        ->first();
+                    if ($productExists == null)
+                    {
+                        //No product by that ID was found for this stand, prevent them from moving forward
+                        $view = json_encode(['error' => 'You do not have access to this product.']);
+                    }
+                    else
+                    {
+                        $product = Product::find($product_id);
+                        //Allow editing that product
+                        $product->name          = $request->get('name');
+                        $product->description   = $request->get('description');
+                        $product->price         = $request->get('price');
+                        $product->stock         = $request->get('stock');
+                        $product->save();
+                        $view = json_encode($product);
+                    }
+                }
+            }
+            else
+            {
+                //No payment information set
+                $view = json_encode(['error' => 'You must set payment information before creating products.']);
             }
         }
         else
