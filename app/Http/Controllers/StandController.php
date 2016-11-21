@@ -90,14 +90,13 @@ class StandController extends Controller
     public function edit(Request $request)
     {
         $stand = Auth::user()->stand;
-        $address = $stand->address();
         if ($request->isMethod('POST'))
         {
             //
         }
         else
         {
-            $view = view('stand.edit', ['stand' => $stand, 'address' => $address]);
+            $view = view('stand.edit', ['stand' => $stand]);
         }
     return $view;
     }

@@ -159,7 +159,7 @@ $(editPrefix+'update').on('click', function(e) {
 	});
 });
 
-$('#changeStandAddress').on('click', function(e) {
+$('#submitEditStand').on('click', function(e) {
 	e.preventDefault();
 
 	var address = {};
@@ -170,7 +170,7 @@ $('#changeStandAddress').on('click', function(e) {
 	createCoordsFromAddress(address, function(lat, long) {
 		$('#lat').val(lat);
 		$('#long').val(long);
-		$('#editStandAddress').submit();
+		$('#editStand').submit();
 	}, 
 	function() {
 		// This function is called if there is an error retrieving coordinates.
