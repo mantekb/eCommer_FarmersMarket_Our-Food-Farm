@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Mail;
 use Session;
 use App\Http\Requests;
 use App\User;
@@ -67,7 +68,7 @@ class CheckoutController extends Controller
         $this->cart->placeOrder();
 
         //Send mails to the buyer and sellers.
-        //
+        $this->mailUser($stands);
 
         return view('shopping.order-complete', [
             'cart' => $this->cart,
@@ -141,6 +142,24 @@ class CheckoutController extends Controller
 
         //Return false if nothing went wrong.
         return false;
+    }
+
+    /**
+    * Send an email to the user that is similar to the checkout view.
+    *
+    * @param $stands
+    */
+    public function mailUser($stands)
+    {
+        try {
+            Mail::send('shopping.order-complete', ['stands' => $stands, 'user' => $this->user], 
+            function($m) use ($stands, $user) {
+                $m->from('noreply@ourfoodfarm.com', 'Our Food Farm');
+                $m->to($user->email, $user->name)->subject('Order Confirmation');
+            });
+        } catch (\Exception $e) {
+            //Do nothing on failure.
+        }
     }
 
     /**
