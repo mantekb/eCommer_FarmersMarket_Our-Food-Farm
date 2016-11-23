@@ -163,10 +163,10 @@ $('#submitEditStand').on('click', function(e) {
 	e.preventDefault();
 
 	var address = {};
-	address.address = $('#address').val()
-	address.city = $('#city').val()
-	address.state = $('#state').val()
-	address.zip = $('#zip').val()
+	address.address = $('#address').val();
+	address.city = $('#city').val();
+	address.state = $('#state').val();
+	address.zip = $('#zip').val();
 	createCoordsFromAddress(address, function(lat, long) {
 		$('#lat').val(lat);
 		$('#long').val(long);

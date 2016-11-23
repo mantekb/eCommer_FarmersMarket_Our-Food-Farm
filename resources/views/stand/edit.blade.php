@@ -61,6 +61,10 @@
                 </div>
         </div>
 
+        {{-- Hidden inputs for lat and long --}}
+        <input type="hidden" id="lat" name="lat">
+        <input type="hidden" id="long" name="long">
+
         <div class="card-content">
             <button type="submit" id="submitEditStand" class="btn btn-primary">
                 Submit
