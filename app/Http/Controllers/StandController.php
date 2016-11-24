@@ -92,7 +92,34 @@ class StandController extends Controller
         $stand = Auth::user()->stand;
         if ($request->isMethod('POST'))
         {
-            //
+            $name =        $request->get('name');
+            $description = $request->get('description');
+            $address =     $request->get('address');
+            $city =        $request->get('city');
+            $state =       $request->get('state');
+            $zip =         $request->get('zip');
+            $lat =         $request->get('lat');
+            $long =        $request->get('long');
+
+            $stand->name = $name;
+            $stand->description = $description;
+            $stand->address->address = $address;
+            $stand->address->city = $city;
+            $stand->address->state = $state;
+            $stand->address->zip = $zip;
+            $stand->address->lat = $lat;
+            $stand->address->long = $long;
+
+            $stand->save();
+            $stand->address->save();
+
+            //Create View for Return
+            $params = ['stand' => $stand];
+            if ($stand->hasProducts())
+            {
+                $params += ['products' => $stand->products];
+            }
+            $view = view('stand.view', $params);
         }
         else
         {

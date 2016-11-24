@@ -174,3 +174,22 @@ $(editPrefix+'update').on('click', function(e) {
 	    }
 	});
 });
+
+$('#submitEditStand').on('click', function(e) {
+	e.preventDefault();
+
+	var address = {};
+	address.address = $('#address').val();
+	address.city = $('#city').val();
+	address.state = $('#state').val();
+	address.zip = $('#zip').val();
+	createCoordsFromAddress(address, function(lat, long) {
+		$('#lat').val(lat);
+		$('#long').val(long);
+		$('#editStand').submit();
+	}, 
+	function() {
+		// This function is called if there is an error retrieving coordinates.
+		swal('Error', 'Could not retrieve coordinates for showing on map. Please ensure your location is correct.');
+	});
+})

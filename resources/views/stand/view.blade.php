@@ -10,6 +10,11 @@
     </div>
 </div>
 
+@if(Auth::user() && Auth::user()->id == $stand->user_id)
+    <div class="row" align="right">
+        <button id="edit" class="btn btn-primary" onclick="location.href=DOCUMENT_ROOT+'/stand/edit';">Edit Your Stand</button>
+    </div>
+@endif
 
 <div class="row stand-address">
 
