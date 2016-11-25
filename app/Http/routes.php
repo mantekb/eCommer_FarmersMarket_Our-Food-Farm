@@ -86,6 +86,7 @@ Route::group(['prefix'=>'/payment', 'middleware'=>'auth'], function() {
 	Route::post('/createStripeAccount', 'PaymentController@createStripeAccount');
 });
 
+Route::get("/newarticle", "newarticlecontroller@NewArticle");
 
 //Routes to error pages below
 Route::get('/404', function() {
