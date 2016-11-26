@@ -9,7 +9,10 @@ use App\Http\Requests;
 
 class SearchController extends Controller{
 	public function getResults(Request $request){
-		$zip = $request->get('zip');
+		$latDif = $request->get('latDif');
+		$longDif = $request->get('longDif');
+		$lat = $request->get('lat');
+		$long = $request->get('long');
 		$search = $request->get('val');
 
 		//If we're just using the zipcode to search
@@ -17,7 +20,12 @@ class SearchController extends Controller{
 			$stands = DB::table('stand_addresses')
 					 ->join('stands', 'stand_addresses.stand_id', '=', 'stands.id')
                      ->select('stands.name', 'lat', 'long')
-                     ->where('zip', '=', $zip)
+                     ->where([
+						    ['lat', '>=', $lat-$latDif],
+						    ['lat', '<=', $lat+$latDif],
+						    ['long', '>=', $long-$longDif],
+						    ['long', '<=', $long+$longDif]
+						])
                      ->get();
 		} else {
 			$search = '%'.$search.'%';
