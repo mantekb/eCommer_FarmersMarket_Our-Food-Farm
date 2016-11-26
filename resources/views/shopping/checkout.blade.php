@@ -24,11 +24,12 @@
 				</div>
 			</div>
 
-			<form method="POST" action="{{url('/checkout/pay')}}" id="checkoutPayment">
+			<form method="POST" action="{{url('/checkout')}}" id="checkoutPayment">
 				{{ csrf_field() }}
 
 				{{-- This only shows if payment info is saved. --}}
-				@if(!empty($paymentInfo))
+				{{-- False while paying from account not working. --}}
+				@if(!empty($paymentInfo) && false)
 				<p>
 					<input class="with-gap" name="paymentGroup" type="radio" id="savedCC" checked="checked">
 					<label for="savedCC">Use Card Ending In *{{$paymentInfo->last_four}}</label>

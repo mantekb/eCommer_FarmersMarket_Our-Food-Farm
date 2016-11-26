@@ -41,7 +41,7 @@ Route::group(['prefix' => '/cart'], function() {
 
 Route::group(['prefix' => '/checkout'], function() {
 	Route::get('/', 'CheckoutController@index');
-	Route::post('/pay', 'CheckoutController@pay');
+	Route::post('/', 'CheckoutController@checkout');
 	Route::get('/error/{type}', ['as' => '/error/{type}', 'uses' => 'CheckoutController@showError']);
 });
 

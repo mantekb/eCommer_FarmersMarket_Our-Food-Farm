@@ -2,6 +2,9 @@
 
 namespace App\Classes;
 
+use App\Product;
+use Session;
+
 class Cart
 {
 	/**
@@ -34,6 +37,8 @@ class Cart
 			//If the part is in the cart, increment the quantity
 			$this->members[$index]->quantity += $quantity;
 		}
+		//Save this to the Session.
+		$this->persist();
 	}
 
 	/**
@@ -52,6 +57,7 @@ class Cart
 			array_splice($this->members, $index, 1);
 			$removed = true;
 		}
+		$this->persist();
 		return $removed;
 	}
 
@@ -121,6 +127,87 @@ class Cart
 		foreach ($this->members as $product) {
 			$totalPrice += $product->quantity * $product->price;
 		}
-		return $totalPrice;
+		return number_format($totalPrice, 2);
+	}
+
+	/**
+	* Changes the stock of each item upon placing an order.
+	* Also saves this order in the DB.
+	*
+	* @
+	*/
+	public function placeOrder()
+	{
+		//Create the order object and add the products to the order.
+		//
+
+		//Edit the stock remaining for the product.
+		foreach ($this->members as $product) {
+			$product->stock -= $product->quantity;
+			unset($product->quantity);
+			$product->save();
+		}
+
+		//Remove this cart from the session.
+		$this->forget();
+	}
+
+	/**
+	* Get the list of stands and products in this cart, for that stand.
+	*
+	* @return $stands - object holding stand information and also products that were bought
+	*/
+	public function standsToVisit()
+	{
+		$stands = [];
+		$numMembers = count($this->members);
+		for($i = 0; $i < $numMembers; $i++) {
+			//Stand for the current product.
+			$stand = $this->members[$i]->stand[0];
+
+			//Essentially getIndex() for the stands array
+			$inStands = -1;
+			$j = 0;
+			$numStands = count($stands);
+			while ($j < $numStands && $inStands == -1)
+			{
+				//Check to see if the stand is already in our array
+				if ($stands[$j]['stand']->id == $stand->id)
+				{
+					$inStands = $j;
+				}
+				$j++;
+			}
+
+			if ($inStands == -1)
+			{
+				//Add the product we are retrieving to the stand.
+				$stands[$i]['products'][] = $this->members[$i];
+				//If the stand is not in our array, just append it.
+				$stands[$i]['stand'] = $stand;
+			}
+			else
+			{
+				//If the stand is in our array, add the product to it.
+				$stands[$inStands]['products'][] = $this->members[$i];
+			}
+		}
+		return $stands;
+	}
+
+	/**
+	* Persist this object in the Session.
+	*/
+	public function persist()
+	{
+		Session::set('cart', $this);
+	}
+
+	/**
+	* Remove this object from the Session.
+	*/
+	public function forget()
+	{
+		Session::forget('cart');
 	}
 }

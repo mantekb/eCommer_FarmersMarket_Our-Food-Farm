@@ -4,19 +4,20 @@
 
 @section('content')
 
-<h2>Save Payment Information</h2>
+<h2>Update Payment Information</h2>
 
-<h4>
-<p>
-We do not store any information that you have provided us below.
-This information is used to create an account with Stripe for 
-accepting payments directly into your account (as a stand owner) 
-and saving your card information for future transactions (as a buyer).<br>
-The link below provides Stripe's Documentation for you to look at: <br>
+<div class="card">
+    <div class="card-content">
+        <p>
+        We do not store any of the information that you have provided us below.
+        This information is used to create an account with Stripe for 
+        accepting payments directly into your account as a stand owner.<br>
+        The link below provides Stripe's website for you to look at: <br>
 
-<a href="https://stripe.com">Stripe Documentation</a>
-</p>
-</h4>
+        <a href="https://stripe.com">Stripe</a>
+        </p>
+    </div>
+</div>
 
 <form class="form-horizontal" role="form" method="POST" action="{{ url('/payment') }}">
 <div class="card">

@@ -32,10 +32,18 @@ $('#submitpayinfo').on('click', function(e) {
 	    	zip: zip,
 	    },
 	    error: (response) => {
-	        swal('Error', "Unable to create Stripe account.");
+	        swal('Error', "Unable to update your information.");
 	    },
 	    success: (response) => {
-	        swal('Success', "Your stripe account has been created.");
+			var res = JSON.parse(response);
+			if (!res.error)
+			{
+				swal('Success', "Your information has been updated successfully!");
+			}
+			else
+			{
+				swal('Error', res.error);
+			}
 	    }
 	});
 });

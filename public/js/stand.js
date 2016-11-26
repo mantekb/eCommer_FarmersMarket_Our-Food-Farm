@@ -43,26 +43,35 @@ $(window).resize(function() {
 
 
 //Create the map object for a stand
-if ($('#standMap').length > 0)
+if ($('.standMap').length > 0)
 {
+	var maps = $('.standMap');
+	for (var i = 0; i < maps.length; i++)
+	{
+		//Current stand id
+		var stand_id = maps[i].id.replace('standMap', '');
+		//Current stand object
+		var stand = JSON.parse($('#standData'+stand_id).val());
+		var address = JSON.parse($('#standAddress'+stand_id).val());
 
-	//Stand information for the map.
-	var lat = $('#lat').val();
-	var long = $('#long').val();
-	var standName = $('#standName').html();
+		//Stand information for the map.
+		var lat = address.lat;
+		var long = address.long;
+		var standName = stand.name;
 
-	mapboxgl.accessToken = MAPBOX_KEY;
-	var map = new mapboxgl.Map({
-		container: 'standMap',
-		style: 'mapbox://styles/mapbox/streets-v9',
-		center: [long, lat], //Start centered on stand instead of flyto
-		zoom: 13
-	});
+		mapboxgl.accessToken = MAPBOX_KEY;
+		var map = new mapboxgl.Map({
+			container: maps[i].id,
+			style: 'mapbox://styles/mapbox/streets-v9',
+			center: [long, lat], //Start centered on stand instead of flyto
+			zoom: 13
+		});
 
-	map.on('load', function() {
-		//Once the map loads, place a marker where the stand should be.
-		placeMarker(map, lat, long, standName);
-	});
+		map.on('load', function() {
+			//Once the map loads, place a marker where the stand should be.
+			placeMarker(map, lat, long, standName);
+		});
+	}
 }
 
 $('#submitCreateProduct').on('click', function(e) {
@@ -87,13 +96,20 @@ $('#submitCreateProduct').on('click', function(e) {
 	        swal('Error', 'Could not create product.');
 	    },
 	    success: (response) => {
-	        //Response is the card that has the product information
-	        $('#products').append(response);
-	        //Clear inputs.
-	        $('#name').val('');
-			$('#description').val('');
-			$('#price').val('');
-			$('#stock').val('');
+	    	try
+	    	{
+	    		swal('Error', JSON.parse(response).error);
+	    	}
+	    	catch(e)
+	    	{
+		        //Response is the card that has the product information
+		        $('#products').append(response);
+		        //Clear inputs.
+		        $('#name').val('');
+				$('#description').val('');
+				$('#price').val('');
+				$('#stock').val('');
+			}
 	    }
 	});
 });
@@ -158,3 +174,22 @@ $(editPrefix+'update').on('click', function(e) {
 	    }
 	});
 });
+
+$('#submitEditStand').on('click', function(e) {
+	e.preventDefault();
+
+	var address = {};
+	address.address = $('#address').val();
+	address.city = $('#city').val();
+	address.state = $('#state').val();
+	address.zip = $('#zip').val();
+	createCoordsFromAddress(address, function(lat, long) {
+		$('#lat').val(lat);
+		$('#long').val(long);
+		$('#editStand').submit();
+	}, 
+	function() {
+		// This function is called if there is an error retrieving coordinates.
+		swal('Error', 'Could not retrieve coordinates for showing on map. Please ensure your location is correct.');
+	});
+})
