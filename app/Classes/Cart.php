@@ -3,6 +3,8 @@
 namespace App\Classes;
 
 use App\Product;
+use App\Order;
+use App\OrderItems;
 use Session;
 
 class Cart
@@ -134,15 +136,30 @@ class Cart
 	* Changes the stock of each item upon placing an order.
 	* Also saves this order in the DB.
 	*
-	* @
+	* @param $user_id - User id of the user placing the order.
+	* @param $payType - payment type for paying the order.
 	*/
-	public function placeOrder()
+	public function placeOrder($user_id, $payType)
 	{
 		//Create the order object and add the products to the order.
-		//
+		$order = new Order;
+		$order->user_id = $user_id;
+		$order->paid_with = str_replace("pay", "", $payType);
+		$order->save();
 
 		//Edit the stock remaining for the product.
 		foreach ($this->members as $product) {
+			//Add the product to the order.
+			$orderItems = new OrderItems;
+			$orderItems->order_id = $order->id;
+			$orderItems->quantity = $product->quantity;
+			$orderItems->product_id = $product->id;
+			$orderItems->name = $product->name;
+			$orderItems->description = $product->description;
+			$orderItems->price = $product->price;
+			$orderItems->save();
+
+			//Mess with the stock for the current product.
 			$product->stock -= $product->quantity;
 			unset($product->quantity);
 			$product->save();

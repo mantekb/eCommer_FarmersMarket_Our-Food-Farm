@@ -65,7 +65,7 @@ class CheckoutController extends Controller
         }
 
         //Edit stock of items, save checkout details, remove from session.
-        $this->cart->placeOrder();
+        $this->cart->placeOrder($this->user->id, $payType);
 
         //Send mails to the buyer and sellers.
         $this->mailUser($stands);
