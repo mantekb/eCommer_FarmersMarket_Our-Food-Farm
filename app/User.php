@@ -63,4 +63,14 @@ class User extends Authenticatable
     {
         return (bool)count($this->paymentInfo);
     }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+    public function hasOrders()
+    {
+        return (bool)count($this->orders);
+    }
 }

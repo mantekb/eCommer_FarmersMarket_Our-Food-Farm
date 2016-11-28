@@ -1,6 +1,8 @@
 var GEOCODE_KEY = "6e256225eae872958e945279678fa95952f2f5a";
 var MAPBOX_KEY = 'pk.eyJ1IjoiaW5zYW5lYWxlYyIsImEiOiJjaXN0Y3VtMDIwM2szMnpsOGFyNzBranpiIn0.t73_pX_gZy5govr5LM9liA';
 var map = null;
+var latMaster = null;
+var longMaster = null;
 
 //If the map element exists, init the map, then load the position.
 if ($('#map').length > 0){
@@ -75,7 +77,11 @@ $('#zip-search').click(function(){
             createCoords(zip);
         }
         else {
+            latMaster = result.Lat;
+            longMaster = result.Long;
             showPosition(result.Lat, result.Long);
+            var searchTerms = $('#search-input').val();
+            showResults(searchTerms, zip);
         }
     })
     .fail(function() {
@@ -83,7 +89,6 @@ $('#zip-search').click(function(){
     });
     //Then we want to unfocus the input to make it easier for mobile.
     $('#zipcode').blur();
-    showResults("", zip);
 });
 
 
@@ -109,7 +114,11 @@ function createCoords(zip){
             //parse response object
             var lat = response.results[0].location.lat;
             var long = response.results[0].location.lng;
+            latMaster = lat;
+            longMaster = long;
             showPosition(lat, long);
+            var searchTerms = $('#search-input').val();
+            showResults(searchTerms, zip);
             //now save the coordinates for next time
             saveCoords(zip, lat, long);
         },
@@ -215,12 +224,6 @@ window.onclick = function(event) {
     }
 }
 
-$('#zip-search').click(function(){
-    var searchTerms = $('#search-input').val();
-    var zip = $('#zip').text();
-    showResults(searchTerms, zip);
-})
-
 $('#search-button').click(function(){
     var searchTerms = $('#search-input').val();
     var zip = $('#zip').text();
@@ -228,12 +231,18 @@ $('#search-button').click(function(){
 })
 
 function showResults(term, zip){
+    var latDif = findLatDifference();
+    var longDif = findLongDifference();
+    console.log(latMaster+"   "+latDif);
     $.ajax({
         url: DOCUMENT_ROOT+'/search',
         type: 'POST',
         data: {
             val: term,
-            zip: zip
+            lat: latMaster,
+            long: longMaster,
+            latDif: latDif,
+            longDif: longDif
         },
         error: function(response) {
             swal('Error', 'Sorry, we could not find your location.');
@@ -246,4 +255,18 @@ function showResults(term, zip){
             }
         },
     });
+}
+
+function findLatDifference(){
+    var miles = 20;
+    var radius = miles*0.621371; //convert to km
+    var deg = (1 / 110.54) * radius;
+    return deg;
+}
+
+function findLongDifference(){
+    var miles = 20;
+    var radius = miles*0.621371; //convert to km
+    var deg = (1 / (111.320 * Math.cos(latMaster))) * radius;
+    return deg;
 }

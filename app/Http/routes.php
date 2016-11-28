@@ -45,6 +45,11 @@ Route::group(['prefix' => '/checkout'], function() {
 	Route::get('/error/{type}', ['as' => '/error/{type}', 'uses' => 'CheckoutController@showError']);
 });
 
+Route::group(['middleware' => 'auth'], function() {
+	Route::get('/orders', 'AccountController@orders');
+	Route::get('/order/{id}', 'AccountController@order');
+});
+
 Route::get('learning', function() {
 	//Replace function with a controller function instead.
 	$articles = [
