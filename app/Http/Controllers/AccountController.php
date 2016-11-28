@@ -22,7 +22,11 @@ class AccountController extends Controller
     */
     public function orders()
     {
-    	$orders = $this->user->orders;
+        $orders = [];
+        if ($this->user->hasOrders())
+        {
+        	$orders = $this->user->orders;
+        }
     	return view('account.orders', ['orders' => $orders]);
     }
 
