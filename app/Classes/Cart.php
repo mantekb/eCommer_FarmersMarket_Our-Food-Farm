@@ -27,6 +27,7 @@ class Cart
 	public function add($product, $quantity)
 	{
 		$index = $this->getIndex($product);
+		$this->checkQuantity($index, $product, $quantity);
 		if ($index == -1)
 		{
 			//Set the quantity of the new item.
@@ -38,6 +39,8 @@ class Cart
 		{
 			//If the part is in the cart, increment the quantity
 			$this->members[$index]->quantity += $quantity;
+			//Also update the stock to what currently is set for that product.
+			$this->members[$index]->stock = $product->stock;
 		}
 		//Save this to the Session.
 		$this->persist();
@@ -74,6 +77,7 @@ class Cart
 		//Was the product updated?
 		$updated = false;
 		$index = $this->getIndex($product);
+		$this->checkQuantity($index, $product, $quantity);
 		if ($index != -1)
 		{
 			$this->members[$index]->quantity = $quantity;
@@ -101,6 +105,33 @@ class Cart
 			$i++;
 		}
 		return $index;
+	}
+
+	/**
+	* Ensure the user isn't trying to add more to their cart than exists.
+	*
+	* @param $index - index of that product in this cart
+	* @param $product - the actual product, so we can ensure to check most recent version
+	* @param $quantity - quantity requested
+	*/
+	public function checkQuantity($index, $product, $quantity)
+	{
+		if ($index == -1)
+		{
+			//Product is not yet in cart, just ensure stock isn't less than quantity.
+		}
+		else
+		{
+			//Set the quantity equal to what is requested and what we have.
+			$quantity += $this->members[$index]->quantity;
+		}
+
+		//Make sure the quantity doesn't bring the stock below 0.
+		if (($product->stock - $quantity) < 0)
+		{
+			//Conflict with the state of the resource.
+			abort(409);
+		}
 	}
 
 	/**
