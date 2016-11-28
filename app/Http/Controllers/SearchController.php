@@ -34,7 +34,12 @@ class SearchController extends Controller{
 					->leftJoin('stand_products', 'stand_products.stand_id', '=', 'stands.id')
 					->leftJoin('products', 'stand_products.product_id', '=', 'products.id')
                     ->select('stands.name', 'lat', 'long')
-                    ->where('zip', '=', $zip)
+                    ->where([
+						    ['lat', '>=', $lat-$latDif],
+						    ['lat', '<=', $lat+$latDif],
+						    ['long', '>=', $long-$longDif],
+						    ['long', '<=', $long+$longDif]
+						])
 					->where(function ($query) use ($search) {
 						$query->where('stands.description', 'LIKE', $search)
 						    ->orWhere('stands.name', 'LIKE', $search)
