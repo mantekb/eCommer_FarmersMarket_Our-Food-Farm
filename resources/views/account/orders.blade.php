@@ -7,7 +7,8 @@
 @if(empty($orders))
 	<div class="row">
 	    <div class="col s12">
-	        <h1 class="center-align">{{$stand->name}}</h1>
+	        <h1 class="center-align">You haven't made any orders.</h1>
+	        <a href="{{url('/home')}}" class="btn btn-primary">Find Some Food</a>
 	    </div>
 	</div>
 @else
