@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\OrderItems;
 use App\Http\Requests;
 use Auth;
 
@@ -28,10 +29,11 @@ class AccountController extends Controller
     /**
     * Display details about a specific Order.
     *
-    * @param $order - Order Object to retrieve
+    * @param $id - id of Order Object to retrieve
     */
-    public function order(Order $order)
+    public function order($id)
     {
-    	dd($order);
+    	$order = Order::find($id);
+    	return view('account.order', ['order' => $order, 'items' => $order->items]);
     }
 }
