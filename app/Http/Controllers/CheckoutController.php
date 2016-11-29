@@ -91,7 +91,7 @@ class CheckoutController extends Controller
         //Things may fail, catch them.
         try {
             //Stand's stripe account so we can pay them.
-            $payToAccount = User::find($stand['stand']->user_id)->paymentInfo->stripe_id;
+            $payToAccount = $stand['stand']->user->paymentInfo->stripe_id;
 
             if ($payType === "payCard")
             {
@@ -109,7 +109,7 @@ class CheckoutController extends Controller
                 //Do a single charge.
                 $charge = \Stripe\Charge::create(array(
                     // Amount in cents
-                    "amount" => ($this->cart->getTotalprice() * 100),
+                    "amount" => ($stand['totalPrice'] * 100),
                     "currency" => "usd",
                     //Card token we just obtained.
                     "source" => $cardToken['id'],
@@ -124,7 +124,7 @@ class CheckoutController extends Controller
                 //Charge and save the new token for this user.
                 $charge = \Stripe\Charge::create(array(
                     // Amount in cents
-                    "amount" => ($this->cart->getTotalprice() * 100),
+                    "amount" => ($stand['totalPrice'] * 100),
                     "currency" => "usd",
                     //Stripe Customer ID instead of token- NOT WORKING FOR SOME REASON
                     //Possibly because no ssnLastFour associated with account?
@@ -159,6 +159,30 @@ class CheckoutController extends Controller
             });
         } catch (\Exception $e) {
             //Do nothing on failure.
+        }
+        $this->mailSellers($stands);
+    }
+
+    /**
+    * Sends an email to each stand owner.
+    *   Could expand to use text and other methods.
+    * @param $stands
+    */
+    public function mailSellers($stands)
+    {
+        foreach ($stands as $stand) {
+            try {
+                $message = $this->user->name.' has purchased these items from you: <br>';
+                foreach ($stand['products'] as $product) {
+                    $message .= $product->quantity." of ".$product->name."<br>";
+                }
+                $message .= "Make sure you put those products aside!";
+
+                //Mail plain text
+                mail($stand->user->email, "Order", $message);
+            } catch (\Exception $e) {
+                //Do nothing on failure.
+            }
         }
     }
 

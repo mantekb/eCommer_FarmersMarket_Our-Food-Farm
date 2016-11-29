@@ -233,11 +233,15 @@ class Cart
 				$stands[$i]['products'][] = $this->members[$i];
 				//If the stand is not in our array, just append it.
 				$stands[$i]['stand'] = $stand;
+				//Also set the price for ease of use.
+				$stands[$i]['totalPrice'] = $this->members[$i]->quantity * $this->members[$i]->price;
 			}
 			else
 			{
 				//If the stand is in our array, add the product to it.
 				$stands[$inStands]['products'][] = $this->members[$i];
+				//Add to the toal price.
+				$stands[$inStands]['totalPrice'] += $this->members[$i]->quantity * $this->members[$i]->price;
 			}
 		}
 		return $stands;

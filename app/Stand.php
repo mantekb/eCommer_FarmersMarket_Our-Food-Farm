@@ -62,4 +62,9 @@ class Stand extends Model
     {
         $this->products()->detach($product->id);
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
