@@ -191,9 +191,10 @@ class Cart
 			$orderItems->save();
 
 			//Mess with the stock for the current product.
-			$product->stock -= $product->quantity;
-			unset($product->quantity);
-			$product->save();
+			//We set a new one so unsetting the quantity doesn't affect other variables.
+			$prodToChange = Product::find($product->id);
+			$prodToChange->stock -= $product->quantity;
+			$prodToChange->save();
 		}
 
 		//Remove this cart from the session.
