@@ -172,6 +172,7 @@ class CheckoutController extends Controller
     {
         foreach ($stands as $stand) {
             try {
+                //Possibly make a table-ized view and use the laravel mail instead?
                 $message = $this->user->name.' has purchased these items from you: <br>';
                 foreach ($stand['products'] as $product) {
                     $message .= $product->quantity." of ".$product->name."<br>";
