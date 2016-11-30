@@ -7,6 +7,10 @@
 <script src='{{asset('js/mapbox-gl.js')}}'></script>
 
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
+
+{{-- Masonry grid view --}}
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
 {{-- Make sure config.js comes first! --}}
 <script src="{{asset('js/config.js')}}"></script>
 <script src="{{asset('js/landing.js')}}"></script>
