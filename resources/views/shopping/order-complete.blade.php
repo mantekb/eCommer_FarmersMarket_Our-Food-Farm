@@ -19,7 +19,7 @@
 	    
 	</div>
 
-	<div class="row">
+	<div class="grid row">
         @foreach($stand['products'] as $product)
             @include('stand.product-card', ['product' => $product, 'toPickup' => $product->quantity])
         @endforeach

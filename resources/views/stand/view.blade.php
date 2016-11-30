@@ -30,7 +30,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="grid row">
         @foreach($products as $product)
             @include('stand.product-card', ['product' => $product])
         @endforeach
