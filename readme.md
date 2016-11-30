@@ -1,53 +1,49 @@
-# Getting Started
+# Our Food Farm
+
+**Client:** Jerry Schnepp
+
+**Developers:**
+- Alec Gordon
+- Jessica Wooley
+- Sam O'Neal
+- Mantek Bhatia
+
+## Project Summary
+
+The _Our Food Farm_ project is a website devoted to connect backyard gardeners, 
+and farmsteads to an ever growing customer base looking for fresh locally grown produce and other farmstead products.
+Target audiences include urban, suburban households that are producing food locally and looking for locally produced food
+
+**Goals:**
+1. Establish a connection with Backyard gardeners, Farmers, and Ranchers with customers looking for local grown foods. 
+2. Help re-establish people with their food sources, by establishing full transparency on where and how their food was grown. 
+3. Help establish community between the backyard gardeners, farmers, ranchers. 
+4. Help boost local entrepreneurship/commerce.
+
+**Target Audience:**
+1. Urban and suburban households that are producing food locally. 
+2. Urban and suburban households looking for locally produced foods.
+
+## Deployment
+
+### Setup For Production Environment
+
+1. Setup a server of your choice with PHP, git, and composer.
+2. Clone this repository into your webserver and set up domain.
+3. In the command line, run `composer install` in the project's folder.
+4. Ensure user keys in `.env` and other files are updated to their production versions.
+5. Browse to the live website!
+
+### Setup For Local Development
 
 1. Install WAMP
 	1. Click on WAMP tray icon > phpmyadmin
 	2. Login with user: "root" pass: ""
 	3. On side nav click _new+_
-	4. Add database "homestead"
+	4. Add database "cs4540g1"
 2. Install Composer
 3. Clone this repo into C:\wamp\www
 4. `cd our-food-farm`
 5. `composer install`
 6. `php artisan migrate`
-7. Click on WAMP tray icon > Apache > Alias directories > Add an alias
-8. `our-food-farm`
-9. `C:\wamp\www\our-food-farm\public`
-10. Ensure browsing to *localhost/our-food-farm/* works.
-
-_If not already done:_
-1. Go to C:\wamp\www\our-food-farm\public\.htaccess
-2. Below line `RewriteEngine On` add `RewriteBase /our-food-farm/`
-
-
-
-
-# Laravel readme below:
-
-# Laravel PHP Framework
-
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
-
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
-
-## Official Documentation
-
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+7. Ensure browsing to *localhost/our-food-farm/* works.
