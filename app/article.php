@@ -2,14 +2,12 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User;
+use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Database\Eloquent\articles;
-
-class NewArticle extends articles extends User
+class Article extends Model
 {
-    protected $fillable = []
-    	'name','content',
-    ];
-
+    public function user()
+    {
+    	return $this->belongsTo('App\User');
+    }
 }

@@ -24,7 +24,7 @@
             {{ csrf_field() }}
 
             <div class="input-field">
-                <textarea id="textarea1" class="materialize-textarea"></textarea>
+                <textarea id="content" class="materialize-textarea" name="content"></textarea>
          		<label for="content">Content</label>
             </div>
         
@@ -35,7 +35,7 @@
     <div class="col s1 m1">
         <div class="card">
             <div class="input-field">
-                <button type="submit" id="submitpayinfo" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">
                     Submit
                 </button>
             </div>
@@ -43,4 +43,5 @@
     </div>
 </div>
 </form>
+
 @endsection
