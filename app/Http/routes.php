@@ -51,8 +51,8 @@ Route::group(['prefix' => '/learning'], function() {
 });
 
 Route::group(['prefix'=>'/newarticle', 'middleware'=>'auth'], function() {
-	Route::get('/', 'ArticleController@NewArticle');
-	Route::post('/', 'ArticleController@createArticle');
+	Route::get('/', 'ArticleController@NewArticle')->middleware('hasstand');
+	Route::post('/', 'ArticleController@createArticle')->middleware('hasstand');
 });
 
 Route::group(['middleware' => 'auth'], function() {
