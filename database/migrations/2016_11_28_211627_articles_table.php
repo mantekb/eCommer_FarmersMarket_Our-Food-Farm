@@ -16,7 +16,7 @@ class ArticlesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->index()->unsigned();
             $table->string('title');
-            $table->string('content');
+            $table->string('content', 4096);
             $table->timestamps();
 
         });
