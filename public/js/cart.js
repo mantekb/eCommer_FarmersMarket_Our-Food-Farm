@@ -7,6 +7,12 @@ $('.add-to-cart').on('click', function(e) {
 	    data: {
 	    	quantity: 1,
 	    },
+	    //specific error
+	    statusCode: {
+	    	409: function() {
+	    		swal('Too Many', 'You are trying to add more of this product to your cart than is in stock.');
+	    	}
+	    },
 	    error: (response) => {
 	        swal('Error', 'Could not add product to your cart.');
 	    },
@@ -135,6 +141,12 @@ $('#updateCartBtn').on('click', function(e) {
 	    type: 'POST',
 	    data: {
 	    	list: JSON.stringify(changedQuantities),
+	    },
+	    //specific error
+	    statusCode: {
+	    	409: function() {
+	    		swal('Too Many', 'You are trying to add more of a product to your cart than is in stock.');
+	    	}
 	    },
 	    error: (response) => {
 	        swal('Error', 'Could not update cart.');

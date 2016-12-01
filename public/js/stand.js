@@ -192,4 +192,9 @@ $('#submitEditStand').on('click', function(e) {
 		// This function is called if there is an error retrieving coordinates.
 		swal('Error', 'Could not retrieve coordinates for showing on map. Please ensure your location is correct.');
 	});
-})
+});
+
+//Setup the masonry grid for products
+$('.grid').masonry({
+	itemSelector: '.col'
+});

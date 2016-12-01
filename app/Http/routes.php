@@ -55,6 +55,11 @@ Route::group(['prefix'=>'/newarticle', 'middleware'=>'auth'], function() {
 	Route::post('/', 'ArticleController@createArticle');
 });
 
+Route::group(['middleware' => 'auth'], function() {
+	Route::get('/orders', 'AccountController@orders');
+	Route::get('/order/{id}', 'AccountController@order');
+});
+
 Route::group(['prefix'=>'/settings', 'middleware'=>'auth'], function() {
 	Route::get('/', ['as' => '/', 'uses' => 'SettingsController@index']);
 	Route::post('/name', 'SettingsController@changeName');

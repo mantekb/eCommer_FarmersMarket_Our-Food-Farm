@@ -14,6 +14,14 @@ class CreateOrderItemsTable extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_id')->index()->unsigned();
+            //Product information, saved for redundancy in case owner changed it.
+            $table->integer('quantity');
+            //Not index'd as we don't tie it in to the actual table.
+            $table->integer('product_id');
+            $table->string('name');
+            $table->string('description');
+            $table->decimal('price'); //unit price
             $table->timestamps();
         });
     }

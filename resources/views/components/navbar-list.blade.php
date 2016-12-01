@@ -21,6 +21,7 @@
 		@endif
 		<li><a href="{{url("/settings")}}">Settings</a></li>
 		<li><a href="{{url("/newarticle")}}">Post a New Leaning Resource</a></li>
+		<li><a href="{{url("/orders")}}">Previous Orders</a></li>
 		<li><a href="{{url("/payment")}}">Update Payment Information</a></li>
 		<li><a href="{{url("/logout")}}">Logout</a></li>
     </ul>

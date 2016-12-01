@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Mail;
 use Session;
 use App\Http\Requests;
 use App\User;
@@ -64,10 +65,10 @@ class CheckoutController extends Controller
         }
 
         //Edit stock of items, save checkout details, remove from session.
-        $this->cart->placeOrder();
+        $this->cart->placeOrder($this->user->id, $payType);
 
         //Send mails to the buyer and sellers.
-        //
+        $this->mailUser($stands);
 
         return view('shopping.order-complete', [
             'cart' => $this->cart,
@@ -90,7 +91,7 @@ class CheckoutController extends Controller
         //Things may fail, catch them.
         try {
             //Stand's stripe account so we can pay them.
-            $payToAccount = User::find($stand['stand']->user_id)->paymentInfo->stripe_id;
+            $payToAccount = $stand['stand']->user->paymentInfo->stripe_id;
 
             if ($payType === "payCard")
             {
@@ -108,7 +109,7 @@ class CheckoutController extends Controller
                 //Do a single charge.
                 $charge = \Stripe\Charge::create(array(
                     // Amount in cents
-                    "amount" => ($this->cart->getTotalprice() * 100),
+                    "amount" => ($stand['totalPrice'] * 100),
                     "currency" => "usd",
                     //Card token we just obtained.
                     "source" => $cardToken['id'],
@@ -123,7 +124,7 @@ class CheckoutController extends Controller
                 //Charge and save the new token for this user.
                 $charge = \Stripe\Charge::create(array(
                     // Amount in cents
-                    "amount" => ($this->cart->getTotalprice() * 100),
+                    "amount" => ($stand['totalPrice'] * 100),
                     "currency" => "usd",
                     //Stripe Customer ID instead of token- NOT WORKING FOR SOME REASON
                     //Possibly because no ssnLastFour associated with account?
@@ -141,6 +142,49 @@ class CheckoutController extends Controller
 
         //Return false if nothing went wrong.
         return false;
+    }
+
+    /**
+    * Send an email to the user that is similar to the checkout view.
+    *
+    * @param $stands
+    */
+    public function mailUser($stands)
+    {
+        try {
+            Mail::send('shopping.order-complete', ['stands' => $stands, 'user' => $this->user], 
+            function($m) use ($stands, $user) {
+                $m->from('noreply@ourfoodfarm.com', 'Our Food Farm');
+                $m->to($user->email, $user->name)->subject('Order Confirmation');
+            });
+        } catch (\Exception $e) {
+            //Do nothing on failure.
+        }
+        $this->mailSellers($stands);
+    }
+
+    /**
+    * Sends an email to each stand owner.
+    *   Could expand to use text and other methods.
+    * @param $stands
+    */
+    public function mailSellers($stands)
+    {
+        foreach ($stands as $stand) {
+            try {
+                //Possibly make a table-ized view and use the laravel mail instead?
+                $message = $this->user->name.' has purchased these items from you: <br>';
+                foreach ($stand['products'] as $product) {
+                    $message .= $product->quantity." of ".$product->name."<br>";
+                }
+                $message .= "Make sure you put those products aside!";
+
+                //Mail plain text
+                mail($stand->user->email, "Order", $message);
+            } catch (\Exception $e) {
+                //Do nothing on failure.
+            }
+        }
     }
 
     /**

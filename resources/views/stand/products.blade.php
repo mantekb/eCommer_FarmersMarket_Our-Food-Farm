@@ -41,7 +41,7 @@
 </div>
 
 {{-- Next show all existing products, and be able to delete and edit them. --}}
-<div class="row" id="products">
+<div class="grid row" id="products">
 	@foreach($stand->products as $product)
 		@include('stand.product-card', ['product' => $product, 'edit' => true])
 	@endforeach

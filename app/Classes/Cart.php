@@ -3,6 +3,8 @@
 namespace App\Classes;
 
 use App\Product;
+use App\Order;
+use App\OrderItems;
 use Session;
 
 class Cart
@@ -25,6 +27,7 @@ class Cart
 	public function add($product, $quantity)
 	{
 		$index = $this->getIndex($product);
+		$this->checkQuantity($index, $product, $quantity);
 		if ($index == -1)
 		{
 			//Set the quantity of the new item.
@@ -36,6 +39,8 @@ class Cart
 		{
 			//If the part is in the cart, increment the quantity
 			$this->members[$index]->quantity += $quantity;
+			//Also update the stock to what currently is set for that product.
+			$this->members[$index]->stock = $product->stock;
 		}
 		//Save this to the Session.
 		$this->persist();
@@ -72,6 +77,7 @@ class Cart
 		//Was the product updated?
 		$updated = false;
 		$index = $this->getIndex($product);
+		$this->checkQuantity($index, $product, $quantity);
 		if ($index != -1)
 		{
 			$this->members[$index]->quantity = $quantity;
@@ -99,6 +105,33 @@ class Cart
 			$i++;
 		}
 		return $index;
+	}
+
+	/**
+	* Ensure the user isn't trying to add more to their cart than exists.
+	*
+	* @param $index - index of that product in this cart
+	* @param $product - the actual product, so we can ensure to check most recent version
+	* @param $quantity - quantity requested
+	*/
+	public function checkQuantity($index, $product, $quantity)
+	{
+		if ($index == -1)
+		{
+			//Product is not yet in cart, just ensure stock isn't less than quantity.
+		}
+		else
+		{
+			//Set the quantity equal to what is requested and what we have.
+			$quantity += $this->members[$index]->quantity;
+		}
+
+		//Make sure the quantity doesn't bring the stock below 0.
+		if (($product->stock - $quantity) < 0)
+		{
+			//Conflict with the state of the resource.
+			abort(409);
+		}
 	}
 
 	/**
@@ -134,18 +167,34 @@ class Cart
 	* Changes the stock of each item upon placing an order.
 	* Also saves this order in the DB.
 	*
-	* @
+	* @param $user_id - User id of the user placing the order.
+	* @param $payType - payment type for paying the order.
 	*/
-	public function placeOrder()
+	public function placeOrder($user_id, $payType)
 	{
 		//Create the order object and add the products to the order.
-		//
+		$order = new Order;
+		$order->user_id = $user_id;
+		$order->paid_with = str_replace("pay", "", $payType);
+		$order->save();
 
 		//Edit the stock remaining for the product.
 		foreach ($this->members as $product) {
-			$product->stock -= $product->quantity;
-			unset($product->quantity);
-			$product->save();
+			//Add the product to the order.
+			$orderItems = new OrderItems;
+			$orderItems->order_id = $order->id;
+			$orderItems->quantity = $product->quantity;
+			$orderItems->product_id = $product->id;
+			$orderItems->name = $product->name;
+			$orderItems->description = $product->description;
+			$orderItems->price = $product->price;
+			$orderItems->save();
+
+			//Mess with the stock for the current product.
+			//We set a new one so unsetting the quantity doesn't affect other variables.
+			$prodToChange = Product::find($product->id);
+			$prodToChange->stock -= $product->quantity;
+			$prodToChange->save();
 		}
 
 		//Remove this cart from the session.
@@ -185,11 +234,15 @@ class Cart
 				$stands[$i]['products'][] = $this->members[$i];
 				//If the stand is not in our array, just append it.
 				$stands[$i]['stand'] = $stand;
+				//Also set the price for ease of use.
+				$stands[$i]['totalPrice'] = $this->members[$i]->quantity * $this->members[$i]->price;
 			}
 			else
 			{
 				//If the stand is in our array, add the product to it.
 				$stands[$inStands]['products'][] = $this->members[$i];
+				//Add to the toal price.
+				$stands[$inStands]['totalPrice'] += $this->members[$i]->quantity * $this->members[$i]->price;
 			}
 		}
 		return $stands;
