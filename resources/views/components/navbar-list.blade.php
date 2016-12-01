@@ -2,6 +2,7 @@
 {{-- <li><a href="/food">Food</a></li> --}}
 <li><a href="{{url("/deals")}}">Deals of the Day</a></li>
 <li><a href="{{url("/learning")}}">Learning Resources</a></li>
+
 @if(Auth::guest())
 	<li><a class="login" href="{{url("/login")}}">Login</a></li>
 	<li><a href="{{url("/register")}}">Register</a></li>
@@ -19,6 +20,7 @@
 			<li><a href="{{url('/stand/products')}}">Add/Edit Products</a></li>
 		@endif
 		<li><a href="{{url("/settings")}}">Settings</a></li>
+		<li><a href="{{url("/newarticle")}}">Post a New Leaning Resource</a></li>
 		<li><a href="{{url("/orders")}}">Previous Orders</a></li>
 		<li><a href="{{url("/payment")}}">Update Payment Information</a></li>
 		<li><a href="{{url("/logout")}}">Logout</a></li>
