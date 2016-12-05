@@ -3,13 +3,25 @@
 	background-color: rgb(194, 239, 149);
 }
 
+.dropdown-icon {
+	height: 22px;
+	width: 22px;
+}
+
+.filter-label, .filters{
+	color: white;
+	font-family: BebasKai;
+	font-size: 1.4rem;
+	text-shadow: 0 0 1px #34482b;
+}
+
 span#zip, #zip-text {
 	color: white;
 	font-family: BebasKai;
 	text-shadow: 0 0 1px #34482b;
 }
 
-#change-zip {
+#change-zip, #apply-filters {
 	height: 50%;
     font-family: BebasKai;
     font-size: 1rem;
@@ -25,7 +37,7 @@ span#zip, #zip-text {
 	background-color: #759456;
 }
 
-#zip-dropdown {
+#zip-dropdown, #dist-dropdown, #price-dropdown {
 	background-color: white;
     border-radius: 0px 0px 3px 3px;
 }
@@ -83,16 +95,18 @@ span#zip, #zip-text {
     height: 44px
 }
 
-#zip-search .search-icon {
+#zip-search .search-icon, .dropdown-icon {
 	-webkit-filter: invert(1);
 	filter: invert(1);
 }
 
 @media (max-width: 360px) { /*Mobile Dev S*/
 	#searchbar {
-		margin: -20px -9% 0px;
 		height: 38px;
 		text-align: center;
+	}
+	#searchbar, #dropdown {
+		margin: -20px -9% 0px;
 	}
 	#zip, #zip-text {
 		font-size: 1.1rem;
@@ -100,16 +114,15 @@ span#zip, #zip-text {
 	#zip-dropdown {
 		text-align: center;
 	}
-	#zip-section {
-		
-	}
 }
 
 @media (min-width: 361px) and (max-width: 673px) { /*Mobile Dev M and L*/
 	#searchbar {
-		margin: -20px -9% 0px;
 		height: 38px;
 		text-align: center;
+	}
+	#searchbar, #dropdowns {
+		margin: -20px -9% 0px;
 	}
 	#zip, #zip-text {
 		font-size: 1.2rem;
@@ -117,16 +130,15 @@ span#zip, #zip-text {
 	#zip-dropdown {
 		text-align: center;
 	}
-	#zip-section {
-		
-	}
 }
 
 @media (min-width: 674px) and (max-width: 862px) { /*Tablet*/
 	#searchbar {
-		margin: -20px -9% 0px;
 		height: 43px;
 		text-align: center;
+	}
+	#searchbar, #dropdowns {
+		margin: -20px -9% 0px;
 	}
 	#zip, #zip-text {
 		font-size: 1.4rem;
@@ -134,15 +146,14 @@ span#zip, #zip-text {
 	#zip-dropdown {
     	text-align: center;
 	}
-	#zip-section {
-		
-	}
 }
 
 @media (min-width: 863px) and (max-width: 992px) { /*Laptop/Desktop*/
 	#searchbar {
-		margin: -20px -9% 0px;
 		height: 43px;
+	}
+	#searchbar, #dropdown {
+		margin: -20px -9% 0px;
 	}
 	#zip-text {
 		margin-left: 15px;
@@ -154,15 +165,14 @@ span#zip, #zip-text {
 		position: absolute;
     	z-index: 1;
 	}
-	#zip-section {
-		
-	}
 }
 
 @media (min-width: 992px) { /*Larger Laptop/Desktop*/
 	#searchbar {
-		margin: -20px -22% 0px;
 		height: 43px;
+	}
+	#searchbar, #dropdown {
+		margin: -20px -22% 0px;
 	}
 	#zip-text {
 		margin-left: 15px;
@@ -176,10 +186,6 @@ span#zip, #zip-text {
 		width: 200px;
     	left: 6%;
 	}
-	#zip-section {
-		width: 350px;
-	}
-
 	#search-input {
 		height: 32px;
 	    position: relative;

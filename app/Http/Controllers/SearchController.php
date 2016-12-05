@@ -14,18 +14,30 @@ class SearchController extends Controller{
 		$lat = $request->get('lat');
 		$long = $request->get('long');
 		$search = $request->get('val');
+		$high = intval(trim($request->get('high')));
+		$low = intval(trim($request->get('low')));
 
 		//If we're just using the zipcode to search
 		if ($search == ""){
 			$stands = DB::table('stand_addresses')
 					 ->join('stands', 'stand_addresses.stand_id', '=', 'stands.id')
-                     ->select('stands.name', 'lat', 'long')
+                     ->select('stands.name', 'lat', 'stand_addresses.long')
                      ->where([
 						    ['lat', '>=', $lat-$latDif],
 						    ['lat', '<=', $lat+$latDif],
-						    ['long', '>=', $long-$longDif],
-						    ['long', '<=', $long+$longDif]
+						    ['stand_addresses.long', '>=', $long-$longDif],
+						    ['stand_addresses.long', '<=', $long+$longDif]
 						])
+                     ->whereExists(function ($query) use ($high, $low) {
+			                $query->select(DB::raw(1))
+			                      ->from('products')
+			                      ->leftJoin('stand_products', 'stand_products.product_id', '=', 'products.id')
+			                      ->where([
+									    ['stands.id', '=', 'stand_products.stand_id'], //causing exclusions
+									    ['products.price', '<=', $high],
+									    ['products.price', '>=', $low]
+									]);
+					 })
                      ->get();
 		} else {
 			$search = '%'.$search.'%';
