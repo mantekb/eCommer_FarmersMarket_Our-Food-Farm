@@ -8,12 +8,20 @@ $('#changeName').on('click', function(e) {
 	    	name: name,
 	    },
 	    error: (response) => {
-	        swal('Error', "Unable to change name.");
+        	swal('Error', 'Unable to change your name');
 	    },
 	    success: (response) => {
-	        swal('Success', "Your name has changed to "+name+".");
-	        $('#name-account-main').html(name);
-	        $('#name-account-mobile').html(name);
+            var res = JSON.parse(response);
+            if(res.error)
+            {
+                swal('Error', res.error);
+            }
+            else
+            {
+                swal('Success', "Your name has changed to "+name+".");
+                $('#name-account-main').html(name);
+                $('#name-account-mobile').html(name);
+            }
 	    }
 	});
 });
@@ -30,17 +38,22 @@ $('#changePassword').on('click', function(e) {
 			conf_password: conf_password,
 		},
 		error: (response) => {
-			swal('Error', "Unable to change password.");
+            swal('Error', "Unable to change password.");
 		},
 		success: (response) => {
 			var res = JSON.parse(response);
-			if (!res.error)
+			if (res.error)
 			{
-				swal('Success', "Your password has been changed.");
+                var message = res.error;
+
+                var strMessage = message.toString();
+                var processedMessage = strMessage.replace(/,/g, '\n');
+
+                swal('Error', processedMessage);
 			}
 			else
 			{
-				swal('Error', res.error);
+				swal('Success', "Your password has been changed.");
 			}
 		}
 	});
@@ -70,7 +83,20 @@ $('#changeAddress').on('click', function(e) {
 				swal('Error', "Unable to change address.");
 			},
 			success: (response) => {
-				swal('Success', "Your address has been changed.")
+                var res = JSON.parse(response);
+                if(res.error)
+                {
+                    var message = res.error;
+
+                    var strMessage = message.toString();
+                    var processedMessage = strMessage.replace(/,/g, '\n');
+
+                    swal('Error', processedMessage);
+                }
+                else
+                {
+				    swal('Success', "Your address has been changed.")
+                }
 			}
 		});	
 	});
