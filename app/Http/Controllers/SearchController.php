@@ -32,8 +32,8 @@ class SearchController extends Controller{
 			                $query->select(DB::raw(1))
 			                      ->from('products')
 			                      ->leftJoin('stand_products', 'stand_products.product_id', '=', 'products.id')
+			                      ->whereRaw('stands.id = stand_products.stand_id')
 			                      ->where([
-									    ['stands.id', '=', 'stand_products.stand_id'], //causing exclusions
 									    ['products.price', '<=', $high],
 									    ['products.price', '>=', $low]
 									]);
