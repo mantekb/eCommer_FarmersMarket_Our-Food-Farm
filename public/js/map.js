@@ -253,7 +253,6 @@ function showResults(term, zip, high=100, low=0, dist=20){
     var longDif = findLongDifference(dist);
     if(low == ""){low = 0;}
     if(high == "100" || high == 100 || high == ""){high = 99999;} //important to include items above the "high" price point
-    console.log("Low: "+low+" High: "+high+" Distance: "+dist);
     $.ajax({
         url: DOCUMENT_ROOT+'/search',
         type: 'POST',
@@ -309,6 +308,7 @@ $( function() {
     $( "#dist-slider" ).slider({
         min: 5,
         max: 50,
+        value: 20,
         slide: function( event, ui ) {
             $("#dist-amount").text(ui.value + "m");
         }

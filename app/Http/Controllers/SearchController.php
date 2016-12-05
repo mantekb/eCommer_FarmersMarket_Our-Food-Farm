@@ -57,6 +57,16 @@ class SearchController extends Controller{
 						    ->orWhere('stands.name', 'LIKE', $search)
 						    ->orWhere('products.name', 'LIKE', $search);
 					})
+					->whereExists(function ($query) use ($high, $low) {
+			                $query->select(DB::raw(1))
+			                      ->from('products')
+			                      ->leftJoin('stand_products', 'stand_products.product_id', '=', 'products.id')
+			                      ->whereRaw('stands.id = stand_products.stand_id')
+			                      ->where([
+									    ['products.price', '<=', $high],
+									    ['products.price', '>=', $low]
+									]);
+					 })
                     ->get();
 		}
 
