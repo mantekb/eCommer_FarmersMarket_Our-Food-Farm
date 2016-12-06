@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests;
 use App\UserAddress;
+use Validator;
 
 class SettingsController extends Controller
 {
@@ -21,8 +22,25 @@ class SettingsController extends Controller
 		return view('settings.settings', ['user'=>$this->user]);
 	}
 
+	public function validateName(array $data)
+	{
+		$rules = [
+			'name' => 'required|max:255'
+		];
+		return Validator::make($data, $rules);
+	}
+
 	public function changeName(Request $request)
 	{
+		//Validate name by DB constraints
+		$data = $request->all();
+		$validator = $this->validateName($data);
+
+		if ($validator->fails())
+		{
+			return json_encode(['error' => $validator->errors()->all()]);
+		}
+
 		$name = $request->get('name');
 		$this->user->name = $name;
 		$this->user->save();
@@ -30,37 +48,67 @@ class SettingsController extends Controller
 		{
 			return Redirect('/settings');
 		}
+		else
+		{
+			return json_encode([]);
+		}
+	}
+
+	public function validatePassword(array $data)
+	{
+		$rules = [
+			'new_password'  => 'required|min:6|max:255',
+			'conf_password' => 'required|min:6|max:255|same:new_password'
+		];
+		return Validator::make($data, $rules);
 	}
 
 	public function changePassword(Request $request)
 	{
+        $data = $request->all();
+        $validator = $this->validatePassword($data);
+
+        if($validator->fails())
+        {
+            return json_encode(['error' => $validator->errors()->all()]);
+        }
+
 		$new_password = $request->get('new_password');
 		$conf_password = $request->get('conf_password');
-		if ($new_password == $conf_password && $new_password != "")
+
+		$this->user->password = bcrypt($new_password);
+		$this->user->save();
+		if (!$request->ajax())
 		{
-			$this->user->password = bcrypt($new_password);
-			$this->user->save();
-			if (!$request->ajax())
-			{
-				return Redirect('/settings');
-			}
+			return Redirect('/settings');
 		}
 		else
 		{
-			if ($new_password == "")
-			{
-				return json_encode(['error' => 'Password must not be empty.']);
-			}
-			else
-			{
-				return json_encode(['error' => 'Passwords do not match.']);
-			}
-			
+			return json_encode([]);
 		}
+	}
+
+	public function validateAddress(array $data)
+	{
+		$rules = [
+			'address'  => 'required|max:255',
+			'city' 	   => 'required|max:255',
+			'state'    => 'required|max:255',
+			'zip'      => 'required|max:255'
+		];
+		return Validator::make($data, $rules);
 	}
 
 	public function changeAddress(Request $request)
 	{
+        $data = $request->all();
+        $validator = $this->validateAddress($data);
+
+        if($validator->fails())
+        {
+            return json_encode(['error' => $validator->errors()->all()]);
+        }
+
 		$address = $request->get('address');
 		$city = $request->get('city');
 		$state = $request->get('state');
@@ -89,6 +137,10 @@ class SettingsController extends Controller
 		if (!$request->ajax())
 		{
 			return Redirect('/settings');
+		}
+		else
+		{
+			return json_encode([]);
 		}
 	}
 
