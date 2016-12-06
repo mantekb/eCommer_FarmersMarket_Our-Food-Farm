@@ -48,6 +48,10 @@ class SettingsController extends Controller
 		{
 			return Redirect('/settings');
 		}
+		else
+		{
+			return json_encode([]);
+		}
 	}
 
 	public function validatePassword(array $data)
@@ -77,6 +81,10 @@ class SettingsController extends Controller
 		if (!$request->ajax())
 		{
 			return Redirect('/settings');
+		}
+		else
+		{
+			return json_encode([]);
 		}
 	}
 
@@ -129,6 +137,10 @@ class SettingsController extends Controller
 		if (!$request->ajax())
 		{
 			return Redirect('/settings');
+		}
+		else
+		{
+			return json_encode([]);
 		}
 	}
 

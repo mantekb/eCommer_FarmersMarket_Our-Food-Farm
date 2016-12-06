@@ -12,15 +12,15 @@ $('#changeName').on('click', function(e) {
 	    },
 	    success: (response) => {
             var res = JSON.parse(response);
-            if(res.error)
-            {
-                swal('Error', res.error);
-            }
-            else
+            if(!res.error)
             {
                 swal('Success', "Your name has changed to "+name+".");
                 $('#name-account-main').html(name);
                 $('#name-account-mobile').html(name);
+            }
+            else
+            {
+                swal('Error', res.error);
             }
 	    }
 	});
