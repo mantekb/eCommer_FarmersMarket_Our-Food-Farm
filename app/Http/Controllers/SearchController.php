@@ -33,7 +33,7 @@ class SearchController extends Controller{
 					->join('stand_addresses', 'stand_addresses.stand_id', '=', 'stands.id')
 					->leftJoin('stand_products', 'stand_products.stand_id', '=', 'stands.id')
 					->leftJoin('products', 'stand_products.product_id', '=', 'products.id')
-                    ->select('stands.name', 'lat', 'long')
+                    ->select('stands.name', 'stands.id', 'lat', 'long')
                     ->where([
 						    ['lat', '>=', $lat-$latDif],
 						    ['lat', '<=', $lat+$latDif],
