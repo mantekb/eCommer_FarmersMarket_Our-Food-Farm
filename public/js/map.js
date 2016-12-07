@@ -176,9 +176,9 @@ function createCoordsFromAddress(address, callback, errorCallback)
     setToken();
 }
 
-function placeMarker(map, lat, long, title)
+function placeMarker(map, lat, long, title, stand_id)
 {
-    var display = '<p>'+title+'</p>';
+    var display = '<p><a href="'+DOCUMENT_ROOT+'/stand/'+stand_id+'">'+title+'</a></p>';
     var ll = new mapboxgl.LngLat(long, lat);
     new mapboxgl.Popup()
       .setLngLat(ll)
@@ -211,6 +211,14 @@ $('#change-zip').click(function(){
     document.getElementById("zip-dropdown").classList.toggle("hide");
 })
 
+$('#dist-button').click(function(){
+    document.getElementById("dist-dropdown").classList.toggle("hide");
+})
+
+$('#price-button').click(function(){
+    document.getElementById("price-dropdown").classList.toggle("hide");
+})
+
 $('#zip-input').click(function(){
     $('#zip-input').val("");
 })
@@ -230,10 +238,21 @@ $('#search-button').click(function(){
     showResults(searchTerms, zip);
 })
 
-function showResults(term, zip){
-    var latDif = findLatDifference();
-    var longDif = findLongDifference();
-    console.log(latMaster+"   "+latDif);
+$('#apply-filters').click(function(){
+    var searchTerms = $('#search-input').val();
+    var zip = $('#zip').text();
+    var priceText = $('#price-amount').text();
+    var low = priceText.substring(1, priceText.indexOf('-'));
+    var high = priceText.substring(priceText.indexOf('-')+3).replace("+", "");
+    var dist = $('#dist-amount').text().substring(0, $('#dist-amount').text().length-1);
+    showResults(searchTerms, zip, high, low, dist);
+})
+
+function showResults(term, zip, high=100, low=0, dist=20){
+    var latDif = findLatDifference(dist);
+    var longDif = findLongDifference(dist);
+    if(low == ""){low = 0;}
+    if(high == "100" || high == 100 || high == ""){high = 99999;} //important to include items above the "high" price point
     $.ajax({
         url: DOCUMENT_ROOT+'/search',
         type: 'POST',
@@ -242,7 +261,9 @@ function showResults(term, zip){
             lat: latMaster,
             long: longMaster,
             latDif: latDif,
-            longDif: longDif
+            longDif: longDif,
+            high: high,
+            low: low
         },
         error: function(response) {
             swal('Error', 'Sorry, we could not find your location.');
@@ -251,22 +272,45 @@ function showResults(term, zip){
             var results = response;
             removeMarkers();
             for (var i = 0; i < results.length; i++){
-                placeMarker(map, results[i].lat, results[i].long, results[i].name);
+                placeMarker(map, results[i].lat, results[i].long, results[i].name, results[i].id);
             }
         },
     });
 }
 
-function findLatDifference(){
-    var miles = 20;
+function findLatDifference(miles){
     var radius = miles*0.621371; //convert to km
     var deg = (1 / 110.54) * radius;
     return deg;
 }
 
-function findLongDifference(){
-    var miles = 20;
+function findLongDifference(miles){
     var radius = miles*0.621371; //convert to km
     var deg = (1 / (111.320 * Math.cos(latMaster))) * radius;
     return deg;
 }
+
+$( function() {
+    $( "#price-range" ).slider({
+      range: true,
+      min: 0,
+      max: 100,
+      values: [10, 90],
+      slide: function(event, ui) {
+        var plus = "";
+        if (ui.values[1] == "100"){plus = "+";}
+        $('#price-amount').text("$"+ui.values[0]+" - $"+ui.values[1]+plus);
+      }
+    });
+  });
+
+$( function() {
+    $( "#dist-slider" ).slider({
+        min: 5,
+        max: 50,
+        value: 20,
+        slide: function( event, ui ) {
+            $("#dist-amount").text(ui.value + "m");
+        }
+    });
+  } );

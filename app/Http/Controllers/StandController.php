@@ -68,6 +68,25 @@ class StandController extends Controller
     }
 
     /**
+    * Validate a Stand's inputs when it is being edited. There are slightly different requirements.
+    *
+    * @param $request - array of post values
+    * @param $stand   - the stand, needed to allow users to keep their current stand name
+    */
+    public function validateEditOfStand(array $data, Stand $stand)
+    {
+      $rules = [
+            'name' => 'required|max:255|unique:stands,name,'.$stand->id,
+            'description' => 'required|max:4096',
+            'address' => 'required|max:255',
+            'city' => 'required|max:255',
+            'state' => 'required|max:255',
+            'zip' => 'required|max:255',
+        ];
+        return Validator::make($data, $rules);
+    }
+
+    /**
     * View the store page for that stand.
     *
     * @param $stand - Automatically detected Stand by laravel.
@@ -92,6 +111,16 @@ class StandController extends Controller
         $stand = Auth::user()->stand;
         if ($request->isMethod('POST'))
         {
+            //Data Validation
+            $data = $request->all();
+            $validator = $this->validateEditOfStand($data, $stand);
+
+            if ($validator->fails()) {
+                $this->throwValidationException(
+                    $request, $validator
+                );
+            }
+
             $name =        $request->get('name');
             $description = $request->get('description');
             $address =     $request->get('address');
