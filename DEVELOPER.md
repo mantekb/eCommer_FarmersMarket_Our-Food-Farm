@@ -203,3 +203,10 @@ By visiting this page they can see the order by the time it was completed.
 By clicking on the link on the order, they can see all the products they bought,
  the quantity they purchased, and the total prices of those products.
 
+###### Learning Resources
+
+Users are also able to post a blog-like article known as _Learning Resources_.
+Anyone can view a learning resource without having to be logged in.
+Users have to be logged-in and __have a stand__ in order to create learning resources.
+The link to the creation form is located on the _/learning_ page if logged in.
+**Note:** Learning resources are not currently search-able.
