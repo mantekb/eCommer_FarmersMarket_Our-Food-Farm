@@ -29,6 +29,20 @@
 13. Users can view and create learning resources (blogs/articles)
 14. Users can logout and still use the searching features of the website
 
+#### Setup For Local Development
+
+1. Install WAMP
+	1. Click on WAMP tray icon > phpmyadmin
+	2. Login with user: "root" pass: ""
+	3. On side nav click _new+_
+	4. Add database "cs4540g1" (or whatever is in .env)
+2. Install Composer
+3. Clone this repo into C:\wamp\www
+4. `cd our-food-farm`
+5. `composer install`
+6. `php artisan migrate`
+7. Ensure browsing to *localhost/our-food-farm/public* works.
+
 #### Program explanation
 
 _Our Food Farm_ uses the [Laravel](https://laravel.com/docs/5.2/) PHP framework 

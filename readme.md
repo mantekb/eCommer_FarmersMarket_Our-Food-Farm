@@ -28,6 +28,14 @@ Target audiences include urban, suburban households that are producing food loca
 
 ### Setup For Production Environment
 
+**Using Zip**
+1. Set up the server of your choice with PHP.
+2. Copy the extracted zip file into the specified place the server reqires.
+3. Point the website server to _our-food-farm/public_
+4. Ensure user keys in `.env` and other files are updated to their production versions.
+5. Browse to the live website!
+
+**Using Git**
 1. Setup a server of your choice with PHP, git, and composer.
 2. Clone this repository into your webserver and set up domain.
 3. In the command line, run `composer install` in the project's folder.
