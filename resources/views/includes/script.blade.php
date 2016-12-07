@@ -4,7 +4,8 @@
 <script src="{{asset('js/jquery-3.1.0.min.js')}}"></script>
 <!-- Compiled and minified JavaScript -->
 <script src="{{asset('js/materialize.min.js')}}"></script>
-<script src='{{asset('js/mapbox-gl.js')}}'></script>
+<script src="{{asset('js/jquery-ui.js')}}"></script>
+<script src="{{asset('js/mapbox-gl.js')}}"></script>
 
 <script src="{{asset('js/sweetalert.min.js')}}"></script>
 
