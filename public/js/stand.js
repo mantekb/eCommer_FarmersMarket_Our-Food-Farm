@@ -69,7 +69,7 @@ if ($('.standMap').length > 0)
 
 		map.on('load', function() {
 			//Once the map loads, place a marker where the stand should be.
-			placeMarker(map, lat, long, standName);
+			placeMarker(map, lat, long, standName, stand_id);
 		});
 	}
 }
