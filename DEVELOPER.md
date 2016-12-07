@@ -46,11 +46,18 @@
 #### Program explanation
 
 _Our Food Farm_ uses the [Laravel](https://laravel.com/docs/5.2/) PHP framework 
-to serve the webiste, handle routing, manipulate data, and responsd to requests. 
+to serve the webiste, handle routing, manipulate data, and responsd to requests.
+
 As a css framework we changed out the original Bootstrap css framework in favor 
-of a more unique css framework in [Materialize](http://materializecss.com/). 
+of a more unique css framework in [Materialize](http://materializecss.com/).
+
 For javascript we are making use of the [JQuery](http://api.jquery.com/) library in order to save 
 time doing frequent type of `AJAX` calls and `DOM` manipulations.
+
+**Misc Libraries:**
+- [Mapbox](https://www.mapbox.com/)
+- [SweetAlert](http://t4t5.github.io/sweetalert/)
+- [Masonry](http://masonry.desandro.com/)
 
 #### Program Analysis
 
