@@ -45,26 +45,19 @@ Route::group(['prefix' => '/checkout'], function() {
 	Route::get('/error/{type}', ['as' => '/error/{type}', 'uses' => 'CheckoutController@showError']);
 });
 
+Route::group(['prefix' => '/learning'], function() {
+	Route::get('/', 'ArticleController@listArticles');
+	Route::get("/article/{id}", "ArticleController@showSingleArticle");
+});
+
+Route::group(['prefix'=>'/newarticle', 'middleware'=>'auth'], function() {
+	Route::get('/', 'ArticleController@NewArticle')->middleware('hasstand');
+	Route::post('/', 'ArticleController@createArticle')->middleware('hasstand');
+});
+
 Route::group(['middleware' => 'auth'], function() {
 	Route::get('/orders', 'AccountController@orders');
 	Route::get('/order/{id}', 'AccountController@order');
-});
-
-Route::get('learning', function() {
-	//Replace function with a controller function instead.
-	$articles = [
-		[
-			'title' => 'Tomatoes',
-			'excerpt' => 'something somethings',
-			'author' => 'Farmer'
-		],
-		[
-			'title' => 'Corn',
-			'excerpt' => 'something somethings',
-			'author' => 'Stand Owner'
-		],
-	];
-	return view('learning.learning-resources', ['articles' => $articles]);
 });
 
 Route::group(['prefix'=>'/settings', 'middleware'=>'auth'], function() {
@@ -84,19 +77,15 @@ Route::get("/deals", "ShoppingController@deals");
 
 Route::post("/search", "SearchController@getResults");
 
-Route::get("/article", "ArticleController@article");
-
 Route::group(['prefix'=>'/payment', 'middleware'=>'auth'], function() {
 	Route::get('/', ['as' => '/', 'uses' => 'PaymentController@PaymentInfo']);
 	Route::post('/createStripeAccount', 'PaymentController@createStripeAccount');
 });
 
-
 //Routes to error pages below
 Route::get('/404', function() {
 	return view('errors.not-found');
 });
-
 
 // This is for testing, remove once testing complete
 Route::get('/session/flush', function() {
