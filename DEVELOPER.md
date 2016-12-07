@@ -63,19 +63,35 @@ time doing frequent type of `AJAX` calls and `DOM` manipulations.
 
 ###### User
 
-explanation
+The user that is in the process of using the site is represented by a `User` object.
 
-controllers
+You can access the current user in PHP by calling the Laravel function `Auth::user()` and assigning that to a variable.
 
-front-end
+Users are stored in the `users` database along with specific information relating to them.
+
+Users are seen as owners of other objects which are `stands`, `addresses`, `payment infos`, and `orders`.
+
+Many of these objects can be referenced from the user object within `User.php`.
+
+
+Users are referenced in just about every controller. They are extremely useful in gathering information about most types 
+of other objects, as their user_id ties other objects together within the relational database.
 
 ###### Map
 
-explanation
+We use maps on the _/home_, _/stand/{stand\_id}_, and _/checkout_ routes.
 
-controllers
+The API we use to display the map, specific areas on the map, and display markers noting the location of stands
+ is the [Mapbox](https://www.mapbox.com/) API.
 
-front-end
+We control what is displayed on the map through functions in `stand.js`, `map.js`, `LocationController.php`,
+ and `SearchController.php`.
+
+The controllers gather information about the location the user is in, the stands that need displayed, and
+ narrowing down that information based upon search criteria.
+
+The javascript files use the information from the back-end, and send it to the Mapbox API so the user can view
+ stands in their area.
 
 ###### Stands
 
