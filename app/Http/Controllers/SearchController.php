@@ -19,7 +19,7 @@ class SearchController extends Controller{
 		if ($search == ""){
 			$stands = DB::table('stand_addresses')
 					 ->join('stands', 'stand_addresses.stand_id', '=', 'stands.id')
-                     ->select('stands.name', 'lat', 'long')
+                     ->select('stands.name', 'stands.id', 'lat', 'long')
                      ->where([
 						    ['lat', '>=', $lat-$latDif],
 						    ['lat', '<=', $lat+$latDif],

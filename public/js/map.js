@@ -176,9 +176,9 @@ function createCoordsFromAddress(address, callback, errorCallback)
     setToken();
 }
 
-function placeMarker(map, lat, long, title)
+function placeMarker(map, lat, long, title, stand_id)
 {
-    var display = '<p>'+title+'</p>';
+    var display = '<p><a href="'+DOCUMENT_ROOT+'/stand/'+stand_id+'">'+title+'</a></p>';
     var ll = new mapboxgl.LngLat(long, lat);
     new mapboxgl.Popup()
       .setLngLat(ll)
@@ -251,7 +251,7 @@ function showResults(term, zip){
             var results = response;
             removeMarkers();
             for (var i = 0; i < results.length; i++){
-                placeMarker(map, results[i].lat, results[i].long, results[i].name);
+                placeMarker(map, results[i].lat, results[i].long, results[i].name, results[i].id);
             }
         },
     });
