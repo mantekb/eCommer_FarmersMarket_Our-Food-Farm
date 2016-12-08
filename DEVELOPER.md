@@ -54,11 +54,15 @@ of a more unique css framework in [Materialize](http://materializecss.com/).
 For javascript we are making use of the [JQuery](http://api.jquery.com/) library in order to save 
 time doing frequent type of `AJAX` calls and `DOM` manipulations.
 
+The payment system provider we use is [Stripe](https://stripe.com/docs). The general flow of Stripe's
+API is to create tokens and then take actions with these tokens. Actions done to tokens will update
+some piece of information Stripe is holding. We also normally use try catch blocks for Stripe calls.
+They handle errors nicely, which makes it easy to capture error messages and interpret the issue.
+
 **Misc Libraries:**
 - [Mapbox](https://www.mapbox.com/)
 - [SweetAlert](http://t4t5.github.io/sweetalert/)
 - [Masonry](http://masonry.desandro.com/)
-- [Stripe](https://stripe.com/docs)
 
 #### Program Analysis
 
